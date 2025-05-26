@@ -22,20 +22,20 @@ pacman::p_load(lme4,
 
 rm(list = ls()) # para limpiar el entorno de trabajo
 
-# ----------------Establecer directorio-----------------------------------------
+#----------------Establecer directorio-----------------------------------------
 
 setwd("Colocar directorio")           # ajústalo a tu ruta
 getwd()
 
 
-# Carga datos ------------------------------------------------------------------
+#Carga datos ------------------------------------------------------------------
 
 #Leer las bases desde tus rutas
 casen2022 <- read_sav("D:/U pruebas/TDR_1/Prueba2/trabajo1-grupo-3/input/data/Base de datos Casen 2022 SPSS_18 marzo 2024.sav")
 comunas <- read_sav("D:/U pruebas/TDR_1/Prueba2/trabajo1-grupo-3/input/data/Base de datos provincia y comuna Casen 2022 SPSS.sav")
 
 
-## Unir bases por folio + id_persona  (añade código de comuna)------------------
+#Unir bases por folio + id_persona  (añade código de comuna)------------------
 
 casen_completa <- left_join(
   casen2022,
@@ -44,10 +44,10 @@ casen_completa <- left_join(
 )
 
 
-## Filtrar por comunas de santiago ---------------------------------------------
+##Filtrar por comunas de santiago ---------------------------------------------
 
 
-# Quedarse solo con las 32 comunas del núcleo urbano de Santiago
+#Quedarse solo con las 32 comunas del núcleo urbano de Santiago
 
 comunas_santiago <- tibble::tibble(
   codigo = c(
@@ -119,7 +119,7 @@ casen_santiago <- casen_santiago %>%
 
 ##Crear la variable contextual: prop_empleo (tasa de empleo efectivo)------------
 
-                  # trabajó ≥ 1 hora la semana pasada    1= trabajo 0= no trabajo
+                  # trabajó ≥ 1 hora la semana pasada    1= trabajo // 0= no trabajo
 
 casen_santiago <- casen_santiago %>% 
   mutate(emp_efect = o1 == 1)                          # TRUE / FALSE
@@ -196,4 +196,4 @@ casen_educ <- casen_santiago %>%
   )
 
 # Guardar datos ----------------------------------------------------------------
-save(data,file="output/casen_educ.RData")
+saveRDS(casen_educ, file = "output/casen_educ.rds")

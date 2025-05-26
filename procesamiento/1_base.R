@@ -24,22 +24,19 @@ rm(list = ls()) # para limpiar el entorno de trabajo
 
 # ----------------Establecer directorio-----------------------------------------
 
-#Colocar Directorio del proyecto 
-setwd("Colocar directorio")
-
-# Confirmar directorio/ evitar problema de compatibilidad. 
+setwd("Colocar directorio")           # ajústalo a tu ruta
 getwd()
+
 
 # Carga datos ------------------------------------------------------------------
 
-# 1. Leer las bases desde tus rutas
+#Leer las bases desde tus rutas
 casen2022 <- read_sav("D:/U pruebas/TDR_1/Prueba2/trabajo1-grupo-3/input/data/Base de datos Casen 2022 SPSS_18 marzo 2024.sav")
 comunas <- read_sav("D:/U pruebas/TDR_1/Prueba2/trabajo1-grupo-3/input/data/Base de datos provincia y comuna Casen 2022 SPSS.sav")
 
 
-## Unir bases ------------------------------------------------------------------
+## Unir bases por folio + id_persona  (añade código de comuna)------------------
 
-# 2. Unir base de datos por folio e id_persona
 casen_completa <- left_join(
   casen2022,
   comunas %>% select(folio, id_persona, comuna),
@@ -49,50 +46,154 @@ casen_completa <- left_join(
 
 ## Filtrar por comunas de santiago ---------------------------------------------
 
-# 3. Crear vector con códigos y etiquetar los nombres de las 32 comunas del Gran Santiago
+
+# Quedarse solo con las 32 comunas del núcleo urbano de Santiago
+
 comunas_santiago <- tibble::tibble(
   codigo = c(
-    13101, 13102, 13103, 13104, 13105, 13106, 13107, 13108,
-    13109, 13110, 13111, 13112, 13113, 13114, 13115, 13116,
-    13117, 13118, 13119, 13120, 13121, 13122, 13123, 13124,
-    13125, 13126, 13127, 13128, 13129, 13130, 13131, 13132
+    13101:13132      # rango contiguo desde 13101 a 13132
   ),
   nombre = c(
-    "Santiago", "Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central",
-    "Huechuraba", "Independencia", "La Cisterna", "La Florida", "La Granja", "La Pintana",
-    "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú",
-    "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura",
-    "Quinta Normal", "Recoleta", "Renca", "San Joaquín", "San Miguel", "San Ramón", "Vitacura"
+    "Santiago","Cerrillos","Cerro Navia","Conchalí","El Bosque","Estación Central",
+    "Huechuraba","Independencia","La Cisterna","La Florida","La Granja","La Pintana",
+    "La Reina","Las Condes","Lo Barnechea","Lo Espejo","Lo Prado","Macul","Maipú",
+    "Ñuñoa","Pedro Aguirre Cerda","Peñalolén","Providencia","Pudahuel","Quilicura",
+    "Quinta Normal","Recoleta","Renca","San Joaquín","San Miguel","San Ramón","Vitacura"
   )
 )
 
+#filtro casen de comuna de santiago---------------------------------------------
 
-# 4. Filtrar casos solo de esas comunas y volver factor a comuna.
-casen_santiago <- casen_completa %>%
-  filter(comuna %in% comunas_santiago$codigo) %>%
-  mutate(comuna = factor(comuna, levels = comunas_santiago$codigo, labels = comunas_santiago$nombre))
+casen_santiago <- casen_completa %>% 
+  filter(comuna %in% comunas_santiago$codigo) %>% 
+  mutate(comuna = factor(comuna,
+                         levels = comunas_santiago$codigo,
+                         labels = comunas_santiago$nombre))
 
-#### Filtrar variables utilizadas y limpieza -----------------------------------
+#Ajuste de variable sexo y NSE--------------------------------------------------
+                                    #sexo: 1 = hombre, 2 = mujer  → dummy female                                                          # 1= mujer, 0 = hombr
 
-casen_educ <- casen_santiago %>%
-  select(esc, comuna, "agregar las otras variables que utlizaremos") %>%
-  filter(!is.na(esc), !is.na(comuna), "XXXX")
+casen_santiago <- casen_santiago %>% 
+  mutate(
+      # dummy female (1 = mujer, 0 = hombre)
+    female = ifelse(sexo == 2, 1, 0))
+    
 
-##ICC --------------------------------------------------------------------------
+#Nse
 
-# 5. Ajustar modelo nulo para ICC
-modelo_icc_santiago = lmer(esc ~ 1 + (1 | comuna), data = casen_educ)
-summary(modelo_icc_santiago)
+casen_santiago <- casen_santiago %>% 
+      mutate(
+        # factor ordenado (categorías 1-7 en sentido ascendente)
+        nse_factor = factor(
+          nse,
+          levels = c(1, 4, 5, 6, 2, 7, 3),
+          labels = c("Bajo",
+                     "Bajo-medio",
+                     "Bajo-alto",
+                     "Bajo-medio-alto",
+                     "Medio",
+                     "Medio-alto",
+                     "Alto"),
+          ordered = TRUE
+        ),
+        
+        # versión numérica 1–7 que respeta ese orden
+        nse_numerico = as.numeric(nse_factor)
+      )
 
-# 6. Tabla icc
+#Ajuste variable hogar carente de participacion social (hh_d_part)--------------
 
-reghelper::ICC(modelo_icc_santiago)
+casen_santiago <- casen_santiago %>% 
+  mutate(
+    # 1) Dummy clara: 1 = hogar carente, 0 = no carente
+    part_social = ifelse(hh_d_part == 1, 1, 0),
+    
+    # 2) Factor con etiquetas legibles (opción para tablas/modelos)
+    part_social = factor(
+      hh_d_part,
+      levels = c(0, 1),
+      labels = c("No carente", "Carente")
+    )
+  )
 
-screenreg(modelo_icc_santiago) # de library texreg
+
+##Crear la variable contextual: prop_empleo (tasa de empleo efectivo)------------
+
+                  # trabajó ≥ 1 hora la semana pasada    1= trabajo 0= no trabajo
+
+casen_santiago <- casen_santiago %>% 
+  mutate(emp_efect = o1 == 1)                          # TRUE / FALSE
+
+prop_empleo <- casen_santiago %>% 
+  group_by(comuna) %>% 
+  summarise(prop_empleo = mean(emp_efect, na.rm = TRUE))   # 0–1
+
+casen_santiago <- casen_santiago %>%
+  left_join(prop_empleo, by = "comuna")   # ← ahora prop_empleo es columna numérica
 
 
 
-##Volver Base de datos ---------------------------------------------------------
+# Crear tabla con número de establecimientos educacionales por comuna(dato 2022)
+# ------------------------------------------------------------------------------
 
+escuelas_tbl <- tibble::tribble(
+  ~comuna,                 ~n_escuelas,
+  "Lo Barnechea",            31,
+  "Quilicura",               59,
+  "Huechuraba",              27,
+  "Conchalí",                58,
+  "Vitacura",                19,
+  "Renca",                   58,
+  "Recoleta",                68,
+  "Independencia",           36,
+  "Las Condes",              59,
+  "Cerro Navia",             49,
+  "Quinta Normal",           69,
+  "Providencia",             43,
+  "Pudahuel",                64,
+  "La Reina",                43,
+  "Lo Prado",                30,
+  "Santiago",               128,
+  "Ñuñoa",                   80,
+  "Estación Central",        59,
+  "Peñalolén",               69,
+  "Macul",                   40,
+  "Pedro Aguirre Cerda",     50,
+  "San Joaquín",             40,
+  "San Miguel",              63,
+  "Cerrillos",               32,
+  "Maipú",                  199,
+  "Lo Espejo",               38,
+  "La Florida",             184,
+  "La Cisterna",             63,
+  "La Granja",               54,
+  "San Ramón",               38,
+  "El Bosque",               92,
+  "La Pintana",              70
+)
+
+
+# Unir a casen_santiago (la columna comuna ya es factor con nombres)
+casen_santiago <- casen_santiago %>%
+  left_join(escuelas_tbl, by = "comuna")
+
+
+#base final (casen_educ) incluyendo n_escuelas
+# ------------------------------------------------------------------------------
+
+casen_educ <- casen_santiago %>% 
+  select(
+    esc, comuna,                       # dependiente + clúster
+    female, nse_factor, nse_numerico,   # individuales ajustados
+    part_social,                         # indicador de hogar sin cotizar (si lo usas)
+    prop_empleo, n_escuelas            # contextuales ya unidos
+  ) %>% 
+  filter(
+    !is.na(esc),
+    !is.na(nse_numerico),
+    !is.na(n_escuelas),
+    !is.na(prop_empleo)
+  )
+
+# Guardar datos ----------------------------------------------------------------
 save(data,file="output/casen_educ.RData")
-

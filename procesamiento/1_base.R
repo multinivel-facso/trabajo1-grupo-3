@@ -105,12 +105,12 @@ casen_santiago <- casen_santiago %>%
 
 casen_santiago <- casen_santiago %>% 
   mutate(
-    # 1) Dummy clara: 1 = hogar carente, 0 = no carente
-    part_social = ifelse(hh_d_part == 1, 1, 0),
+    # Dummy numérica 0 = no carente, 1 = carente
+    part_social_num = ifelse(hh_d_part == 1, 1, 0),
     
-    # 2) Factor con etiquetas legibles (opción para tablas/modelos)
-    part_social = factor(
-      hh_d_part,
+    # Factor con etiquetas legibles
+    part_social_fac = factor(
+      part_social_num,
       levels = c(0, 1),
       labels = c("No carente", "Carente")
     )
@@ -185,7 +185,7 @@ casen_educ <- casen_santiago %>%
   select(
     esc, comuna,                       # dependiente + clúster
     female, nse_factor, nse_numerico,   # individuales ajustados
-    part_social,                         # indicador de hogar sin cotizar (si lo usas)
+    part_social_num, part_social_fac,                         # indicador de hogar sin cotizar (si lo usas)
     prop_empleo, n_escuelas            # contextuales ya unidos
   ) %>% 
   filter(

@@ -105,17 +105,16 @@ casen_santiago <- casen_santiago %>%
 
 casen_santiago <- casen_santiago %>% 
   mutate(
-    # Dummy numérica 0 = no carente, 1 = carente
-    part_social_num = ifelse(hh_d_part == 1, 1, 0),
+    # Dummy numérica: 1 = No carente, 0 = Carente
+    part_social_num = ifelse(hh_d_part == 0, 1, 0),
     
     # Factor con etiquetas legibles
     part_social_fac = factor(
       part_social_num,
       levels = c(0, 1),
-      labels = c("No carente", "Carente")
+      labels = c("Carente", "No carente")
     )
   )
-
 
 ##Crear la variable contextual: prop_empleo (tasa de empleo efectivo)------------
 

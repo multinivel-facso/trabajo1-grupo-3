@@ -111,6 +111,20 @@ La segunda variable es el nivel socioeconómico (NSE) trabajado de forma continu
 
 La tercera variable es hogar carente  participación social (hh_d_part), recodificada como dicotómica, donde 1 indica ausencia de carencia  y 0 presencia de carencia. Esta dimensión captura la ausencia de vínculos comunitarios o redes sociales activas, operando como un indicador de capital social limitado. 
 
+```{r descriptivos nivel 1, echo=FALSE, results='asis'}
+library(stargazer)
+
+nivel1 <- casen_educ %>%
+  select(esc, female, nse_numerico,part_social_num)
+
+stargazer(as.data.frame(nivel1),
+          type = "html",
+          title = "Estadísticos descriptivos de Nivel 1 (individual)",
+          digits = 2, summary.stat = c("n","min", "p25", "median", "mean", "p75", "max", "sd"))
+
+
+```
+
 #### **Variable independiente de nivel 2 (contextual)**
 
 La primera variable contextual es la tasa comunal de empleo efectivo (prop_empleo), que representa la proporción de personas que trabajaron al menos una hora durante la semana anterior por comuna. Su valor promedio es 0.554, con una desviación estándar de 0.063, y un rango 0.464 y 0.704. Esta oscilación refleja diferencias en el dinamismo económico de las comunas, lo cual puede incidir en las oportunidades educativas disponibles para sus habitantes.  
@@ -120,13 +134,17 @@ La segunda variable contextual corresponde a la oferta educativa comunal, la cua
 ```{r descriptivos, echo=FALSE, results='asis'}
 library(stargazer)
 
-stargazer(
-  as.data.frame(casen_educ),
-  title = "Estadísticos descriptivos",
-  type = "html",
-  digits = 2,
-  summary.stat = c("N",  "min" ,  "p25" ,  "median" ,  "mean" ,  "p75" ,  "max",  "sd")
-)
+# Variables de nivel 2 (contextual)
+nivel2 <- casen_educ %>%
+  select(comuna, n_escuelas, prop_empleo) %>%
+  distinct()  # evitar duplicados por comuna
+
+stargazer(as.data.frame(nivel2),
+          type = "html",
+          title = "Estadísticos descriptivos - Nivel 2 (comunal)",
+          digits = 2, summary.stat = c("n", "min", "p25", "median", "mean", "p75", "max", "sd"))
+
+
 ```
 
 **3.3 Métodos**
@@ -241,7 +259,7 @@ En resumen, este modelo confirma que las trayectorias educativas en el Gran Sant
 
 El análisis de los efectos aleatorios busca identificar si las asociaciones observadas entre los predictores de nivel individual o comunal y la variable dependiente ( los años de escolaridad) varían significativamente según la comuna de residencia. Para esta investigación, se evaluó el efecto aleatorio de la variable de participación social hogar y el genero.
 
-#### **Participación social familiar** 
+#### **Participación social familiar**
 
 ```{r modelo_tabla1, echo=FALSE, fig.cap="Figura 1.2", warning=FALSE, results='asis'}
 

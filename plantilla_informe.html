@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -30,10 +30,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="plantilla_informe_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="plantilla_informe_files/libs/quarto-html/anchor.min.js"></script>
 <link href="plantilla_informe_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="plantilla_informe_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="plantilla_informe_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="plantilla_informe_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="plantilla_informe_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="plantilla_informe_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="plantilla_informe_files/libs/bootstrap/bootstrap-1bc8a17f135ab3d594c857e9f48e611b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -72,7 +72,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 <section id="abstract" class="level1">
 <h1>Abstract</h1>
@@ -129,7 +131,11 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="input/img/Años_de_escolaridad.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="input/img/Años_de_escolaridad.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -150,15 +156,9 @@ ul.task-list li input[type="checkbox"] {
 <p>La primera variable es sexo, recodificada en una variable dicotómica denominada female (1 = mujer; 0 = hombre). Su media es 0,539, lo que indica un leve predominio de mujeres en la muestra.</p>
 <p>La segunda variable es el nivel socioeconómico (NSE) trabajado de forma continua del 1 a 7, con un promedio de 4,56. Esta fue determinada por el INE (instituto nacional de estadística) considerando escolaridad, ocupación, número de hijos/as nacidos/as y materialidad de la vivienda. La variable fue recodificada siguiendo un orden lógico ascendente.&nbsp;</p>
 <p>La tercera variable es hogar carente&nbsp; participación social (hh_d_part), recodificada como dicotómica, donde 1 indica ausencia de carencia&nbsp; y 0 presencia de carencia. Esta dimensión captura la ausencia de vínculos comunitarios o redes sociales activas, operando como un indicador de capital social limitado.&nbsp;</p>
-</section>
-<section id="variable-independiente-de-nivel-2-contextual" class="level4">
-<h4 class="anchored" data-anchor-id="variable-independiente-de-nivel-2-contextual"><strong>Variable independiente de nivel 2 (contextual)</strong></h4>
-<p>La primera variable contextual es la tasa comunal de empleo efectivo (prop_empleo), que representa la proporción de personas que trabajaron al menos una hora durante la semana anterior por comuna. Su valor promedio es 0.554, con una desviación estándar de 0.063, y un rango 0.464 y 0.704. Esta oscilación refleja diferencias en el dinamismo económico de las comunas, lo cual puede incidir en las oportunidades educativas disponibles para sus habitantes.&nbsp;&nbsp;</p>
-<p>La segunda variable contextual corresponde a la oferta educativa comunal, la cual se operacionaliza mediante el número de establecimientos escolares por comuna (n_escuelas). Esta información proviene de la Biblioteca del Congreso Nacional de Chile, específicamente del sistema SIIT Estadísticas Territoriales, que recopila datos oficiales a nivel comunal y regional en diversas áreas. Los datos utilizados corresponden al año 2022 y permiten aproximar la disponibilidad institucional de oportunidades educativas dentro de cada comuna.</p>
-
 <table style="text-align:center">
 <caption>
-<strong>Estadísticos descriptivos</strong>
+<strong>Estadísticos descriptivos de Nivel 1 (individual)</strong>
 </caption>
 <tbody><tr>
 <td colspan="9" style="border-bottom: 1px solid black">
@@ -314,17 +314,97 @@ part_social_num
 </td>
 </tr>
 <tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</tbody></table>
+</section>
+<section id="variable-independiente-de-nivel-2-contextual" class="level4">
+<h4 class="anchored" data-anchor-id="variable-independiente-de-nivel-2-contextual"><strong>Variable independiente de nivel 2 (contextual)</strong></h4>
+<p>La primera variable contextual es la tasa comunal de empleo efectivo (prop_empleo), que representa la proporción de personas que trabajaron al menos una hora durante la semana anterior por comuna. Su valor promedio es 0.554, con una desviación estándar de 0.063, y un rango 0.464 y 0.704. Esta oscilación refleja diferencias en el dinamismo económico de las comunas, lo cual puede incidir en las oportunidades educativas disponibles para sus habitantes.&nbsp;&nbsp;</p>
+<p>La segunda variable contextual corresponde a la oferta educativa comunal, la cual se operacionaliza mediante el número de establecimientos escolares por comuna (n_escuelas). Esta información proviene de la Biblioteca del Congreso Nacional de Chile, específicamente del sistema SIIT Estadísticas Territoriales, que recopila datos oficiales a nivel comunal y regional en diversas áreas. Los datos utilizados corresponden al año 2022 y permiten aproximar la disponibilidad institucional de oportunidades educativas dentro de cada comuna.</p>
+<table style="text-align:center">
+<caption>
+<strong>Estadísticos descriptivos - Nivel 2 (comunal)</strong>
+</caption>
+<tbody><tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Statistic
+</td>
+<td>
+N
+</td>
+<td>
+Min
+</td>
+<td>
+Pctl(25)
+</td>
+<td>
+Median
+</td>
+<td>
+Mean
+</td>
+<td>
+Pctl(75)
+</td>
+<td>
+Max
+</td>
+<td>
+St.&nbsp;Dev.
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+n_escuelas
+</td>
+<td>
+32
+</td>
+<td>
+19
+</td>
+<td>
+39.5
+</td>
+<td>
+58
+</td>
+<td>
+62.88
+</td>
+<td>
+68.2
+</td>
+<td>
+199
+</td>
+<td>
+39.89
+</td>
+</tr>
+<tr>
 <td style="text-align:left">
 prop_empleo
 </td>
 <td>
-22,776
+32
 </td>
 <td>
 0.46
 </td>
 <td>
-0.52
+0.51
 </td>
 <td>
 0.54
@@ -343,39 +423,9 @@ prop_empleo
 </td>
 </tr>
 <tr>
-<td style="text-align:left">
-n_escuelas
-</td>
-<td>
-22,776
-</td>
-<td>
-19
-</td>
-<td>
-43
-</td>
-<td>
-63
-</td>
-<td>
-82.74
-</td>
-<td>
-92
-</td>
-<td>
-199
-</td>
-<td>
-54.22
-</td>
-</tr>
-<tr>
 <td colspan="9" style="border-bottom: 1px solid black">
 </td>
 </tr>
-
 </tbody></table>
 <p><strong>3.3 Métodos</strong></p>
 <p>La estrategia metodológica consiste en el uso de modelos multinivel, configurando los datos entre individuos anidados en unidades de carácter territorial, con los cuales se establen cuatro modelos.</p>
@@ -387,7 +437,7 @@ n_escuelas
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output/modelo_0.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Modelo 0: solo intercepto por comuna</figcaption>
+<figcaption>Modelo 0: solo intercepto por comuna</figcaption>
 </figure>
 </div>
 </div>
@@ -399,7 +449,7 @@ n_escuelas
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output/modelo_1.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Modelo 1: predictores individuales</figcaption>
+<figcaption>Modelo 1: predictores individuales</figcaption>
 </figure>
 </div>
 </div>
@@ -410,7 +460,7 @@ n_escuelas
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output/modelo_2.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Modelo 2: predictores contextuales</figcaption>
+<figcaption>Modelo 2: predictores contextuales</figcaption>
 </figure>
 </div>
 </div>
@@ -422,7 +472,7 @@ n_escuelas
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="output/modelo_3.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Modelo 3: predictores individuales y contextuales</figcaption>
+<figcaption>Modelo 3: predictores individuales y contextuales</figcaption>
 </figure>
 </div>
 </div>
@@ -432,8 +482,6 @@ n_escuelas
 </section>
 <section id="resultados" class="level1">
 <h1>Resultados</h1>
-<div class="cell-output-display">
-
 <table style="border-collapse:collapse; border:none;">
 <tbody><tr>
 <th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
@@ -543,7 +591,6 @@ n_escuelas
 
 </tbody></table>
 
-</div>
 <section id="modelo-nulo-e-icc" class="level3">
 <h3 class="anchored" data-anchor-id="modelo-nulo-e-icc"><strong>Modelo nulo e ICC</strong></h3>
 <p>Antes de introducir la estimación de los modelos preliminares, se estimó un modelo nulo con intercepto aleatorio por comuna, cuyo objetivo es evaluar la pertinencia del enfoque multinivel y estimar la varianza atribuible al contexto territorial. Este modelo permite calcular la correlación intra-clase (ICC), indicador que refleja qué proporción de la varianza total en los años de escolaridad puede atribuirse a diferencias entre comunas.</p>
@@ -585,7 +632,7 @@ n_escuelas
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="plantilla_informe_files/figure-html/modelo_tabla1-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figura 1.2</figcaption>
+<figcaption>Figura 1.2</figcaption>
 </figure>
 </div>
 <p>El primer modelo incluye una pendiente aleatoria para la variable part_social_num (0 = carente, 1 = no carente). Los resultados muestran una varianza comunal de 0.10 para esta pendiente, además de una covarianza positiva con el intercepto (0.33). Esta covarianza positiva sugiere que en comunas con mayor nivel promedio de escolaridad, el efecto positivo de la participación social es aún más fuerte. Es decir, el capital social familiar potencia sus efectos cuando se inserta en contextos comunales más favorecidos.</p>
@@ -597,7 +644,7 @@ n_escuelas
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="plantilla_informe_files/figure-html/modelo_tabla2-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figura 1.3</figcaption>
+<figcaption>Figura 1.3</figcaption>
 </figure>
 </div>
 <p>El modelo incorpora una pendiente aleatoria para la variable female (0 = hombre, 1 = mujer), con el fin de evaluar si el efecto de ser mujer sobre los años de escolaridad varía entre comunas del Gran Santiago.</p>
@@ -678,18 +725,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -721,11 +757,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -735,8 +808,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -748,7 +830,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -792,6 +996,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -817,6 +1022,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -877,6 +1108,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

@@ -72,7 +72,7 @@ m5_H6 <- lmer(esc ~ nse_cmc * prop_empleo_gmc +
 :::
 
 :::: {.column .column-right width="80%"}
-## **Desigualdad educativa en el Gran Santiago: un análisis multinivel de factores individuales y territoriales**\
+## **Desigualdad educativa en el Gran Santiago: un análisis multinivel de factores individuales y territoriales**
 
 ------------------------------------------------------------------------
 
@@ -359,6 +359,7 @@ knitr::asis_output(as.character(scroll_box))
 ::::: columns
 ::: {.column width="70%"}
 ```{r}
+#| include: false
 int_h6 <- plot_model(
   m5_H6,
   type  = "int",
@@ -378,8 +379,13 @@ p_h6 <- int_h6 +
   ) +
   theme_minimal(base_size = 12)
 
-print(p_h6) 
 
+
+```
+
+```{r}
+#| echo: false
+print(p_h6) 
 ```
 :::
 
@@ -397,5 +403,3 @@ La interacción muestra que...
 :::
 
 ## Referencias
-
-

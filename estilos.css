@@ -1,0 +1,19 @@
+/* --- contenedor con scroll horizontal (sin cambios) --- */
+.hscroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+/* --- tabla ligeramente más grande y ancha --- */
+.small-table table {
+  font-size: 1rem;   /* ≈ 16 px en la mayoría de temas Reveal   */
+  width: 98%;        /* casi todo el ancho del slide            */
+  margin: 0 auto;    /* centrada                                */
+}
+
+/* aire extra en las celdas */
+.small-table th,
+.small-table td  {
+  padding: 8px 12px; /* un poco más que antes                  */
+}

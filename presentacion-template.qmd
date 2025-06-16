@@ -8,12 +8,18 @@ format:
     auto-stretch: false
     transition: fade
     transition-speed: slow
+    scrollable: true
+    scrollOverflow: true           
+    css: estilos.css 
 editor: source
 ---
 
 # 
 
 ```{r}
+#| include: false
+#| message: false
+
 if (!require("pacman")) install.packages("pacman") # solo la primera vez
 pacman::p_load(lme4,
                kableExtra,
@@ -24,20 +30,41 @@ pacman::p_load(lme4,
                stargazer,
                ggplot2, # gráficos
                dplyr, # manipulacion de datos
-               equatiomatic) # paquetes a cargar
+               equatiomatic, knitr, kableExtra) # paquetes a cargar
 
-mlm = read_dta("http://www.stata-press.com/data/mlmus3/hsb.dta")
+library(knitr)
+library(kableExtra)
+library(htmltools) 
+casen_educ <- readRDS("output/casen_educ.rds")
 
-mlm = mlm %>% 
-  select(mathach, female,ses,sector,mnses,schoolid) %>%
-  as.data.frame()
+# ---- centrados --------------------------------------------------------------
+casen_educ <- casen_educ %>%                 # CMC nivel-1
+  group_by(comuna) %>%
+  mutate(
+    mean_nse_comuna = mean(nse_numerico, na.rm = TRUE),
+    nse_cmc         = nse_numerico - mean_nse_comuna
+  ) %>% ungroup() %>%                        # GMC nivel-2
+  mutate(
+    prop_empleo_gmc = prop_empleo - mean(prop_empleo, na.rm = TRUE),
+    n_escuelas_gmc  = n_escuelas  - mean(n_escuelas,  na.rm = TRUE)
+  )
+
+# ---- modelos ----------------------------------------------------------------
+m0    <- lmer(esc ~ 1 + (1 | comuna), data = casen_educ)
+m1    <- lmer(esc ~ female + nse_cmc + part_social_num + (1|comuna), data = casen_educ)
+m2    <- lmer(esc ~ prop_empleo_gmc + n_escuelas_gmc + (1|comuna),    data = casen_educ)
+m3    <- lmer(esc ~ female + nse_cmc + part_social_num +
+                     prop_empleo_gmc + n_escuelas_gmc + (1|comuna),   data = casen_educ)
+m4    <- lmer(esc ~ female + nse_cmc + part_social_num +
+                     prop_empleo_gmc + n_escuelas_gmc +
+                     (1 + nse_cmc | comuna),                          data = casen_educ)
+m5_H6 <- lmer(esc ~ nse_cmc * prop_empleo_gmc +
+                     part_social_num + n_escuelas_gmc + female +
+                     (1 + nse_cmc | comuna),                          data = casen_educ)
 
 
-results_0 = lmer(mathach ~ 1 + (1 | schoolid), data = mlm)
-results_1 = lmer(mathach ~ 1 + ses + female + (1 | schoolid), data = mlm)
-results_2 = lmer(mathach ~ 1 + sector + mnses + (1 | schoolid), data = mlm)
-results_3 = lmer(mathach ~ 1 + ses + female + sector + mnses + (1 | schoolid), data = mlm)
-results_4 = lmer(mathach ~ 1 + ses + female + sector + mnses + ses*sector + (1 | schoolid), data = mlm)
+
+
 ```
 
 :::::: columns
@@ -45,11 +72,11 @@ results_4 = lmer(mathach ~ 1 + ses + female + sector + mnses + ses*sector + (1 |
 :::
 
 :::: {.column .column-right width="80%"}
-# **(titulo del trabajo)**
+## **Desigualdad educativa en el Gran Santiago: un análisis multinivel de factores individuales y territoriales**\
 
 ------------------------------------------------------------------------
 
-**Autor1, autor2 & autor3**
+**Katherine Aravena Herrera, Paula Cerda Torres & Sebastián Monreal Villarroel**
 
 ::: {.red2 .medium}
 **Análisis de datos multinivel - 2025**
@@ -105,58 +132,254 @@ $H_4$:
 
 ## Métodos
 
-... se estimó el siguiente modelo:
+Se estimaron un total de 6 modelos, siguientes modelos:
+
+## Modelo nulo
 
 $$
-y_{ij} = \gamma_{00} + \gamma_{01} \text{ses} + \gamma_{02} \text{female} + \gamma_{03} \text{sector} + \gamma_{04} \text{mnses} + u_{0j} + r_{ij}
+\text{esc}_{ij} \;=\; \gamma_{00}
++ u_{0\text{comuna}}
++ r_{ij}
 $$
+
+## Modelo 1 con variables independientes individuales
+
+$$
+\text{esc}_{ij} \;=\; \gamma_{00}
++ \gamma_{01}\,\text{female}
++ \gamma_{02}\,\text{nse_cmc}
++ \gamma_{03}\,\text{part_social_num}
++ u_{0\text{comuna}}
++ r_{ij}
+$$
+
+## Modelo 2 con variables independientes contextuales
+
+$$
+\text{esc}_{ij} \;=\; \gamma_{00}
++ \gamma_{01}\,\text{prop_empleo_gmc}
++ \gamma_{02}\,\text{n_escuelas_gmc}
++ u_{0\text{comuna}}
++ r_{ij}
+$$
+
+## Modelo 3 con variables independiente individual y grupal
+
+:::: {style="font-size:85%"}
+::: {style="overflow-x: auto; white-space: nowrap;"}
+$$
+\text{esc}_{ij}= \gamma_{00}
++ \gamma_{01}\,\text{female}
++ \gamma_{02}\,\text{nse_cmc}
++ \gamma_{03}\,\text{part_social_num}
++ \gamma_{04}\,\text{prop_empleo_gmc}
++ \gamma_{05}\,\text{n_escuelas_gmc}
++ u_{0\text{comuna}}
++ r_{ij}
+$$
+:::
+::::
+
+## Modelo 4 con intercepto y pendiente aleatoria de NSE
+
+:::: {style="font-size:85%"}
+::: {style="overflow-x: auto; white-space: nowrap;"}
+$$
+\text{esc}_{ij}= \gamma_{00}
++ \gamma_{01}\,\text{female}
++ \gamma_{02}\,\text{nse_cmc}
++ \gamma_{03}\,\text{part_social_num}
++ \gamma_{04}\,\text{prop_empleo_gmc}
++ \gamma_{05}\,\text{n_escuelas_gmc}
++ u_{0\text{comuna}}
++ u_{1\text{comuna}}\,\text{nse_cmc}
++ r_{ij}
+$$
+:::
+::::
+
+## Modelo 5 con interacción entre NSE y empleo
+
+:::: {style="font-size:85%"}
+::: {style="overflow-x: auto; white-space: nowrap;"}
+$$
+\text{esc}_{ij}= \gamma_{00}
++ \gamma_{01}\,\text{nse_cmc}
++ \gamma_{02}\,\text{prop_empleo_gmc}
++ \gamma_{03}\,\text{part_social_num}
++ \gamma_{04}\,\text{n_escuelas_gmc}
++ \gamma_{05}\,\text{female}
++ \gamma_{06}\bigl(\text{nse_cmc}\,\times\,\text{prop_empleo_gmc}\bigr)
++ u_{0\text{comuna}}
++ u_{1\text{comuna}}\,\text{nse_cmc}
++ r_{ij}
+$$
+:::
+::::
 
 # Resultados {data-background-color="#5f5758"}
 
 ## Descriptivos
 
+Scatterplot: relación entre promedio comunal de escolaridad y tasa de empleo
+
 ```{r}
-scatterplot(mlm$mathach ~ mlm$ses, data=mlm, xlab="Ses", ylab="Math Score", main="Math on SES", smooth=FALSE)
+casen_educ %>%
+  group_by(comuna) %>%
+  summarise(
+    esc_prom = mean(esc, na.rm = TRUE),
+    prop_empleo = first(prop_empleo)
+  ) %>%
+  ggplot(aes(x = prop_empleo, y = esc_prom)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "steelblue") +
+  labs(
+    title = "Relación entre tasa de empleo comunal y escolaridad promedio",
+    x = "Tasa de empleo (proporción)",
+    y = "Años promedio de escolaridad"
+  ) +
+  theme_minimal()
 ```
+
+------------------------------------------------------------------------
+
+## Boxplot
+
+escolaridad individual según cuartiles de escuelas comunales
+
+```{r}
+casen_educ %>%
+  mutate(
+    cuartil_escuelas = ntile(n_escuelas, 4)  # divide en 4 cuartiles
+  ) %>%
+  ggplot(aes(x = factor(cuartil_escuelas), y = esc)) +
+  geom_boxplot(fill = "lightgray", color = "black") +
+  labs(
+    title = "Distribución de escolaridad según cantidad de escuelas en la comuna",
+    x = "Cuartil de cantidad de escuelas",
+    y = "Años de escolaridad"
+  ) +
+  theme_minimal()
+```
+
+\`
 
 ## Modelos
 
-Los resultados de los modelos de regresión pueden ser presentados en un coefplot
+```{r tabla_modelos, echo=FALSE, results='asis'}
+library(sjPlot)
 
-```{r}
-plot_model(results_3, 
-            title = "", #quitar titulo
-            show.values = TRUE, #mostrar valor de efectos
-            dot.size = 3, #tamaño circulos
-            line.size = 1, #tamaño CI
-            value.size = 4, #tamaño valor efectoss
-            spacing = 1, #espacio entre efectos
-            vline.color = "red", # linea roja en punto neutro (0)
-            axis.labels = rev(c("Ses",
-                              "Female", 
-                              "Sector", 
-                              "Mean sed")), #con rev porque automatico los tira en otro orden
-            show.legend = FALSE) + # variables dependientes
-  theme_bw()
+# 1. Genera la tabla SIN imprimirla
+html_tab <- tab_model(
+  m0, m1, m2, m3, m4, m5_H6,
+  show.ci  = FALSE,
+  show.se  = TRUE,
+  p.style  = "stars",
+  digits   = 3,
+  dv.labels = c(
+    "Nulo (ICC)", "L1 (centrado)", "L2 (centrado)",
+    "L1 + L2", "+ Pend. NSE", "+ Interacción H6"
+  ),
+  file = NA          # ← devuelve la lista, no la imprime
+)
+
+# 2. Compone la salida (solo UNA vez)
+salida <- paste0(
+  "<style>", html_tab$page.style, "</style>",
+  '<div class="hscroll small-table">', html_tab$page.content, "</div>"
+)
+
+knitr::asis_output(salida)
+invisible(NULL)      # evita ecos adicionales
 ```
 
-## Resultados {.scrollable-x .smaller}
+------------------------------------------------------------------------
 
-o mediante tablas
+## Test de devianza
 
 ```{r}
-tab_model(results_0,results_1,results_2,results_3,results_4,
-          show.ci=FALSE,
-          show.icc=FALSE)
+#| label: lrt-table
+#| echo: false
+#| results: asis
+#| warning: false
+#| message: false
+
+library(dplyr)
+library(kableExtra)
+library(htmltools)
+
+## 1 ─ LRT ----------------------------------------------------------------------
+lrt_raw <- anova(m3, m4) |>
+  as.data.frame() |>
+  tibble::rownames_to_column("modelo") |>
+  mutate(modelo = recode(modelo,
+                         m3 = "sin&nbsp;pendiente",
+                         m4 = "con&nbsp;pendiente"))
+
+row_lrt <- tibble(
+  modelo = "LRT", npar = NA, AIC = NA, BIC = NA, logLik = NA,
+  LRT = lrt_raw$Chisq[2], gl = lrt_raw$Df[2],
+  p = lrt_raw$`Pr(>Chisq)`[2]
+)
+
+tabla_lrt <- bind_rows(
+  select(lrt_raw, modelo, npar, AIC, BIC, logLik),
+  row_lrt
+)
+
+## 2 ─ kable en HTML ------------------------------------------------------------
+tbl_html <- kable(tabla_lrt, "html", digits = 3, escape = FALSE,
+                  caption = "¿La pendiente aleatoria de NSE mejora el ajuste?") |>
+  kable_styling(full_width = FALSE,
+                bootstrap_options = c("striped", "hover", "condensed"),
+                font_size = 15) |>          # ← TAMAÑO FUENTE (sube o baja)
+  add_header_above(c(" " = 5, "Likelihood-ratio test" = 3)) |>
+  add_footnote(
+    "χ² significativo (p < 0.001) ⇒ conviene dejar la pendiente de NSE como aleatoria",
+    notation = "none"
+  )
+
+## 3 ─ contenedor centrado con scroll si hace falta ----------------------------
+scroll_box <- div(
+  style = "
+    max-width: 1000px;      /* cambia este ancho si lo necesitas */
+    margin: 0 auto;         /* centra la tabla */
+    overflow-x: auto;       /* barra horizontal si se pasa de 1000 px */
+  ",
+  HTML(tbl_html)
+)
+
+knitr::asis_output(as.character(scroll_box))
 ```
+
+------------------------------------------------------------------------
 
 ## Interacción
 
 ::::: columns
 ::: {.column width="70%"}
 ```{r}
-plot_model(results_4, type="int") +
-  theme_bw()
+int_h6 <- plot_model(
+  m5_H6,
+  type  = "int",
+  terms = c("nse_cmc", "prop_empleo_gmc")   # pred, moderador
+  # si quisieras especificar los niveles del moderador:
+  # terms = c("nse_cmc", "prop_empleo_gmc [-1 +1]")
+)
+is.ggplot(int_h6)
+#> TRUE   ← entonces usa int_h6 directamente
+
+p_h6 <- int_h6 +
+  labs(
+    title  = "Interacción H6: NSE individual × Tasa de empleo comunal",
+    x      = "NSE centrado en la comuna (CMC)",
+    y      = "Años esperados de escolaridad",
+    colour = "Tasa de empleo comunal\n(GMC; −1 DE / Media / +1 DE)"
+  ) +
+  theme_minimal(base_size = 12)
+
+print(p_h6) 
+
 ```
 :::
 
@@ -174,3 +397,5 @@ La interacción muestra que...
 :::
 
 ## Referencias
+
+

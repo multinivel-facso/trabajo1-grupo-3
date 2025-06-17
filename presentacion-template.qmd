@@ -16,7 +16,7 @@ editor: source
 
 # 
 
-```{r}
+```{r paquetes y modelos}
 #| include: false
 #| message: false
 
@@ -30,11 +30,8 @@ pacman::p_load(lme4,
                stargazer,
                ggplot2, # gráficos
                dplyr, # manipulacion de datos
-               equatiomatic, knitr, kableExtra) # paquetes a cargar
+               equatiomatic, knitr, kableExtra, htmltools) # paquetes a cargar
 
-library(knitr)
-library(kableExtra)
-library(htmltools) 
 casen_educ <- readRDS("output/casen_educ.rds")
 
 # ---- centrados --------------------------------------------------------------
@@ -96,43 +93,97 @@ Aquí mis notas
 
 # Introducción
 
--   \[problema, objeto de estudio\] Rendimiento en matemáticas decreciente y aumentan brechas por género
+-   **Problema, objeto de estudio:**
 
--   \[factores asociados L1\] Nivel socioeconómico y género de estudiantes
+    | La desigualdad educativa persiste como una de las principales barreras para la movilidad social en Chile, especialmente en la Región Metropolitana de Santiago. A pesar de la expansión del acceso educativo, las diferencias en años de escolaridad continúan reproduciendo desigualdades estructurales entre grupos sociales. Este estudio busca comprender cómo estas diferencias se explican a partir de la interacción entre recursos familiares y condiciones territoriales en el Gran Santiago.
 
--   \[factores asociados L2\] Nivel socioeconómico de la escuela y composición de género de las salas de clases.
+------------------------------------------------------------------------
 
-##  {data-background-color="#5f5758"}
+-   **Factores asociados L1:** Nivel socioeconómico del hogar, Género y Participación social familiar
+
+    > Estos factores se entienden como recursos o desventajas que configuran las trayectorias escolares desde el origen social, afectando tanto el acceso como la permanencia y el logro educativo.
+
+-   **Factores asociados L2:** Tasa de empleo comunal y Oferta escolar comunal (densidad de establecimientos)
+
+    > Ambas variables expresan las condiciones estructurales del territorio, influyendo en las oportunidades educativas disponibles. Se incorporan para analizar cómo el entorno puede amplificar o mitigar las desigualdades preexistentes, más allá de las características individuales.
+
+##  {data-background-color="#FF0000"}
 
 ::: {.center .middle}
-[¿En qué medida el nivel socioeconómico y el género a nivel individual y de escuela afectan el rendimiento en matemática?]{style="font-size: 250%;"}
+[¿En qué medida los distintos factores de socialización —tanto familiares como territoriales— influyen en los años de escolaridad de los habitantes del Gran Santiago?]{style="font-size: 230%;"}
 :::
 
 # Hipótesis:
 
-Nivel 1:
+**Nivel 1:**
 
-$H_1$:
+$H_1$: Las mujeres completan, en promedio, menos años de escolaridad que los hombres.
 
-$H_2$:
+$H_2$: Cuanto más alto es el nivel socioeconómico (NSE) del hogar, más años de escolaridad alcanza el estudiante.
 
-Nivel 2
+$H_3$: Provenir de un hogar con baja participación social reduce los años de escolaridad frente a hogares activos en redes comunitarias.
 
-$H_3$:
+**Nivel 2:**
 
-$H_4$:
+$H_4$: Las comunas con mayor tasa de empleo presentan una escolaridad promedio más alta.
 
-# Metodología {data-background-color="#5f5758"}
+$H_5$: Las comunas con mayor número de escuelas ofrecen más oportunidades y muestran mayores años de escolaridad.
+
+------------------------------------------------------------------------
+
+**Interacción entre niveles:**
+
+$H_6$: El efecto positivo del nivel socioeconómico (NSE) sobre la escolaridad es más intenso en comunas con alta tasa de empleo; un mercado laboral dinámico potencia los recursos familiares.
+
+![Modelo teórico (hipótesis)](input/img/Años_de_escolaridad.png){fig-align="center" width="638" height="364"}
+
+# Metodología {data-background-color="#FF0000"}
 
 ## Datos
 
 ## Variables
 
-(incluir tablas univariados por nivel)
+::::: columns
+::: {.column width="70%"}
+```{r}
+#Tabla nivel 1-----
+
+# Variables de nivel 1 (individual)
+nivel1 <- casen_educ %>%
+  select(esc, female, nse_numerico,part_social_num)
+
+stargazer(as.data.frame(nivel1),
+          type = "text",
+          title = "Estadísticos descriptivos - Nivel 1 (individual)",
+          digits = 2, summary.stat = c("n","min", "p25", "median", "mean", "p75", "max", "sd"))
+
+```
+
+:::
+
+::: {.column width="30%"}
+:::
+```{r}
+
+#Tabla nivel 2-----
+
+# Variables de nivel 2 (contextual)
+nivel2 <- casen_educ %>%
+  select(comuna, n_escuelas, prop_empleo) %>%
+  distinct()  # evitar duplicados por comuna
+
+stargazer(as.data.frame(nivel2),
+          type = "text",
+          title = "Estadísticos descriptivos - Nivel 2 (comunal)",
+          digits = 2, summary.stat = c("n", "min", "p25", "median", "mean", "p75", "max", "sd"))
+```
+
+:::::
 
 ## Métodos
 
 Se estimaron un total de 6 modelos, siguientes modelos:
+utilizando....
 
 ## Modelo nulo
 
@@ -217,13 +268,13 @@ $$
 :::
 ::::
 
-# Resultados {data-background-color="#5f5758"}
+# Resultados {data-background-color="#FF0000"}
 
 ## Descriptivos
 
 Scatterplot: relación entre promedio comunal de escolaridad y tasa de empleo
 
-```{r}
+```{r Scatterplot}
 casen_educ %>%
   group_by(comuna) %>%
   summarise(
@@ -247,7 +298,7 @@ casen_educ %>%
 
 escolaridad individual según cuartiles de escuelas comunales
 
-```{r}
+```{r Boxplot}
 casen_educ %>%
   mutate(
     cuartil_escuelas = ntile(n_escuelas, 4)  # divide en 4 cuartiles
@@ -297,7 +348,7 @@ invisible(NULL)      # evita ecos adicionales
 
 ## Test de devianza
 
-```{r}
+```{r test de devianza}
 #| label: lrt-table
 #| echo: false
 #| results: asis
@@ -358,8 +409,8 @@ knitr::asis_output(as.character(scroll_box))
 
 ::::: columns
 ::: {.column width="70%"}
-```{r}
-#| include: false
+```{r Interacción}
+#| echo: false
 int_h6 <- plot_model(
   m5_H6,
   type  = "int",
@@ -367,8 +418,6 @@ int_h6 <- plot_model(
   # si quisieras especificar los niveles del moderador:
   # terms = c("nse_cmc", "prop_empleo_gmc [-1 +1]")
 )
-is.ggplot(int_h6)
-#> TRUE   ← entonces usa int_h6 directamente
 
 p_h6 <- int_h6 +
   labs(
@@ -379,13 +428,9 @@ p_h6 <- int_h6 +
   ) +
   theme_minimal(base_size = 12)
 
-
-
-```
-
-```{r}
-#| echo: false
 print(p_h6) 
+
+
 ```
 :::
 
@@ -394,7 +439,33 @@ La interacción muestra que...
 :::
 :::::
 
-# Conclusiones {data-background-color="black"}
+# **Observaciones influyentes**
+
+```{r Observaciones influyentes}
+pacman::p_load(influence.ME, dplyr, sjPlot)
+
+casen_educ_cen <- readRDS("output/casen_educ_cen.rds")
+# 1. Objeto de influencia por comuna -------------------------------------------
+infl_m4 <- influence(m4, group = "comuna")   # m4: modelo con pendiente NSE
+
+# 2. Cook’s distance y punto de corte (4/k) ------------------------------------
+cook_vals <- cooks.distance(infl_m4, sort = TRUE)
+
+k       <- length(unique(casen_educ_cen$comuna))
+cutoff  <- 4 / k                               # ≈ 0.125 si k = 32
+
+influentes <- names(cook_vals)[cook_vals > cutoff]
+
+# 3. Gráfico de Cook -----------------------------------------------------------
+plot(
+  infl_m4, which = "cook",
+  cutoff  = cutoff, sort = TRUE,
+  xlab = "Cook's distance", ylab = "Comuna",
+  main = "Distancia de Cook – Influencia por comuna (modelo m4)"
+)
+```
+
+# Conclusiones {data-background-color="#FF0000"}
 
 ::: incremental
 -   bla bla bla

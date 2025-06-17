@@ -166,29 +166,53 @@
 <section id="introducción" class="title-slide slide level1 center">
 <h1>Introducción</h1>
 <ul>
-<li class="fragment"><p>[problema, objeto de estudio] Rendimiento en matemáticas decreciente y aumentan brechas por género</p></li>
-<li class="fragment"><p>[factores asociados L1] Nivel socioeconómico y género de estudiantes</p></li>
-<li class="fragment"><p>[factores asociados L2] Nivel socioeconómico de la escuela y composición de género de las salas de clases.</p></li>
+<li class="fragment"><p><strong>Problema, objeto de estudio:</strong></p>
+<div class="line-block">La desigualdad educativa persiste como una de las principales barreras para la movilidad social en Chile, especialmente en la Región Metropolitana de Santiago. A pesar de la expansión del acceso educativo, las diferencias en años de escolaridad continúan reproduciendo desigualdades estructurales entre grupos sociales. Este estudio busca comprender cómo estas diferencias se explican a partir de la interacción entre recursos familiares y condiciones territoriales en el Gran Santiago.</div></li>
 </ul>
 </section>
-<section id="section-1" class="slide level2" data-background-color="#5f5758">
+<section class="slide level2">
+
+<ul>
+<li class="fragment"><p><strong>Factores asociados L1:</strong> Nivel socioeconómico del hogar, Género y Participación social familiar</p>
+<blockquote>
+<p>Estos factores se entienden como recursos o desventajas que configuran las trayectorias escolares desde el origen social, afectando tanto el acceso como la permanencia y el logro educativo.</p>
+</blockquote></li>
+<li class="fragment"><p><strong>Factores asociados L2:</strong> Tasa de empleo comunal y Oferta escolar comunal (densidad de establecimientos)</p>
+<blockquote>
+<p>Ambas variables expresan las condiciones estructurales del territorio, influyendo en las oportunidades educativas disponibles. Se incorporan para analizar cómo el entorno puede amplificar o mitigar las desigualdades preexistentes, más allá de las características individuales.</p>
+</blockquote></li>
+</ul>
+</section>
+<section id="section-1" class="slide level2" data-background-color="#FF0000">
 <h2></h2>
 <div class="center middle">
-<p><span style="font-size: 250%;">¿En qué medida el nivel socioeconómico y el género a nivel individual y de escuela afectan el rendimiento en matemática?</span></p>
+<p><span style="font-size: 230%;">¿En qué medida los distintos factores de socialización —tanto familiares como territoriales— influyen en los años de escolaridad de los habitantes del Gran Santiago?</span></p>
 </div>
 </section></section>
+<section>
 <section id="hipótesis" class="title-slide slide level1 center">
 <h1>Hipótesis:</h1>
-<p>Nivel 1:</p>
-<p><span class="math inline">\(H_1\)</span>:</p>
-<p><span class="math inline">\(H_2\)</span>:</p>
-<p>Nivel 2</p>
-<p><span class="math inline">\(H_3\)</span>:</p>
-<p><span class="math inline">\(H_4\)</span>:</p>
+<p><strong>Nivel 1:</strong></p>
+<p><span class="math inline">\(H_1\)</span>: Las mujeres completan, en promedio, menos años de escolaridad que los hombres.</p>
+<p><span class="math inline">\(H_2\)</span>: Cuanto más alto es el nivel socioeconómico (NSE) del hogar, más años de escolaridad alcanza el estudiante.</p>
+<p><span class="math inline">\(H_3\)</span>: Provenir de un hogar con baja participación social reduce los años de escolaridad frente a hogares activos en redes comunitarias.</p>
+<p><strong>Nivel 2:</strong></p>
+<p><span class="math inline">\(H_4\)</span>: Las comunas con mayor tasa de empleo presentan una escolaridad promedio más alta.</p>
+<p><span class="math inline">\(H_5\)</span>: Las comunas con mayor número de escuelas ofrecen más oportunidades y muestran mayores años de escolaridad.</p>
 </section>
+<section class="slide level2">
 
+<p><strong>Interacción entre niveles:</strong></p>
+<p><span class="math inline">\(H_6\)</span>: El efecto positivo del nivel socioeconómico (NSE) sobre la escolaridad es más intenso en comunas con alta tasa de empleo; un mercado laboral dinámico potencia los recursos familiares.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="input/img/Años_de_escolaridad.png" width="638" height="364"></p>
+<figcaption>Modelo teórico (hipótesis)</figcaption>
+</figure>
+</div>
+</section></section>
 <section>
-<section id="metodología" class="title-slide slide level1 center" data-background-color="#5f5758">
+<section id="metodología" class="title-slide slide level1 center" data-background-color="#FF0000">
 <h1>Metodología</h1>
 
 </section>
@@ -197,6 +221,37 @@
 </section>
 <section id="variables" class="slide level2">
 <h2>Variables</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Estadísticos descriptivos - Nivel 1 (individual)
+======================================================================
+Statistic         N    Min Pctl(25) Median Mean  Pctl(75) Max St. Dev.
+----------------------------------------------------------------------
+esc             22,776  0     11      12   12.60    16    29    4.11  
+female          22,776  0     0       1    0.54     1      1    0.50  
+nse_numerico    22,776  1     2       5    4.56     6      7    2.01  
+part_social_num 22,706  0     0       0    0.13     0      1    0.33  
+----------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+
+</div><div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Estadísticos descriptivos - Nivel 2 (comunal)
+================================================================
+Statistic   N  Min  Pctl(25) Median Mean  Pctl(75) Max  St. Dev.
+----------------------------------------------------------------
+n_escuelas  32  19    39.5     58   62.88   68.2   199   39.89  
+prop_empleo 32 0.46   0.51    0.54  0.55    0.58   0.70   0.06  
+----------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
 <p>(incluir tablas univariados por nivel)</p>
 </section>
 <section id="métodos" class="slide level2">
@@ -287,7 +342,7 @@
 </div>
 </section></section>
 <section>
-<section id="resultados" class="title-slide slide level1 center" data-background-color="#5f5758">
+<section id="resultados" class="title-slide slide level1 center" data-background-color="#FF0000">
 <h1>Resultados</h1>
 
 </section>
@@ -298,7 +353,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentacion-template_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+<p><img data-src="presentacion-template_files/figure-revealjs/Scatterplot-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -311,7 +366,7 @@
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentacion-template_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+<p><img data-src="presentacion-template_files/figure-revealjs/Boxplot-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -663,7 +718,7 @@ Likelihood-ratio test
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentacion-template_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<p><img data-src="presentacion-template_files/figure-revealjs/Interacción-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -672,8 +727,21 @@ Likelihood-ratio test
 <p>La interacción muestra que…</p>
 </div></div>
 </section></section>
+<section id="observaciones-influyentes" class="title-slide slide level1 center">
+<h1><strong>Observaciones influyentes</strong></h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion-template_files/figure-revealjs/Observaciones%20influyentes-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
 <section>
-<section id="conclusiones" class="title-slide slide level1 center" data-background-color="black">
+<section id="conclusiones" class="title-slide slide level1 center" data-background-color="#FF0000">
 <h1>Conclusiones</h1>
 <div>
 <ul>

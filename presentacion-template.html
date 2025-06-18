@@ -221,42 +221,131 @@
 </section>
 <section id="variables" class="slide level2">
 <h2>Variables</h2>
-<div class="columns">
-<div class="column" style="width:70%;">
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Estadísticos descriptivos - Nivel 1 (individual)
-======================================================================
-Statistic         N    Min Pctl(25) Median Mean  Pctl(75) Max St. Dev.
-----------------------------------------------------------------------
-esc             22,776  0     11      12   12.60    16    29    4.11  
-female          22,776  0     0       1    0.54     1      1    0.50  
-nse_numerico    22,776  1     2       5    4.56     6      7    2.01  
-part_social_num 22,706  0     0       0    0.13     0      1    0.33  
-----------------------------------------------------------------------</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:30%;">
+<div style="font-size:85%; width:95%; margin:0 auto;">
 
-</div><div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Estadísticos descriptivos - Nivel 2 (comunal)
-================================================================
-Statistic   N  Min  Pctl(25) Median Mean  Pctl(75) Max  St. Dev.
-----------------------------------------------------------------
-n_escuelas  32  19    39.5     58   62.88   68.2   199   39.89  
-prop_empleo 32 0.46   0.51    0.54  0.55    0.58   0.70   0.06  
-----------------------------------------------------------------</code></pre>
+<table class="caption-top" data-quarto-postprocess="true" style="text-align:center">
+<caption><strong>Estadísticos descriptivos – Nivel 1 (individual)</strong></caption>
+<tbody>
+<tr class="odd">
+<td colspan="9" style="border-bottom: 1px solid black"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Statistic</td>
+<td>N</td>
+<td>Min</td>
+<td>Pctl(25)</td>
+<td>Median</td>
+<td>Mean</td>
+<td>Pctl(75)</td>
+<td>Max</td>
+<td>St. Dev.</td>
+</tr>
+<tr class="odd">
+<td colspan="9" style="border-bottom: 1px solid black"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">esc</td>
+<td>22,776</td>
+<td>0</td>
+<td>11</td>
+<td>12</td>
+<td>12.60</td>
+<td>16</td>
+<td>29</td>
+<td>4.11</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">female</td>
+<td>22,776</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0.54</td>
+<td>1</td>
+<td>1</td>
+<td>0.50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">nse_numerico</td>
+<td>22,776</td>
+<td>1</td>
+<td>2</td>
+<td>5</td>
+<td>4.56</td>
+<td>6</td>
+<td>7</td>
+<td>2.01</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">part_social_num</td>
+<td>22,706</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0.13</td>
+<td>0</td>
+<td>1</td>
+<td>0.33</td>
+</tr>
+<tr class="even">
+<td colspan="9" style="border-bottom: 1px solid black"></td>
+</tr>
+</tbody>
+</table>
+<br><br>
+
+<table class="caption-top" data-quarto-postprocess="true" style="text-align:center">
+<caption><strong>Estadísticos descriptivos – Nivel 2 (comunal)</strong></caption>
+<tbody>
+<tr class="odd">
+<td colspan="9" style="border-bottom: 1px solid black"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Statistic</td>
+<td>N</td>
+<td>Min</td>
+<td>Pctl(25)</td>
+<td>Median</td>
+<td>Mean</td>
+<td>Pctl(75)</td>
+<td>Max</td>
+<td>St. Dev.</td>
+</tr>
+<tr class="odd">
+<td colspan="9" style="border-bottom: 1px solid black"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">n_escuelas</td>
+<td>32</td>
+<td>19</td>
+<td>39.5</td>
+<td>58</td>
+<td>62.88</td>
+<td>68.2</td>
+<td>199</td>
+<td>39.89</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prop_empleo</td>
+<td>32</td>
+<td>0.46</td>
+<td>0.51</td>
+<td>0.54</td>
+<td>0.55</td>
+<td>0.58</td>
+<td>0.70</td>
+<td>0.06</td>
+</tr>
+<tr class="even">
+<td colspan="9" style="border-bottom: 1px solid black"></td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
-</div>
-<p>(incluir tablas univariados por nivel)</p>
 </section>
 <section id="métodos" class="slide level2">
 <h2>Métodos</h2>
-<p>Se estimaron un total de 6 modelos, siguientes modelos:</p>
+<p>Se estimaron un total de 6 modelos, siguientes modelos: utilizando….</p>
 </section>
 <section id="modelo-nulo" class="slide level2">
 <h2>Modelo nulo</h2>
@@ -718,7 +807,7 @@ Likelihood-ratio test
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="presentacion-template_files/figure-revealjs/Interacción-1.png" width="960"></p>
+<p><img data-src="presentacion-template_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -727,6 +816,7 @@ Likelihood-ratio test
 <p>La interacción muestra que…</p>
 </div></div>
 </section></section>
+<section>
 <section id="observaciones-influyentes" class="title-slide slide level1 center">
 <h1><strong>Observaciones influyentes</strong></h1>
 <div class="cell">
@@ -739,7 +829,104 @@ Likelihood-ratio test
 </div>
 </div>
 </section>
+<section class="slide level2">
 
+<div class="cell">
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="1" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Modelo original</th>
+<th colspan="1" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Sin comunas influyentes</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">12.568 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">12.569 <sup>***</sup></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">female</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.398 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.398 <sup>***</sup></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">nse cmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.451 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.453 <sup>***</sup></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">part social num</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.729 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.729 <sup>***</sup></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">prop empleo gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">18.082 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">17.957 <sup>***</sup></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">n escuelas gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.002 <sup></sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.002 <sup></sup></td>
+</tr>
+<tr>
+<td colspan="3" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">13.37</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">13.37</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">1.48 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">1.35 <sub>comuna</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>11</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">0.09 <sub>comuna.nse_cmc</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">0.08 <sub>comuna.nse_cmc</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ρ<sub>01</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">0.34 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">0.37 <sub>comuna</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">0.11</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">0.11</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">32 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">32 <sub>comuna</sub></td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="1">22706</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="1">22706</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">0.116 / 0.217</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">0.116 / 0.210</td>
+</tr>
+<tr>
+<td colspan="3" style="font-style:italic; border-top:double black; text-align:right;">* p&lt;0.05&nbsp;&nbsp;&nbsp;** p&lt;0.01&nbsp;&nbsp;&nbsp;*** p&lt;0.001</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+</section></section>
 <section>
 <section id="conclusiones" class="title-slide slide level1 center" data-background-color="#FF0000">
 <h1>Conclusiones</h1>

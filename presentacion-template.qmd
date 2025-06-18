@@ -143,42 +143,64 @@ $H_6$: El efecto positivo del nivel socioeconómico (NSE) sobre la escolaridad e
 
 ## Variables
 
-::::: columns
-::: {.column width="70%"}
-```{r}
-#Tabla nivel 1-----
+```{r tabla_nivel1, echo=FALSE, results='asis'}
 
-# Variables de nivel 1 (individual)
+### --------- NIVEL 1: variables individuales -----------------------------
 nivel1 <- casen_educ %>%
-  select(esc, female, nse_numerico,part_social_num)
+  mutate(
+    female          = as.numeric(female),          # 0 / 1
+    part_social_num = as.numeric(part_social_num)
+  ) %>%
+  select(esc, female, nse_numerico, part_social_num) %>%
+  as.data.frame()
 
-stargazer(as.data.frame(nivel1),
-          type = "text",
-          title = "Estadísticos descriptivos - Nivel 1 (individual)",
-          digits = 2, summary.stat = c("n","min", "p25", "median", "mean", "p75", "max", "sd"))
+html_lvl1 <- paste(
+  capture.output(
+    stargazer(
+      nivel1,
+      type   = "html",
+      title  = "Estadísticos descriptivos – Nivel 1 (individual)",
+      digits = 2,
+      summary.stat = c("n","min","p25","median","mean","p75","max","sd")
+    )
+  ),
+  collapse = "\n"
+)
 
-```
-
-:::
-
-::: {.column width="30%"}
-:::
-```{r}
-
-#Tabla nivel 2-----
-
-# Variables de nivel 2 (contextual)
+### --------- NIVEL 2: variables comunales -------------------------------
 nivel2 <- casen_educ %>%
   select(comuna, n_escuelas, prop_empleo) %>%
-  distinct()  # evitar duplicados por comuna
+  distinct() %>%                       # una fila por comuna
+  select(n_escuelas, prop_empleo) %>%  # solo numéricas
+  as.data.frame()
 
-stargazer(as.data.frame(nivel2),
-          type = "text",
-          title = "Estadísticos descriptivos - Nivel 2 (comunal)",
-          digits = 2, summary.stat = c("n", "min", "p25", "median", "mean", "p75", "max", "sd"))
+html_lvl2 <- paste(
+  capture.output(
+    stargazer(
+      nivel2,
+      type   = "html",
+      title  = "Estadísticos descriptivos – Nivel 2 (comunal)",
+      digits = 2,
+      summary.stat = c("n","min","p25","median","mean","p75","max","sd")
+    )
+  ),
+  collapse = "\n"
+)
+
+### --------- COMBINA Y MUESTRA ------------------------------------------
+knitr::asis_output(
+  paste0(
+    '<div style="font-size:85%; width:95%; margin:0 auto;">',
+    html_lvl1,
+    '<br><br>',     # espacio entre tablas
+    html_lvl2,
+    '</div>'
+  )
+)
+invisible(NULL)
+
 ```
 
-:::::
 
 ## Métodos
 
@@ -428,10 +450,14 @@ p_h6 <- int_h6 +
   ) +
   theme_minimal(base_size = 12)
 
-print(p_h6) 
-
-
 ```
+
+```{r}
+#| echo: false
+print(p_h6) 
+```
+
+
 :::
 
 ::: {.column width="30%"}
@@ -464,6 +490,34 @@ plot(
   main = "Distancia de Cook – Influencia por comuna (modelo m4)"
 )
 ```
+
+---
+```{r}
+#| include: false
+casen_trim <- filter(casen_educ_cen, !comuna %in% influentes)
+
+m4_trim <- lmer(
+  esc ~ 1 + female + nse_cmc + part_social_num +
+    prop_empleo_gmc + n_escuelas_gmc +
+    (1 + nse_cmc | comuna),
+  data = casen_trim,
+  REML = FALSE        # para comparabilidad plena
+)
+
+```
+
+
+```{r}
+# 5. Tabla comparativa ---------------------------------------------------------
+sjPlot::tab_model(
+  m4, m4_trim,
+  dv.labels = c("Modelo original", "Sin comunas influyentes"),
+  show.ci   = FALSE,
+  p.style   = "stars",
+  digits    = 3
+)
+```
+
 
 # Conclusiones {data-background-color="#FF0000"}
 

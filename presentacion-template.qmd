@@ -32,6 +32,7 @@ pacman::p_load(lme4,
                dplyr, # manipulacion de datos
                equatiomatic, knitr, kableExtra, htmltools) # paquetes a cargar
 
+
 casen_educ <- readRDS("output/casen_educ.rds")
 
 # ---- centrados --------------------------------------------------------------
@@ -201,11 +202,9 @@ invisible(NULL)
 
 ```
 
-
 ## Métodos
 
-Se estimaron un total de 6 modelos, siguientes modelos:
-utilizando....
+Se estimaron un total de 6 modelos, siguientes modelos: utilizando....
 
 ## Modelo nulo
 
@@ -377,9 +376,6 @@ invisible(NULL)      # evita ecos adicionales
 #| warning: false
 #| message: false
 
-library(dplyr)
-library(kableExtra)
-library(htmltools)
 
 ## 1 ─ LRT ----------------------------------------------------------------------
 lrt_raw <- anova(m3, m4) |>
@@ -430,18 +426,16 @@ knitr::asis_output(as.character(scroll_box))
 ## Interacción
 
 ::::: columns
-::: {.column width="70%"}
-```{r Interacción}
-#| echo: false
-int_h6 <- plot_model(
+::: {.column width="60%"}
+```{r }
+library(sjPlot)   # plot_model()
+library(ggplot2)  # theme_minimal()
+
+p_h6 <- plot_model(
   m5_H6,
   type  = "int",
-  terms = c("nse_cmc", "prop_empleo_gmc")   # pred, moderador
-  # si quisieras especificar los niveles del moderador:
-  # terms = c("nse_cmc", "prop_empleo_gmc [-1 +1]")
-)
-
-p_h6 <- int_h6 +
+  terms = c("nse_cmc", "prop_empleo_gmc")   # predictor y moderador
+) +
   labs(
     title  = "Interacción H6: NSE individual × Tasa de empleo comunal",
     x      = "NSE centrado en la comuna (CMC)",
@@ -450,74 +444,111 @@ p_h6 <- int_h6 +
   ) +
   theme_minimal(base_size = 12)
 
+p_h6              # el último objeto del chunk se imprime -> figura
+
 ```
-
-```{r}
-#| echo: false
-print(p_h6) 
-```
-
-
 :::
 
-::: {.column width="30%"}
-La interacción muestra que...
+::: {.column width="40%"}
+[La interacción muestra que el efecto del nivel socioeconómico sobre la escolaridad varía según la tasa de empleo comunal. En comunas con más empleo (azul), el NSE tiene un impacto mayor sobre los años de escolaridad, mientras que en comunas con menos empleo (roja), su efecto es más débil. Esto confirma que los recursos familiares rinden más en contextos laborales favorables, ampliando así las desigualdades educativas.]{style="font-size: 80%;"}
 :::
 :::::
 
 # **Observaciones influyentes**
 
 ```{r Observaciones influyentes}
-pacman::p_load(influence.ME, dplyr, sjPlot)
+#| include: false
+library(influence.ME)  # Cook's distance por grupo
+library(dplyr)         # manipulación de datos
+library(forcats)       # fct_drop
+library(sjPlot)        # tab_model
+library(broom.mixed)   # tidy() para lmer
 
-casen_educ_cen <- readRDS("output/casen_educ_cen.rds")
-# 1. Objeto de influencia por comuna -------------------------------------------
-infl_m4 <- influence(m4, group = "comuna")   # m4: modelo con pendiente NSE
+casen_educ_cen <- readRDS("output/casen_educ_cen.rds") %>%
+  filter(!is.na(comuna)) %>%                # asegura no haber NAs
+  mutate(comuna = as.factor(comuna))        # comuna como factor
 
-# 2. Cook’s distance y punto de corte (4/k) ------------------------------------
-cook_vals <- cooks.distance(infl_m4, sort = TRUE)
+stopifnot(nlevels(casen_educ_cen$comuna) == 32)  # debe haber 32 comunas
 
-k       <- length(unique(casen_educ_cen$comuna))
-cutoff  <- 4 / k                               # ≈ 0.125 si k = 32
+# ---------------------------------------------------------------
+# 1. Modelo original (m4) ---------------------------------------
+# ---------------------------------------------------------------
+m4 <- lmer(
+  esc ~ female + nse_cmc + part_social_num +
+    prop_empleo_gmc + n_escuelas_gmc +
+    (1 + nse_cmc | comuna),
+  data = casen_educ_cen
+)
 
-influentes <- names(cook_vals)[cook_vals > cutoff]
+# ---------------------------------------------------------------
+# 2. Cook’s Distance por comuna ---------------------------------
+# ---------------------------------------------------------------
+infl_m4   <- influence(m4, group = "comuna")
+cook_vals <- cooks.distance(infl_m4, sort = FALSE)
 
-# 3. Gráfico de Cook -----------------------------------------------------------
+# Añadir nombres de comunas si faltan
+if (is.null(names(cook_vals)) || length(names(cook_vals)) == 0) {
+  names(cook_vals) <- levels(casen_educ_cen$comuna)
+}
+
+# Punto de corte 4/k
+k      <- nlevels(casen_educ_cen$comuna)    # 32
+cutoff <- 4 / k                             # ≈ 0.125
+
+# Comunas influyentes (Cook > cutoff, ignorando NA)
+influentes <- names(cook_vals)[!is.na(cook_vals) & cook_vals > cutoff]
+
+cat("Comunas influyentes (Cook >", round(cutoff, 3), "):\n")
+                           # ej. "Vitacura" "Santiago"
+
+
+```
+
+```{r Gráfico de Cook}
+# ---------------------------------------------------------------
+# 3. Gráfico de Cook --------------------------------------------
+# ---------------------------------------------------------------
 plot(
   infl_m4, which = "cook",
   cutoff  = cutoff, sort = TRUE,
-  xlab = "Cook's distance", ylab = "Comuna",
-  main = "Distancia de Cook – Influencia por comuna (modelo m4)"
+  xlab    = "Cook's distance", ylab = "Comuna",
+  main    = "Distancia de Cook – Influencia por comuna (modelo m4)"
 )
+
 ```
 
----
+------------------------------------------------------------------------
+
 ```{r}
 #| include: false
-casen_trim <- filter(casen_educ_cen, !comuna %in% influentes)
+# ---------------------------------------------------------------
+# 4. Modelo recortado (m4_trim) ---------------------------------
+# ---------------------------------------------------------------
+casen_trim <- casen_educ_cen %>%
+  filter(!comuna %in% influentes) %>%        # excluir influyentes
+  mutate(comuna = fct_drop(comuna))          # quitar niveles vacíos
 
 m4_trim <- lmer(
-  esc ~ 1 + female + nse_cmc + part_social_num +
+  esc ~ female + nse_cmc + part_social_num +
     prop_empleo_gmc + n_escuelas_gmc +
     (1 + nse_cmc | comuna),
-  data = casen_trim,
-  REML = FALSE        # para comparabilidad plena
+  data  = casen_trim,
+  REML  = FALSE
 )
 
-```
+cat("\nNúmero de comunas en m4_trim:\n")
+print(summary(m4_trim)$ngrps)                # debería ser 30
 
+
+```
 
 ```{r}
-# 5. Tabla comparativa ---------------------------------------------------------
-sjPlot::tab_model(
+tab_model(
   m4, m4_trim,
   dv.labels = c("Modelo original", "Sin comunas influyentes"),
-  show.ci   = FALSE,
-  p.style   = "stars",
-  digits    = 3
+  show.ci   = FALSE, p.style = "stars", digits = 3
 )
 ```
-
 
 # Conclusiones {data-background-color="#FF0000"}
 

@@ -11,6 +11,7 @@ format:
     scrollable: true
     scrollOverflow: true           
     css: estilos.css 
+    self-contained: true
 editor: source
 ---
 
@@ -452,7 +453,7 @@ p_h6 <- plot_model(
   ) +
   theme_minimal(base_size = 12)
 
-print(p_h6)      # <- aseguras la impresión
+print(p_h6)      # <- aseguras la impresión  
 ```
 :::
 

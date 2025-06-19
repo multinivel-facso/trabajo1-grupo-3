@@ -140,12 +140,12 @@
 <section id="desigualdad-educativa-en-el-gran-santiago-un-análisis-multinivel-de-factores-individuales-y-territoriales" class="slide level2">
 <h2><strong>Desigualdad educativa en el Gran Santiago: un análisis multinivel de factores individuales y territoriales</strong></h2>
 <hr>
-<p><strong>Katherine Aravena Herrera, Paula Cerda Torres &amp; Sebastián Monreal Villarroel</strong></p>
+<p><strong>Juan Prado, Katherine Aravena Herrera, Paula Cerda Torres &amp; Sebastián Monreal Villarroel</strong></p>
 <div class="red2 medium">
 <p><strong>Análisis de datos multinivel - 2025</strong></p>
 <p><strong>Departamento de Sociología, Universidad de Chile</strong></p>
 </div>
-<p>Santiago, 18 de Junio de 2025</p>
+<p>Santiago, 19 de Junio de 2025</p>
 </section>
 </div><p><a href="link%20al%20repo">Github repo</a></p>
 </div>
@@ -166,7 +166,7 @@
 <section id="introducción" class="title-slide slide level1 center">
 <h1>Introducción</h1>
 <ul>
-<li class="fragment"><p><strong>Problema, objeto de estudio:</strong></p>
+<li class="fragment"><p><strong>Problema/Objeto de estudio:</strong></p>
 <div class="line-block">La desigualdad educativa persiste como una de las principales barreras para la movilidad social en Chile, especialmente en la Región Metropolitana de Santiago. A pesar de la expansión del acceso educativo, las diferencias en años de escolaridad continúan reproduciendo desigualdades estructurales entre grupos sociales. Este estudio busca comprender cómo estas diferencias se explican a partir de la interacción entre recursos familiares y condiciones territoriales en el Gran Santiago.</div></li>
 </ul>
 </section>
@@ -218,6 +218,8 @@
 </section>
 <section id="datos" class="slide level2">
 <h2>Datos</h2>
+<p>[Se utilizó la base de datos de la <strong>CASEN 2022</strong>, que tiene un diseño muestral probabilístico, estratificado por región, comuna y área urbana/rural.</p>
+<p>Para el análisis se trabajó con <strong>22.706 individuos</strong> (nivel 1) de 18 o más años, anidados dentro de las <strong>32 comunas</strong> del Gran Santiago (nivel 2), con un promedio de 702 casos por comuna.]</p>
 </section>
 <section id="variables" class="slide level2">
 <h2>Variables</h2>
@@ -345,7 +347,9 @@
 </section>
 <section id="métodos" class="slide level2">
 <h2>Métodos</h2>
-<p>Se estimaron un total de 6 modelos, siguientes modelos: utilizando….</p>
+<p>Se utilizó una metodología de análisis estadístico multinivel. De este modo se puede observar de manera más precisa cómo __las trayectorias educativas__ se configuran por la interacción entre __factores individuales__ (nivel socioeconómico, género o participación social) y __contextuales__ (oferta escolar o tasa de empleo comunal).</p>
+<p>El análisis de datos se realizó en Rstudio, utilizando _lmer_ para la construcción de los modelos, _sjPlot_ para la visualización de los datos y _summary tools_ para generar descriptivos univariados</p>
+<p>Se estimaron un total de 6 modelos, siguientes modelos:</p>
 </section>
 <section id="modelo-nulo" class="slide level2">
 <h2>Modelo nulo</h2>
@@ -930,16 +934,33 @@ Likelihood-ratio test
 <section>
 <section id="conclusiones" class="title-slide slide level1 center" data-background-color="#FF0000">
 <h1>Conclusiones</h1>
-<div>
-<ul>
-<li class="fragment">bla bla bla</li>
-<li class="fragment">bla bla</li>
-<li class="fragment">bla</li>
-</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="input/img/r_Años_de_escolaridad.png" width="830"></p>
+<figcaption>Modelo teórico con resultados</figcaption>
+</figure>
 </div>
 </section>
 <section id="referencias" class="slide level2">
 <h2>Referencias</h2>
+<p>Agencia de Calidad de la Educación. (2015, agosto). Evolución de las brechas socioeconómicas de rendimiento en pruebas SIMCE. División de Estudios, Agencia de Calidad de la Educación.</p>
+<p>Andréu, J. (2011). El análisis multinivel: una revisión actualizada en el ámbito sociológico. Metodología de Encuestas, 13, 161–176.</p>
+<p>Arita, M., Romano, A., García, A., &amp; Félix, F. (2015). Condiciones de vida y bienestar subjetivo en Culiacán, México. Universidad Autónoma de Sinaloa.</p>
+<p>Bellei Carvacho, C., Contreras, D., &amp; Valenzuela Barros, J. P. (2008). La agenda pendiente en educación. Profesores, administradores y recursos: propuestas para la nueva arquitectura de la educación chilena. Universidad de Chile.</p>
+<p>Bourdieu, P., &amp; Passeron, J. C. (2001). La reproducción. Elementos para una teoría del sistema de enseñanza. Editorial Laia.</p>
+<p>Bullones, E. (2022). Gestión educativa en valores para la paz comunitaria. Aula Virtual, 3(6), 150–160.</p>
+<p>Canales, A., &amp; de Ibarrola, M. (2022). La segmentación del sistema escolar mexicano: un análisis territorial. Revista Mexicana de Investigación Educativa, 27(94), 1035–1060.</p>
+<p>Cimadamore, A. D., &amp; Cattani, A. D. (Coords.). (2008). Producción de pobreza y desigualdad en América Latina. Siglo del Hombre Editores.</p>
+<p>Finch, W. H., Bolin, J. E., &amp; Kelley, K. (2019). Multilevel modeling using R. Chapman and Hall/CRC.</p>
+<p>Instituto Nacional de Evaluación Educativa. (2011). PIRLS–TIMSS 2011. Estudio Internacional de Progreso en Comprensión Lectora, Matemáticas y Ciencias. Volumen I: Informe español. IEA.<a href="https://www.mecd.gob.es/inee">https://www.mecd.gob.es/inee</a></p>
+<p>Ministerio de Educación de Chile. (2023). Informe de resultados SIMCE y brechas por grupo socioeconómico. Santiago: MINEDUC.</p>
+<p>Ministerio de Desarrollo Social y Familia. (2022). Encuesta de Caracterización Socioeconómica Nacional (Casen) 2022. Gobierno de Chile.</p>
+<p>OECD. (2021). Education at a Glance: OECD Indicators. OECD Publishing.<a href="https://doi.org/10.1787/b35a14e5-en">https://doi.org/10.1787/b35a14e5-en</a></p>
+<p>Peláez González, C., &amp; Rodríguez, S. A. (2020). Género, trabajo y educación: Diferencias entre hombres y mujeres en la entrada al primer empleo. Revista Interdisciplinaria de Estudios de Género de El Colegio de México, 6, e494.</p>
+<p>Rivas Espinosa, A., &amp; Terra Polanco, V. (2024). Percepciones de niñas y niños sobre su hábitat en contextos urbanos informales. Sociológica (Madrid), 39(1).</p>
+<p>Romero, E., Alcaraz, S., &amp; Hernández, M. (2020). Desigualdades educativas y respuesta institucional: Una investigación desde la perspectiva territorial. Profesorado, Revista de Currículum y Formación del Profesorado, 24(1), 1–20.</p>
+<p>Soler Mata, J., &amp; Fernández León, R. (2021). La evaluación educativa en España: Tensiones entre la evaluación estandarizada y la evaluación formativa. Revista de Educación, 393, 245–271.</p>
+<p>Villalobos, C., &amp; Mardones, S. P. (2022). ¿Quién, cómo y de qué se investiga en un sistema educativo mercantilizado? Un meta-análisis de la investigación sobre política educativa en el Chile post-dictadura (1990–2019). Education Policy Analysis Archives, 30, 160.</p>
 
 </section></section>
     </div>

@@ -1,11 +1,32 @@
 ---
-title: "Desigualdad educativa en el Gran Santiago: un análisis multinivel de factores individuales y territoriales"
-subtitle: "Estadística Multivariada 2025"
-author: "Katherine Aravena Herrera, Paula Cerda Torres, Sebastián Monreal Villarroel "
-date: "2025-05-11"
+title: "Desigualdad educativa en el Gran Santiago"
+subtitle: "Un análisis multinivel de factores individuales y territoriales"
+author: "Juan Padro,  
+  Katherine Aravena Herrera,  
+  Paula Cerda Torres &  
+  Sebastián Monreal Villarroel"
+  
+date: "30/06/25"
 lang: es
-format: html
+fontsize: 14pt
+format:
+  html:
+    code-fold: true
+    toc: true
+    toc-location: right
+    toc-depth: 2
+    toc-expand: 1
+    toc-title: "Contenidos"
+    number-sections: true
+    number-depth: 2
+    theme:
+      - minty
+      - multinivel_informe.scss
+    code-link: true
+    title-block-banner: true
 editor: visual
+editor_options:
+  chunk_output_type: console
 ---
 
 ```{r librerias, echo=FALSE, message=FALSE, warning=FALSE, collapse=TRUE}
@@ -21,13 +42,13 @@ pacman::p_load(lme4,
                lattice,
                sjPlot,
                ggeffects, 
-               here
+               here, ggrepel, modelsummary
 )
 ```
 
 # Abstract
 
-La desigualdad educativa en Chile, particularmente en el Gran Santiago, persiste como una barrera estructural para la movilidad social. Aunque la cobertura en educación básica y media ha aumentado, las diferencias en los años de escolaridad reproducen brechas de ingreso, empleo y capital social. Este estudio indaga en qué medida los factores de socialización familiares y comunales influyen en los años de escolaridad de los habitantes del Gran Santiago. Se plantea que tanto los recursos del hogar como las condiciones territoriales explican las trayectorias educativas, y que su interacción puede amplificar o moderar estos efectos. Para ello, se empleó un modelo multinivel con datos de la Encuesta CASEN 2022, considerando 22.706 personas de 32 comunas. Los resultados indican que el nivel socioeconómico, el género y la participación social del hogar tienen efectos significativos sobre la escolaridad. A nivel contextual, la tasa de empleo comunal se asocia positivamente, mientras que la cantidad de escuelas no presenta efecto relevante. El 16% de la varianza se atribuye a diferencias entre comunas, y el efecto de la participación social varía según el territorio, a diferencia del género, cuyo impacto negativo es constante. Considerando lo anterior, se concluye que las trayectorias educativas no se explican sólo por condiciones individuales, sino también por el entorno territorial. Estos hallazgos subrayan la necesidad de políticas públicas que aborden la desigualdad educativa de forma integral, articulando recursos familiares y oportunidades comunales.
+La persistencia de la desigualdad educativa en el Gran Santiago cuestiona la promesa meritocrática del sistema escolar chileno y evidencia la reproducción de las ventajas de origen social. Este estudio indaga en qué medida factores individuales (nivel socioeconómico, género y participación social del hogar) y contextuales (tasa de empleo, oferta escolar e índice de desarrollo humano comunal) inciden en los años de escolaridad de la población. A partir de datos de la Encuesta CASEN 2022 (N = 22.706), se estiman modelos multinivel que consideran la anidación de personas en 32 comunas del Gran Santiago. Los resultados muestran que tanto los recursos familiares como las condiciones comunales influyen significativamente en la escolaridad promedio, y que contextos más favorables amplifican los retornos educativos del nivel socioeconómico. En conclusión, el enfoque multinivel permite comprender la desigualdad educativa como un fenómeno estructural y territorialmente situado, lo que refuerza la necesidad de políticas públicas que articulen intervención social con desarrollo local.
 
 # Introducción
 
@@ -39,15 +60,23 @@ Para este estudio utilizaremos un enfoque multinivel que permite analizar cómo 
 
 Es fundamental destacar la relevancia de incluir variables contextuales en el análisis de fenómenos sociales, especialmente cuando se investigan desigualdades estructurales como la educativa. Las condiciones individuales como el nivel socioeconómico o las redes familiares y sociales no operan en el vacío, sino que se despliegan dentro de contextos territoriales que pueden reforzar, neutralizar o modificar sus efectos (Canales & Ibarrola, 2022). La interacción entre lo individual y lo contextual permite comprender con mayor profundidad cómo se configuran las trayectorias sociales, ya que factores como la oferta escolar o el dinamismo económico comunal no solo influyen directamente en los resultados educativos, sino que también potencian o mitigan las desigualdades preexistentes (Andréu, 2013). 
 
-Considerando lo anterior, la relevancia sociológica del estudio radica en su capacidad para incluir el análisis de la desigualdad educativa la articulación de factores estructurales tradicionalmente subestimados. Por un lado, se incorpora la participación social, como un indicador que permite observar cómo la ausencia de redes comunitarias limita los recursos simbólicos y prácticos disponibles para acompañar los procesos escolares, conectando lo educativo con la integración social (Bullones, 2022). Por otro lado, se introduce la tasa comunal de empleo como una expresión concreta del dinamismo económico territorial, elemento clave para entender cómo los contextos locales amplifican o restringen las oportunidades educativas y los años de educación de sus habitantes (Villalobos & Mardones, 2022). Este enfoque permite a la sociología desentrañar los mecanismos invisibles de reproducción de la desigualdad dentro de los contextos educativos, vinculando agencia y estructura en contextos concretos. Así, este estudio contribuye a una sociología de la educación que reconoce la interdependencia entre estructura social, recursos comunitarios y trayectorias formativas, proponiendo una mirada más integral y situada sobre la reproducción de la desigualdad.
+Considerando lo anterior, la relevancia sociológica del estudio radica en su capacidad para incluir el análisis de la desigualdad educativa la articulación de factores estructurales tradicionalmente subestimados. Por un lado, se incorpora la participación social, como un indicador que permite observar cómo la ausencia de redes comunitarias limita los recursos simbólicos y prácticos disponibles para acompañar los procesos escolares, conectando lo educativo con la integración social (Bullones, 2022). 
+
+Por otro lado, se introduce la tasa comunal de empleo como una expresión concreta del dinamismo económico territorial, elemento clave para entender cómo los contextos locales amplifican o restringen las oportunidades educativas y los años de educación de sus habitantes (Villalobos & Mardones, 2022). Este enfoque permite a la sociología desentrañar los mecanismos invisibles de reproducción de la desigualdad dentro de los contextos educativos, vinculando agencia y estructura en contextos concretos. Así, este estudio contribuye a una sociología de la educación que reconoce la interdependencia entre estructura social, recursos comunitarios y trayectorias formativas, proponiendo una mirada más integral y situada sobre la reproducción de la desigualdad.
 
 Diversas investigaciones han examinado cómo factores individuales y territoriales influyen en los niveles de escolaridad y, por extensión, en la reproducción de desigualdades sociales. Arita et al, (2015) analizaron la relación entre las condiciones objetivas de vida y el bienestar subjetivo en habitantes de dos colonias de estrato bajo en Culiacán, México. Mediante un estudio exploratorio transversal con una muestra de 108 personas adultas, identificaron que el nivel socioeconómico constituye una variable clave para el análisis de la calidad de vida, y que la educación opera como un indicador relevante de desigualdad social.
 
 Complementariamente, Peláez & Rodríguez (2020) indagaron las desigualdades de género en la transición al primer empleo, utilizando datos de la Encuesta de Movilidad Social en México (2017), con una muestra representativa nacional de 17.665 casos. Su análisis destaca que el nivel educativo cumple una función mitigadora de las brechas de género en la inserción laboral temprana, y plantea la necesidad de incorporar analíticamente la transición escuela-trabajo como una dimensión clave en el estudio de la movilidad social.
 
-Por otro lado, un análisis aplicado a los datos de TIMSS y PIRLS (Instituto nacional de evaluación educativa, 2011) en Italia utilizó un modelo multinivel multivariado para estudiar los logros académicos en lectura, matemáticas y ciencias en estudiantes de cuarto grado (N = 4.125, anidados en 239 cursos). El estudio incluyó variables individuales como género y nivel socioeconómico, y contextuales como recursos escolares y riqueza territorial. Los resultados revelaron una mayor influencia de los factores individuales sobre los contextuales, indicando que las condiciones estructurales del entorno, como la infraestructura escolar o el desarrollo económico provincial, no presentaron efectos significativos.
+Continuando con factores contextuales, se han realizado bastantes estudios que relacionan la calidad de vida y el nivel socioeconómico con el nivel educacional (González y Espinoza, 1994; Aria et al, 2015; Bullones, 2022). A partir de esto, se puede justificar la relevancia que tiene analizar más allá de características individuales, sino también enfocarse en los factores sociales y su impacto en el nivel educacional.
 
-Finalmente, Rivas & Terra (2024) realizaron un estudio cualitativo en barrios urbanos informales de Valparaíso, Chile, centrado en las percepciones de niñas y niños sobre su entorno habitacional. A través de entrevistas y talleres participativos, el estudio destaca la importancia de considerar las voces infantiles en el análisis territorial, y propone la inclusión de la oferta escolar por comuna como variable para evaluar las condiciones educativas locales.
+Por un lado, un análisis aplicado a los datos de TIMSS y PIRLS (Instituto nacional de evaluación educativa, 2011) en Italia utilizó un modelo multinivel multivariado para estudiar los logros académicos en lectura, matemáticas y ciencias en estudiantes de cuarto grado (N = 4.125, anidados en 239 cursos). El estudio incluyó variables individuales como género y nivel socioeconómico, y contextuales como recursos escolares y riqueza territorial. Los resultados revelaron una mayor influencia de los factores individuales sobre los contextuales, indicando que las condiciones estructurales del entorno, como la infraestructura escolar o el desarrollo económico provincial, no presentaron efectos significativos.
+
+Por otro lado, Rivas & Terra (2024) realizaron un estudio cualitativo en barrios urbanos informales de Valparaíso, Chile, centrado en las percepciones de niñas y niños sobre su entorno habitacional. El estudio concluye proponer la inclusión de la oferta escolar por comuna como variable para evaluar las condiciones educativas locales. En este sentido, se incluyó la variable de oferta laboral operacionalizada por cantidad de escuelas por cada 10.000 habitantes dentro de la comuna. 
+
+Asimismo, se incluye el Índice de Desarrollo Humano Comunal como indicador de condiciones infraestructurales y sociales de cada comuna. Se considera relevante poder diferenciar el valor de este indicador, pues el contexto social está estratificado también urbanamente (Giménez, 2004). De este modo, se podrá incluir en el análisis una posible relación entre la desigualdad socioeconómica, no solamente entre personas, sino también entre comunas y si serán relevantes para el nivel educacional. Como se mencionó anteriormente (Aria et al, 2015; Bullones, 2022), las características sociales contextuales son de gran importancia para entender.
+
+Finalmente es importante señalar que la selección la comuna de santiago no es azarosa, pues  Cortés (2021) realizó un estudio sobre el Área Metropolitana de Santiago analizando la relación entre segregación residencial y acceso a servicios públicos locales, utilizando datos de precios de vivienda por bloque y medidas de accesibilidad a servicios como escuelas, hospitales y transporte. Los resultados subrayan que la segregación espacial impacta negativamente el acceso de los sectores más pobres a servicios públicos, limitando oportunidades laborales, educativas y sanitarias, y perpetuando la desigualdad urbana. Además, evidencia internacional como Shanghai respalda que la fragmentación municipal y la autonomía fiscal influyen significativamente en estos patrones y en la “doble desventaja” que enfrentan los residentes de bajos ingresos. Por último, es relevante la densidad poblacional de la Provincia de Santiago, pues acumula un 29.87% de la población total del país según el Censo del 2017 (Gobierno de Santiago, s.f.)
 
 # Objetivos e hipótesis 
 
@@ -58,8 +87,8 @@ Analizar el rol de la familia y el entorno comunal como espacios de socializaci�
 ### Objetivos específicos
 
 1.  Determinar en qué medida factores individuales como el nivel socioeconómico, el género y la participación social del hogar se asocian con los años de escolaridad.
-2.  Analizar la influencia de factores comunales como la tasa de empleo y la oferta escolar en los niveles promedio de escolaridad en el Gran Santiago.
-3.  Explorar cómo interactúan los factores familiares y comunales, evaluando si el impacto de las condiciones individuales varía según el contexto territorial.
+2.  Analizar la influencia de factores comunales como la tasa de empleo, la oferta escolar y el IDH inciden en los niveles promedio de escolaridad en el Gran Santiago.
+3.  Explorar cómo interactúan los factores familiares y comunales, evaluando si el impacto de las condiciones individuales -nivel socioeconomico- varía según el contexto territorial.
 
 ### Hipótesis multinivel
 
@@ -69,22 +98,24 @@ Analizar el rol de la familia y el entorno comunal como espacios de socializaci�
 
 -   **H2.** Las mujeres completan, en promedio, menos años de escolaridad que los hombres.
 
--   **H3.** Provenir de un hogar con baja participación social reduce los años de escolaridad frente a hogares activos en redes comunitarias.
+-   **H3.** Provenir de un hogar con participación social aumenta los años de escolaridad frente a hogares carentes en redes comunitarias.
 
 #### **Nivel 2 – Contexto comunal**
 
 -   **H4.** Las comunas con mayor tasa de empleo presentan una escolaridad promedio más alta.
 
--   **H5.** Las comunas con mayor número de escuelas ofrecen más oportunidades y muestran mayores años de escolaridad.
+-   **H5.** Las comunas con mayor proporción de escuelas por 10.000 habitantes ofrecen más oportunidades y muestran mayores años de escolaridad.
+
+-   **H6.** Las comunas que presentan un mayor IDH presentan una escolaridad promedio más alta.
 
 #### **Interacciones entre niveles**
 
--   **H6.** El efecto positivo del nivel socioeconómico (NSE) sobre la escolaridad es más intenso en comunas con alta tasa de empleo; un mercado laboral dinámico potencia los recursos familiares.
+-   **H7.** El efecto positivo del nivel socioeconómico (NSE) sobre la escolaridad es más intenso en comunas con alta tasa de empleo; un mercado laboral dinámico potencia los recursos familiares.
 
--   **H7.** El efecto negativo de la baja participación social del hogar se atenúa en comunas con amplia oferta escolar, pues la disponibilidad institucional compensa parcialmente la falta de capital social doméstico.
+-   **H8.** El efecto positivo del nivel socioeconómico (NSE) sobre la escolaridad es más intenso en comunas con un alto IDH
 
-```{r fig_escolaridad, echo=FALSE}
-knitr::include_graphics(here::here("input", "img", "Años_de_escolaridad.png"))
+```{r fig_escolaridad, fig.cap="Figura 1.0: Modelo teórico de las hipótesis planteadas", echo=FALSE}
+knitr::include_graphics(here::here("input", "img", "Años_de_escolaridad_final.png"))
 ```
 
 # Datos, variables y métodos
@@ -97,21 +128,19 @@ El presente estudio utiliza la Encuesta de Caracterización Socioeconómica Naci
 
 Para la realización del modelo multinivel, se anilló en base a la selección de las 32 comunas perteneciente al Gran Santiago, de esta manera podemos controlar la influencia de comunas externas a nuestro análisis.  Junto a esto, se trabajó con un total de 22.706 individuos  (nivel 1) de 18 o más años, anidados dentro de las comunas (nivel 2). Además, en promedio hay 709 casos por cada una de ellas, de modo que es resulta óptima para la estimación de los efectos contextuales.
 
-### Variables
-
 #### **Variable dependiente**
 
-La variable dependiente años de escolaridad (esc) del presente modelo, se mide de manera continua, proviene del ítem de Educación y es usada de forma usual en la literatura (cita). Esta presenta un promedio de 12,6 años, junto con una desviación estándar de 4,1. Lo cual indica una alta dispersión en los distintos niveles educativos de la muestra de las comunas del Gran Santiago. Además, los rangos de esta van de 0 a 29 años de escolaridad. 
+La variable dependiente años de escolaridad (esc) del presente modelo, se mide de manera continua, proviene del ítem de Educación y es usada de forma usual en la literatura (Bourdieu & Passeron, 2001; Soler & Fernández, 2021; Cimadamore & Catanni, 2008). Esta presenta un promedio de 12,6 años, junto con una desviación estándar de 4,1. Lo cual indica una alta dispersión en los distintos niveles educativos de la muestra de las comunas del Gran Santiago. Además, los rangos de esta van de 0 a 29 años de escolaridad. 
 
 #### **Variables independientes de nivel 1 (individual)**
 
 La primera variable es sexo, recodificada en una variable dicotómica denominada female (1 = mujer; 0 = hombre). Su media es 0,539, lo que indica un leve predominio de mujeres en la muestra.
 
-La segunda variable es el nivel socioeconómico (NSE) trabajado de forma continua del 1 a 7, con un promedio de 4,56. Esta fue determinada por el INE (instituto nacional de estadística) considerando escolaridad, ocupación, número de hijos/as nacidos/as y materialidad de la vivienda. La variable fue recodificada siguiendo un orden lógico ascendente. 
+El nivel socioeconómico en la Encuesta CASEN se construye combinando el ingreso autónomo total del hogar —remuneraciones, pensiones y rentas de capital— ajustado mediante una escala de equivalencia que corrige por número de adultos, niños, personas con discapacidad y dependientes. Además, se consideran bienes y medios indirectos que reflejan la capacidad económica, como propiedades y vehículos. El ingreso ajustado se transforma en ingreso per cápita equivalente y se ordena a toda la población, clasificándose en tramos o deciles socioeconómicos. Esta segunda variable fue trabajada por la CASEN de forma continua del 1 a 7, con un promedio de 4,56 y una mediana de 5, indicando que la mayoría de la muestra se ubica en tramos socioeconómicos medios o medio-bajos. La desviación estándar es de 2,01, lo que refleja una distribución relativamente dispersa dentro de los tramos definidos.
 
-La tercera variable es hogar carente  participación social (hh_d_part), recodificada como dicotómica, donde 1 indica ausencia de carencia  y 0 presencia de carencia. Esta dimensión captura la ausencia de vínculos comunitarios o redes sociales activas, operando como un indicador de capital social limitado. 
+La tercera variable es hogar carente  participación social (hh_d_part), siendo  recodificada como dicotómica, donde 1 indica ausencia de carencia  y 0 presencia de carencia. Esta. se construyó considerando como participación social la pertenencia o involucramiento en diversas organizaciones, tales como juntas de vecinos, comunidades barriales, clubes de adulto mayor, centros de madres, comités de vivienda, redes de voluntariado, iglesias, comunidades de fe, centros culturales, talleres artísticos, clubes deportivos, sindicatos, asociaciones gremiales, partidos políticos, movimientos sociales y agrupaciones de defensa de derechos. También se incluyen otras formas de organización como grupos de apoyo mutuo o colectivos de interés específico, abarcando así ámbitos territoriales, comunitarios, religiosos, culturales, deportivos, gremiales y políticos, que reflejan la diversidad de la vida asociativa en la población. Presenta una media de 0,13 y su mediana es 0, lo que confirma la baja proporción de hogares con participación social activa dentro de la muestra.
 
-```{r descriptivos nivel 1, echo=FALSE, results='asis'}
+```{r descriptivos nivel 1, fig.cap="Figura 1.1: Estadisticos descriptivos de nivel 1", echo=FALSE, results='asis'}
 library(stargazer)
 
 nivel1 <- casen_educ %>%
@@ -127,16 +156,18 @@ stargazer(as.data.frame(nivel1),
 
 #### **Variable independiente de nivel 2 (contextual)**
 
-La primera variable contextual es la tasa comunal de empleo efectivo (prop_empleo), que representa la proporción de personas que trabajaron al menos una hora durante la semana anterior por comuna. Su valor promedio es 0.554, con una desviación estándar de 0.063, y un rango 0.464 y 0.704. Esta oscilación refleja diferencias en el dinamismo económico de las comunas, lo cual puede incidir en las oportunidades educativas disponibles para sus habitantes.  
+La primera variable contextual es la tasa comunal de empleo efectivo (prop_empleo), que representa la proporción de personas que trabajaron al menos una hora durante la semana anterior por comuna. Su valor promedio es 0.554, con una desviación estándar de 0.063, y un rango 0.464 y 0.704. Esta oscilación refleja diferencias en el dinamismo económico de las comunas, lo cual puede incidir en las oportunidades educativas disponibles para sus habitantes.
 
-La segunda variable contextual corresponde a la oferta educativa comunal, la cual se operacionaliza mediante el número de establecimientos escolares por comuna (n_escuelas). Esta información proviene de la Biblioteca del Congreso Nacional de Chile, específicamente del sistema SIIT Estadísticas Territoriales, que recopila datos oficiales a nivel comunal y regional en diversas áreas. Los datos utilizados corresponden al año 2022 y permiten aproximar la disponibilidad institucional de oportunidades educativas dentro de cada comuna.
+La segunda variable contextual corresponde a la oferta educativa comunal (prop_pob_esc), la cual se operacionaliza mediante el número de establecimientos escolares por cada 10.000 habitantes de cada comuna. Su valor promedio es de 3.87, con una desviación estándar de 1.06. El rango corresponde a 4.12, con un mínimo de 1.99 y un máximo de 6.11. Por último, cabe mencionar que esta variable se construyó en base a los datos proporcionados por la Biblioteca del Congreso Nacional de Chile (2024), específicamente del sistema SIIT Estadísticas Territoriales.
 
-```{r descriptivos, echo=FALSE, results='asis'}
+La tercera variable contextual corresponde al índice de desarrollo humano comunal. Su valor promedio es 0.67, con una desviación estándar de 0.13. El rango corresponde a un 0.46, con un mínimo de de 0.5, y un máximo de 0.96. Esta variable se basa, al igual que su parte global, en 3 dimensiones: Vida larga y saludable, Educación y Nivel digno. No obstante, los indicadores se ajustaron para acoplarse mejor al nivel de medición. La dimensión de vida larga y saludable se mide con el indicador “Años de vida potencial perdidos”. La dimensión de “Educación”, se mide con los indicadores “Cobertura educacional” y “Años de escolaridad”. Por último, la dimensión de “Nivel de vida digna” se mide con el indicador “Ingreso per cápita”.
+
+```{r descriptivos, echo=FALSE, fig.cap="Figura 1.3: Estadisticos descriptivos de nivel 2", results='asis'}
 library(stargazer)
 
 # Variables de nivel 2 (contextual)
 nivel2 <- casen_educ %>%
-  select(comuna, n_escuelas, prop_empleo) %>%
+  select(comuna,  prop_pob_esc, prop_empleo, idh_comuna, ) %>%
   distinct()  # evitar duplicados por comuna
 
 stargazer(as.data.frame(nivel2),
@@ -149,198 +180,516 @@ stargazer(as.data.frame(nivel2),
 
 **3.3 Métodos**
 
-La estrategia metodológica consiste en el uso de modelos multinivel, configurando los datos entre individuos anidados en unidades de carácter territorial, con los cuales se establen cuatro modelos.
+La estrategia metodológica consiste en el uso de modelos multinivel, configurando los datos entre individuos anidados en unidades de carácter territorial. De este modo, a través de esta metodología se puede obtener un análisis con mayor enfoque en los efectos que características contextuales pueden tener en características individuales. 
+
+Para este análisis se realizaron 6 modelos:
 
 -   **Modelo nulo:** no posee predictores, permite identificar la correlación intra-clase (ICC) y cuantifica la varianza entre las comunas del Gran Santiago.
 
-```{r modelo0, echo=FALSE, fig.cap="Modelo 0: solo intercepto por comuna"}
-knitr::include_graphics(here::here("output", "modelo_0.jpg"))
-```
+$$
+\text{esc}_{ij} \;=\; \gamma_{00}
++ u_{0\text{comuna}}
++ r_{ij}
+$$
 
--   **Modelo 1: Predictores individuales:** integra variables como el sexo, el NSE, y la participacion social.
+-   **Modelo 1: Predictores individuales:** Este modelo evalúa únicamente variables individuales: sexo, nivel socioeconómico y participación social del hogar. Permite identificar cómo estas características personales inciden en los años de escolaridad, sin considerar diferencias territoriales. Sirve como línea base para observar efectos puramente individuales y comparar con modelos más complejos posteriormente.
 
-    ```{r modelo1, echo=FALSE, fig.cap="Modelo 1: predictores individuales"}
-    knitr::include_graphics(here::here("output", "modelo_1.jpg"))
+$$
+  \
+  \text{esc}_{ij} \;=\;
+  \gamma_{00}
+  + \gamma_{01}\,\text{female}
+  + \gamma_{02}\,\text{nse\_cmc}
+  + \gamma_{03}\,\text{part\_social\_num}
+  + u_{0j}
+  + r_{ij}
+  \
+$$
 
-    ```
+-   **Modelo 2: Predictores contextuales:** Este modelo incorpora exclusivamente variables contextuales de nivel comunal: proporción de empleo, la proporcion de escuelas por 10.000 habitantes y desarrollo humano comunal. Busca estimar cuánto influyen estas condiciones estructurales en la escolaridad promedio, sin considerar características individuales. Es útil para dimensionar la importancia del contexto territorial en los logros educativos de la población.
 
--   **Modelo 2: Predictores contextuales:** se adhiere al modelo la tasa de empleo por comuna y el número de escuelas presente en cada una. 
+$$
+  \
+  \begin{aligned}
+  \text{esc}_{ij} \;=\;
+  \gamma_{00}
+  + \gamma_{01}\,\text{prop\_empleo\_gmc}
+  + \gamma_{02}\,\text{prop\_pob\_escn\_gmc}
+  + \gamma_{03}\,\text{idh\_gmc}
+  + u_{0j}
+  + r_{ij}
+  \end{aligned}
+  \
+$$
 
-    ```{r modelo2, echo=FALSE, fig.cap="Modelo 2: predictores contextuales"}
-    knitr::include_graphics(here::here("output", "modelo_2.jpg"))
-    ```
+-   **Modelo 3: Predictores individuales y contextuales:** Las variables anteriores fueron combinadas, incluyendo sexo, nivel socieconómico, participación social, proporción de empleo, oferta escolar y desarrollo humano comunal. Estima los efectos conjuntos, permitiendo conocer cómo se articulan factores personales y territoriales en los años de escolaridad. Asume que el impacto del NSE es constante en todas las comunas consideradas.
 
--   **Modelo 3: Predictores individuales y contextuales:** agrupa las variables anteriores, trabajando correspondiendo a su nivel.
+$$
+  \
+  \begin{aligned}
+  \text{esc}_{ij} =\;&
+      \gamma_{00}
+    + \gamma_{01}\,\text{female}
+    + \gamma_{02}\,\text{nse\_cmc}
+    + \gamma_{03}\,\text{part\_social\_num} \\[4pt]
+    &+ \gamma_{04}\,\text{prop\_empleo\_gmc}
+    + \gamma_{05}\,\text{prop\_pob\_escn\_gmc}
+    + \gamma_{06}\,\text{idh\_gmc} \\[4pt]
+    &+ u_{0j} + r_{ij}
+  \end{aligned}
+  \
+$$ - **Modelo 4: intercepto y pendiente aleatoria de NSE:** El presente modelo amplía el anterior al permitir que la relación entre nivel socioeconómico y escolaridad varíe entre comunas. Introduce una pendiente aleatoria para NSE, mostrando posibles desigualdades estructurales en el retorno educativo del estatus económico. Este diseño reconoce diferencias territoriales en cómo los recursos individuales se traducen en educación.
 
-```{r modelo3, echo=FALSE, fig.cap="Modelo 3: predictores individuales y contextuales"}
-knitr::include_graphics(here::here("output", "modelo_3.jpg"))
-```
+$$
+  \
+  \begin{aligned}
+  \text{esc}_{ij} =\;&
+      \gamma_{00}
+    + \gamma_{01}\,\text{female}
+    + \gamma_{02}\,\text{nse\_cmc}
+    + \gamma_{03}\,\text{part\_social\_num} \\[4pt]
+    &+ \gamma_{04}\,\text{prop\_empleo\_gmc}
+    + \gamma_{05}\,\text{prop\_pob\_esc\_gmc}
+    + \gamma_{06}\,\text{idh\_gmc} \\[4pt]
+    &+ u_{0j}
+    + u_{1j}\,\text{nse\_cmc}
+    + r_{ij}
+  \end{aligned}
+  \
+$$
+
+-   **Modelo 5 con interacción entre NSE y empleo:** El Modelo 5 incorpora una interacción entre NSE y la tasa comunal de empleo. Permite analizar si el impacto del nivel socioeconómico sobre la escolaridad cambia según las oportunidades laborales de cada comuna. Mantiene la pendiente aleatoria para NSE, profundizando en la influencia combinada del capital individual y contexto económico.\
+    $$
+      \
+      \begin{aligned}
+      \text{esc}_{ij} =\;&
+      \gamma_{00}
+    + \gamma_{01}\,\text{female}
+    + \gamma_{02}\,\text{nse\_cmc}
+    + \gamma_{03}\,\text{part\_social\_num} \\[4pt]
+    &+ \gamma_{04}\,\text{prop\_empleo\_gmc}
+    + \gamma_{05}\,\text{prop\_pob\_esc\_gmc}
+    + \gamma_{06}\,\text{idh\_gmc} \\[4pt]
+    &+ \gamma_{07}\bigl(\text{nse\_cmc}\,\times\,\text{prop\_empleo\_gmc}\bigr) \\[4pt]
+    &+ u_{0j}
+    + u_{1j}\,\text{nse\_cmc}
+    + r_{ij}
+      \end{aligned}
+      \
+    $$
+
+-   **Modelo 6 con interacción entre NSE y IDH:** El Modelo 6 introduce la interacción entre NSE y el índice de desarrollo humano comunal. Examina si el retorno educativo del NSE se modifica dependiendo del desarrollo social y económico del territorio. Esta especificación complementa el análisis, evidenciando cómo condiciones estructurales pueden amplificar o moderar desigualdades educativas entre comunas. $$
+     \
+      \begin{aligned}
+      \text{esc}_{ij} =\;&
+      \gamma_{00}
+    + \gamma_{01}\,\text{female}
+    + \gamma_{02}\,\text{nse\_cmc}
+    + \gamma_{03}\,\text{part\_social\_num} \\[4pt]
+    &+ \gamma_{04}\,\text{prop\_empleo\_gmc}
+    + \gamma_{05}\,\text{prop\_pob\_esc\_gmc}
+    + \gamma_{06}\,\text{idh\_gmc} \\[4pt]
+    &+ \gamma_{07}\bigl(\text{nse\_cmc}\,\times\,\text{idh\_gmc}\bigr) \\[4pt]
+    &+ u_{0j}
+    + u_{1j}\,\text{nse\_cmc}
+    + r_{ij}
+      \end{aligned}
+      \
+    $$
 
 # Resultados
 
-```{r definir modelos, include=FALSE}
-# Definir los modelos sin mostrar nada
-modelo_icc <- lmer(esc ~ 1 + (1 | comuna), data = casen_educ)
-results_1 <- lmer(esc ~ 1 + female + nse_numerico + part_social_num + (1 | comuna), data = casen_educ)
-results_2 <- lmer(esc ~ 1 + prop_empleo + n_escuelas + (1 | comuna), data = casen_educ)
-results_3 <- lmer(esc ~ 1 + female + nse_numerico + part_social_num + prop_empleo + n_escuelas + (1 | comuna), data = casen_educ)
+## Descriptivos
+
+```{r Des1, echo=FALSE, message = FALSE,  fig.cap="Figura 1.3: Scatterplot relación entre promedio comunal de escolaridad y tasa de empleo", results='asis'}
+casen_educ %>% 
+  group_by(comuna) %>% 
+  summarise(
+    esc_prom    = mean(esc, na.rm = TRUE),
+    prop_empleo = first(prop_empleo)
+  ) %>% 
+  ggplot(aes(x = prop_empleo, y = esc_prom)) +
+  geom_point() +
+  geom_text_repel(aes(label = comuna), size = 2) +   # tamaño reducido
+  geom_smooth(method = "lm", se = FALSE, color = "steelblue") +
+  labs(
+    title = "Relación entre tasa de empleo comunal y escolaridad promedio",
+    x     = "Tasa de empleo (proporción)",
+    y     = "Años promedio de escolaridad"
+  ) +
+  theme_minimal()
 
 
 ```
 
-```{r mostrar tabla, echo=FALSE, results='asis'}
-tab_model(
-  modelo_icc, results_1, results_2, results_3,
-  show.ci = FALSE,
-  show.se = TRUE,
-  collapse.se = TRUE,
-  show.p = FALSE,
-  p.style = "scientific_stars",
-  dv.labels = c(
-    "Modelo 0: Intercepto",
-    "Modelo 1: Individuales",
-    "Modelo 2: Contextuales",
-    "Modelo 3: Combinado"
+El Gráfico 1.3 muestra una asociación positiva entre la tasa de empleo y los años promedios de escolaridad de sus habitantes. En términos generales, las comunas con una tasa de empleo inferior a 0,50, como La Pintana, Cerro Navia, Renca y Lo Espejo, presentan promedios educativos que no superan los 11 años, lo que evidencia la convergencia de vulnerabilidad laboral y rezago formativo. A medida que la proporción de personas ocupadas aumenta, la pendiente asciende con notable regularidad: por cada 0,10 puntos de empleo adicional, la escolaridad media se incrementa en torno a dos años, coherente con la estimación del modelo multinivel.
+
+En el extremo opuesto, comunas de altas tasas de empleo como Vitacura, Providencia y Ñuñoa, todas por sobre el 0,60 en empleo, superan los 16 años de estudio, situándose muy por encima de la media metropolitana. Las Condes y La Reina, con empleos en torno al 0,56, alcanzan también registros superiores a 14,5 años. Una excepción relativa es Santiago centro: aun con la mayor tasa de empleo (≈ 0,70), su promedio educativo (≈ 14 años) se sitúa algo por debajo de lo esperado según la tendencia, lo que sugiere la coexistencia de bolsas de población adulta con trayectorias educativas dispares.
+
+En síntesis, el gráfico confirma que la tasa comunal de empleo opera como un potente factor contextual que diferencia las trayectorias educativas entre territorios. Aquellas comunas con mercados laborales más inclusivos ofrecen entornos que potencian la continuidad escolar, mientras que las de menor dinamismo concentran rezagos educativos, reforzando la necesidad de políticas que articulen desarrollo económico local y oportunidades formativas.
+
+```{r Des2, echo=FALSE, message = FALSE, fig.cap="Figura 1.4: Scatterplot: relación entre promedio comunal de escolaridad y IDH", results='asis'}
+casen_educ %>% 
+  group_by(comuna) %>% 
+  summarise(
+    esc_prom    = mean(esc, na.rm = TRUE),
+    idh_comuna = first(idh_comuna)
+  ) %>% 
+  ggplot(aes(x = idh_comuna, y = esc_prom)) +
+  geom_point() +
+  geom_text_repel(aes(label = comuna), size = 2) +   # tamaño reducido
+  geom_smooth(method = "lm", se = FALSE, color = "steelblue") +
+  labs(
+    title = "Relación entre IDH y escolaridad promedio",
+    x     = "Indice de Desarollo Humano ",
+    y     = "Años promedio de escolaridad"
+  ) +
+  theme_minimal()
+
+
+```
+
+El Gráfico 1.4 confirma una asociación lineal ascendente entre el nivel de desarrollo humano del territorio y los años promedio de escolaridad de su población adulta. Las comunas con IDH ≤ 0,55 cómo Lo Espejo, Cerro Navia y La Pintana, registran menos de 11 años de estudio, ilustrando cómo la privación multidimensional se refleja en trayectorias educativas truncadas. A medida que el IDH se aproxima a 0,70, se concentran comunas intermedias como La Florida, Macul, San Miguel, cuyo promedio oscila entre 12,5 y 13,5 años, evidenciando progresos formativos pero aún por debajo de la línea metropolitana de referencia.
+
+En el extremo superior, podemos observar territorios con IDH ≥ 0,85 como Providencia, Vitacura y Las Condes que superan los 16 años de escolaridad, subrayando la sinergia entre bienestar socioeconómico, salud y educación. Una ligera desviación la ofrece La Barnechea, que pese a su alto IDH presenta un promedio educativo menor al previsto, lo que sugiere heterogeneidad interna.
+
+```{r definir modelos y centrado, include=FALSE}
+# CENTRADO DE VARIABLES --------------------------------------------------------
+# ─────────────────  CMC para NSE individual  ─────────────────
+casen_educ <- casen_educ %>% 
+  group_by(comuna) %>% 
+  mutate(
+    mean_nse_comuna = mean(nse_numerico, na.rm = TRUE),
+    nse_cmc         = nse_numerico - mean_nse_comuna
+  ) %>% 
+  ungroup()
+# ─────────────────  GMC para variables comunales  ─────────────────
+casen_educ <- casen_educ %>% 
+  mutate(
+    prop_empleo_gmc = prop_empleo - mean(prop_empleo, na.rm = TRUE),
+    prop_pob_esc_gmc  = prop_pob_esc  - mean(prop_pob_esc,  na.rm = TRUE),
+    idh_gmc  = idh_comuna  - mean(idh_comuna,  na.rm = TRUE),
   )
+
+# Definir los modelos sin mostrar nada
+
+# Modelo 0: nulo / ICC ---------------------------------------------------------
+m0 <- lmer(esc ~ 1 + (1 | comuna), data = casen_educ)
+ICC(m0)
+
+# Modelo 1: solo predictores nivel 1 ------------------------------------------
+m1 <- lmer(
+  esc ~ 1 + female + nse_cmc + part_social_num +
+    (1 | comuna),
+  data = casen_educ
 )
-```
 
-### **Modelo nulo e ICC**
+# Modelo 2: solo predictores nivel 2 ------------------------------------------
+m2 <- lmer(
+  esc ~ 1 + prop_empleo_gmc + prop_pob_esc_gmc + idh_gmc +
+    (1 | comuna),
+  data = casen_educ
+)
 
-Antes de introducir la estimación de los modelos preliminares, se estimó un modelo nulo con intercepto aleatorio por comuna, cuyo objetivo es evaluar la pertinencia del enfoque multinivel y estimar la varianza atribuible al contexto territorial. Este modelo permite calcular la correlación intra-clase (ICC), indicador que refleja qué proporción de la varianza total en los años de escolaridad puede atribuirse a diferencias entre comunas.
-
-El resultado obtenido fue una ICC de 0.16, lo que implica que aproximadamente un 16% de la variabilidad en la escolaridad se debe a diferencias entre comunas, mientras que el 84% restante se explica por otros factores. Este valor es estadísticamente significativo y suficiente para justificar la implementación de modelos jerárquicos, dado que revela una estructura anidada relevante en los datos.
-
-En términos de varianza, el modelo indica una varianza comunal (intercepto aleatorio) de 2.73, frente a una varianza residual de 14.15 a nivel individual. El intercepto promedio estimado es de 12,31 años de escolaridad, siendo este el promedio de la variable dependiente, consistente con los valores observados en la muestra.
-
-Estos resultados ofrecen evidencia empírica clara de que las comunas presentan diferencias sistemáticas en sus niveles promedio de escolaridad. Por tanto, el uso de un enfoque multinivel no solo es apropiado, sino necesario para capturar adecuadamente las influencias tanto individuales como contextuales sobre la trayectoria educativa.
-
-### **Modelo con variables individuales**
-
-En este segundo modelo se incorporan predictores de nivel individual con el objetivo de evaluar cómo variables personales —sexo, nivel socioeconómico (NSE) y participación social del hogar— se asocian con los años de escolaridad de los habitantes del Gran Santiago. Esta estimación permite contrastar directamente las hipótesis H1, H2 y H3.
-
-Los resultados muestran que todas las variables individuales incluidas son estadísticamente significativas (p \< 0.001), lo que respalda empíricamente las hipótesis formuladas.
-
-Respecto a la primera hipótesis, el NSE (Nivel socioeconómico) del hogar tiene un efecto positivo y robusto sobre la escolaridad. Por cada punto adicional en la escala de nivel socioeconómico (de 1 a 7), los años de escolaridad aumentan en 0.40 años. Este hallazgo confirma que mayores recursos económicos se traducen en trayectorias educativas más extensas.
-
-Respecto a la segunda hipótesis,ser mujer se asocia con una reducción promedio de 0.40 años de escolaridad en comparación con los hombres. Este resultado señala la persistencia de una brecha de género en desmedro de las mujeres, lo cual es coherente con enfoques feministas que subrayan las desigualdades estructurales que enfrentan las mujeres en el sistema educativo y el mercado laboral.
-
-Respecto a la tercera hipótesis, la Participación social, es decir vivir en un hogar activo en redes comunitarias (variable recodificada como part_social, donde 1 indica participación activa) se vincula con un incremento promedio de 0.74 años en la escolaridad. Este resultado sugiere que el capital social familiar a través de vínculos comunitarios y organización barrial actúa como un recurso valioso que favorece las trayectorias educativas.
-
-Respecto a los parámetros del modelo, el intercepto es de 10.66 años, lo que representa la escolaridad promedio para un hombre de nivel socioeconómico mínimo y sin participación social. La varianza del intercepto entre comunas disminuye a 1.96, y la varianza residual individual se reduce a 13.56, mostrando que parte de la heterogeneidad explicada en el modelo nulo es absorbida por los predictores individuales.
-
-En síntesis, este modelo confirma que los factores familiares y personales sí tienen un peso importante en las trayectorias educativas, especialmente aquellos relacionados con los recursos económicos y sociales del hogar. No obstante, aún persiste una fracción considerable de varianza no explicada, lo que da pie al análisis contextual que se abordará en la siguiente sección.
-
-### **Modelo con variables contextuales**
-
-En esta tercera estimación se incorporan predictores de nivel comunal con el objetivo de evaluar el efecto del entorno territorial sobre los años de escolaridad. Específicamente, se consideran dos variables: la tasa comunal de empleo efectivo (prop_empleo) y la cantidad de escuelas por comuna (n_escuelas), con el fin de contrastar las hipótesis H4 y H5.
-
-Los resultados muestran un efecto significativo de la tasa de empleo, pero no así de la oferta escolar. En concreto:
-
-Respecto a la cuarta hipótesis, el coeficiente asociado a la Tasa de empleo (prop_empleo) es de 19.62 (p \< 0.001), lo que indica que, a igualdad de condiciones individuales, las comunas con mayor dinamismo laboral presentan niveles de escolaridad más altos. Este resultado confirma la hipótesis H4, y puede interpretarse como una señal de que los entornos comunales con mayor inclusión laboral ofrecen mayores oportunidades educativas y sociales, generando un contexto más favorable para la continuidad escolar. Dado que prop_empleo se mide como proporción (de 0 a 1), un aumento de 0.1 en esta tasa se asocia con 1.96 años adicionales de escolaridad promedio, lo cual resulta sustantivamente relevante.
-
-Respecto a la quinta hipótesis, que refiere a la cantidad de escuelas por comuna, el coeficiente de n_escuelas no es estadísticamente significativo (coef. = 0.00; p \> 0.05). Este hallazgo no respalda la hipótesis H5, lo que sugiere que, al menos en este modelo, la mera disponibilidad cuantitativa de establecimientos no se traduce automáticamente en mayores trayectorias educativas.
-
-A nivel de varianza contextual, la inclusión de estos predictores reduce levemente la varianza del intercepto entre comunas a 1.46, lo cual indica que parte de las diferencias territoriales en escolaridad se explican por la tasa de empleo, aunque aún persisten factores no observados.
-
-En suma, este modelo muestra que el contexto comunal sí incide en las trayectorias educativas, especialmente a través del acceso al empleo, mientras que la oferta escolar, por sí sola, no parece tener un efecto discernible en este análisis.
-
-### **Modelo completo: efectos individuales y contextuales**
-
-En este modelo se integran simultáneamente los predictores individuales y contextuales con el fin de estimar de manera conjunta sus efectos sobre los años de escolaridad. Esta especificación permite observar la contribución relativa de los recursos familiares y del entorno comunal, y responde de forma directa a las hipótesis H1 a H5.
-
-Los resultados indican que la mayoría de los predictores incluidos son estadísticamente significativos (p \< 0.001), y sus efectos son coherentes con los modelos estimados previamente.
-
-En cuanto a la varianza contextual, se observa una disminución importante: la varianza del intercepto comunal se reduce a 0.86, desde los 2.73 del modelo nulo. Esto indica que buena parte de la heterogeneidad entre comunas queda explicada por las variables individuales y contextuales incluidas en el modelo.
-
-En resumen, este modelo confirma que las trayectorias educativas en el Gran Santiago se explican por la interacción de factores familiares y comunales, aunque con un peso más claro del nivel socioeconómico y el dinamismo laboral del entorno inmediato.
-
-### Efecto aleatorio
-
-El análisis de los efectos aleatorios busca identificar si las asociaciones observadas entre los predictores de nivel individual o comunal y la variable dependiente ( los años de escolaridad) varían significativamente según la comuna de residencia. Para esta investigación, se evaluó el efecto aleatorio de la variable de participación social hogar y el genero.
-
-#### **Participación social familiar**
-
-```{r modelo_tabla1, echo=FALSE, fig.cap="Figura 1.2", warning=FALSE, results='asis'}
-
-mod_aleat <- lmer(
-  esc ~ part_social_num + female + nse_numerico +          # efectos fijos
-    (1 + part_social_num | comuna),                    # intercepto y pendiente aleatoria
+# Modelo 3: fijos L1 + L2 ------------------------------------------------------
+m3 <- lmer(
+  esc ~ 1 + female + nse_cmc + part_social_num +
+    prop_empleo_gmc + prop_pob_esc_gmc + idh_gmc +
+    (1 | comuna),
   data = casen_educ
 )
 
 
+# Modelo 4: pendiente aleatoria para NSE (ya estimado) -------------------------
+m4 <- lmer(
+  esc ~ 1 + female + nse_cmc + part_social_num +
+    prop_empleo_gmc + prop_pob_esc_gmc + idh_gmc +         # efectos fijos
+    (1 + nse_cmc | comuna),                     # intercepto + pendiente NSE
+  data = casen_educ
+)  # test de devianza (m3 = fijos L1+L2)
 
-# Generar predicciones con pendiente aleatoria para 9 comunas al azar
-plt <- ggpredict(
-  mod_aleat,
-  terms = c("part_social_num", "comuna [sample=9]"),
-  type  = "random"
+# Modelo 5-H6: interacción L1 × L2 SOLO para H6 -------------------------------
+m5_H6 <- lmer(
+  esc ~ 1 +
+    nse_cmc         * prop_empleo_gmc +    # H6 (se mantiene)
+    part_social_num +                     # efecto principal (sin interacción)
+    prop_pob_esc_gmc +                      # efecto principal contextual
+    female +
+    (1 + nse_cmc | comuna),
+  data = casen_educ
+)
+# Modelo 6-H7: interacción L1 × L2 SOLO para H7 -------------------------------
+
+m6_H7 <- lmer(
+  esc ~ 1 +
+    nse_cmc         * idh_gmc +           # ← NUEVA interacción H7
+    part_social_num +                     # efecto principal (sin interacción)
+    prop_empleo_gmc +                     # efecto contextual
+    prop_pob_esc_gmc +                      # efecto contextual
+    female +
+    (1 + nse_cmc | comuna),               # pendiente aleatoria para NSE
+  data = casen_educ,
+  control = lmerControl(
+    optimizer = "bobyqa",
+    optCtrl   = list(maxfun = 1e5)        # para estabilidad si fuera necesario
+  )
 )
 
-# Mostrar gráfico
-plot(plt) +
+# ── Test de devianza m3 vs m4 (pendiente aleatoria NSE) ───────────────
+lr   <- anova(m3, m4)
+delta <- round(lr$Chisq[2], 2)
+df_lr <- lr$Df[2]
+p_val <- lr$`Pr(>Chisq)`[2]
+p_txt <- ifelse(p_val < .001, "< .001", paste0("= ", sprintf("%.3f", p_val)))
+
+foot <- sprintf(
+  "<b>Test de devianza (pendiente aleatoria NSE):</b> Δ = %.2f (df = %d), p %s",
+  delta, df_lr, p_txt
+)
+
+
+```
+
+## Estimación multinivel
+
+Con el fin de orientar la lectura, la tabla está organizada de forma progresiva desde el modelo más simple al más complejo: comienza con el modelo nulo (ICC), que no incluye predictores, y avanza secuencialmente incorporando variables individuales (M1 centrado), variables contextuales (M2 centrado), ambos niveles simultáneamente (M1 + M2), pendiente aleatoria del NSE, y, finalmente, los modelos que incorporan interacciones entre niveles (H7 y H8). Esta secuencia permite observar de manera ordenada cómo cada conjunto de variables contribuye a explicar la variabilidad en los años de escolaridad, facilitando la comparación entre modelos en términos de ajuste y efectos sustantivos.
+
+Para que los coeficientes sean comparables y separemos con nitidez los componentes dentro y entre comunas, adoptamos un esquema mixto de centrado. El nivel socioeconómico (NSE) se centró en la media de cada comuna, de modo que su pendiente indica cuánto aumenta o disminuye la escolaridad respecto del promedio local. Por el contrario, las variables contextuales, tasa de empleo, IDH y proporción de escuelas por 10.000 habitantes, se centraron en la gran media del Gran Santiago, de manera que sus efectos expresan desviaciones respecto del contexto metropolitano típico. Las variables dicotómicas female y participación social se dejaron sin centrar, dado que su escala 0/1 ya ofrece una interpretación directa. Este enfoque reduce la colinealidad, aclara el significado del intercepto y facilita la interpretación de las interacciones entre niveles.
+
+```{r mostrar-tabla, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+
+library(sjPlot)
+
+# Generar tabla con sjPlot -----------------------------------------------
+tab_obj <- tab_model(
+  m0, m1, m2, m3, m4, m5_H6, m6_H7,
+  show.ci = FALSE, show.se = TRUE, p.style = "stars",
+  digits  = 3,
+  dv.labels = c(
+    "Nulo (ICC)", "M1 (centrado)", "M2 (centrado)",
+    "M1 + M2", "+ Pend. NSE", "+ Interacción H7", "+ Interacción H8"
+  )
+)
+
+# HTML con estilos inline; mantiene formato sin cerrar <body> -------------
+html_tab <- tab_obj$knitr   # <table> … </table> con estilos inline
+
+# Nota del test de devianza -----------------------------------------------
+nota <- sprintf(
+  '<p class="mt-2 mb-4 small text-muted">
+     <strong>Test de devianza</strong>
+     (m3&nbsp;vs&nbsp;m4, pendiente aleatoria NSE):<br>
+     &Delta;&nbsp;=&nbsp;%.2f&nbsp;(df&nbsp;=&nbsp;%d),&nbsp;p&nbsp;%s
+   </p>',
+  delta, df_lr, p_txt
+)
+
+# Devolvemos el HTML sin que Quarto lo envuelva en <code> ------------------
+knitr::asis_output(
+  paste0(
+    '<style>.scroll-table{overflow-x:auto;width:100%;}</style>',
+    '<div class="scroll-table">', html_tab, '</div>',
+    nota
+  )
+)
+
+```
+
+#### **Modelo nulo e ICC**
+
+Antes de introducir los resultados, se estimó un modelo nulo con intercepto aleatorio por comuna, cuyo objetivo es evaluar la pertinencia del enfoque multinivel y estimar la varianza atribuible al contexto territorial. Este modelo permite calcular la correlación intra-clase (ICC), indicador que refleja qué proporción de la varianza total en los años de escolaridad puede atribuirse a diferencias entre comunas.
+
+El modelo nulo, estimado con intercepto aleatorio por comuna, revela que la escolaridad promedio en el Gran Santiago es de 12,31 años,  (EE = 0,29; p \< .001). La varianza residual a nivel individual alcanza 14,15, mientras que la varianza entre comunas es 2,80, lo que se traduce en un coeficiente de correlación intraclase (ICC = 0,17). Esto implica que aproximadamente un 17% de la variabilidad en la escolaridad se debe a diferencias entre comunas, mientras que el 83% restante se explica por otros factores. Este valor es estadísticamente significativo.
+
+Estos resultados ofrecen evidencia empírica clara de que las comunas presentan diferencias sistemáticas en sus niveles promedio de escolaridad. Por tanto, el uso de un enfoque multinivel no solo es apropiado, sino necesario para capturar adecuadamente las influencias tanto individuales como contextuales sobre la trayectoria educativa.
+
+#### **Modelo con variables individuales**
+
+Respecto al primer modelo, orientado a contrastar las hipótesis de nivel individual, los tres predictores incorporados resultaron estadísticamente significativos (p \< .001) y en la dirección esperada. En cuanto a la H1, el coeficiente para female (β = –0,40; EE = 0,05) indica que las mujeres completan, en promedio, casi medio año menos de escolaridad que los hombres, evidenciando una brecha de género persistente. De acuerdo con la segunda hipótesis, el nivel socioeconómico centrado en la comuna muestra un efecto positivo robusto (β = 0,40; EE = 0,02): cada unidad adicional en la escala de NSE se traduce en 0,4 años más de estudio. Finalmente, respecto a la tercera hipótesis de participación social del hogar: vivir en un hogar activo en redes comunitarias se asocia con un incremento de 0,74 años en la escolaridad (β = 0,74; EE = 0,07), subrayando la importancia del capital social familiar.
+
+El intercepto estimado (β₀ = 12,44; EE = 0,30) corresponde a un hombre con NSE promedio comunal y sin participación social. La varianza residual individual desciende a 13,56, mientras que la varianza del intercepto comunal se mantiene en 2,74, lo que sugiere que, aunque los factores familiares explican una parte relevante de las trayectorias educativas, persisten diferencias territoriales que requerirán incorporar predictores contextuales en modelos posteriores.
+
+#### **Modelo con variables contextuales**
+
+En cuanto al modelo 2, centrado exclusivamente en predictores de nivel comunal se observa que los resultados confirman la H4, es decir que la tasa de empleo comunal muestra un efecto positivo y sustantivo sobre la escolaridad promedio (β = 10,33; EE = 1,87; p \< .001); un aumento de 0,10 puntos en la tasa de personas ocupadas se asocia con más de un año adicional de estudio. Asimismo, los hallazgos respaldan H6, donde el Índice de Desarrollo Humano presenta una influencia sólida (β = 9,84; EE = 0,92; p \< .001); cada incremento de 0,10 unidades en el IDH implica aproximadamente un año extra de escolaridad, subrayando la convergencia entre bienestar multidimensional y capital educativo.
+
+En contraste, H5 no recibe apoyo empírico: la proporción de escuelas por 10 000 habitantes exhibe un coeficiente pequeño y no significativo (β = 0,12; EE = 0,11). Esto sugiere que la mera disponibilidad cuantitativa de establecimientos, sin considerar su calidad o segmentación, no garantiza trayectorias formativas más largas.
+
+El intercepto estimado se eleva a 12,56 años (EE = 0,10), y la varianza entre comunas cae drásticamente a 0,26, revelando que los factores contextuales incluidos explican gran parte de las diferencias territoriales observadas en el modelo nulo. Sin embargo, la varianza residual individual se mantiene alta (14,10), indicando que persisten heterogeneidades a nivel de personas que serán examinadas al combinar predictores individuales y comunales en modelos posteriores.
+
+#### **Modelo completo: efectos individuales y contextuales**
+
+Al estimar un 3 modelo que une las variables independientes y contextuales, se observa una convergencia de efectos con los hallazgos de los modelos parciales, pero ahora dentro de un marco explicativo más parsimonioso. Los coeficientes individuales, brecha de género, NSE y participación social familiar, conservan magnitud y significancia, lo que indica que su impacto no depende de la omisión de variables de nivel 2. Simultáneamente, la tasa de empleo y el IDH comunal continúan ejerciendo influencias positivas sustantivas, mientras que la densidad de escuelas sigue sin alcanzar significancia estadística, confirmando que la oferta educativa cuantitativa no opera como palanca autónoma.
+
+La varianza entre comunas cae a 0,26, señalando de que la combinación de recursos familiares y dinamismo territorial abarca prácticamente toda la heterogeneidad contextual detectada inicialmente. No obstante, la varianza residual individual permanece elevada, lo que sugiere la existencia de otros factores que escapan a la medición disponible. 
+
+#### **Modelo con Pendiente aleatoria**
+
+Para evaluar si el impacto del nivel socioeconómico centrado en la comuna varía entre territorios, se permitió su pendiente varie aleatoriamente por comuna. El test de devianza indica que el modelo con pendiente aleatoria presenta un ajuste significativamente mejor que el modelo con pendiente fija presentando un valor de chi-cuadrado de 256,1 (con 2 grados de libertad; p \< .001), lo que confirma que la heterogeneidad comunal en el retorno educativo del NSE es estadísticamente relevante.
+
+Considerando los resultados del modelo con pendiente aleatoria para el NSE, se observa que el efecto del nivel socioeconómico sobre los años de escolaridad no es uniforme entre comunas. La varianza de la pendiente del NSE alcanza 0,08, lo que indica que su impacto cambia significativamente según el territorio. Además, la covarianza negativa con el intercepto comunal (-0,52) sugiere que en comunas con menor escolaridad promedio, el efecto del NSE es más pronunciado.
+
+A pesar de este gradiente, las estimaciones fijas del modelo se mantienen estables respecto a las variables anteriores. En ese sentido, la inclusión de la pendiente aleatoria reduce la varianza residual a 13,37 y deja la varianza del intercepto comunal casi inalterada, mostrando que la principal ganancia del modelo radica en capturar la diversidad del efecto socioeconómico entre comunas. 
+
+#### **Modelo con Interacción entre niveles: NSE por Tasa de empleo comunal** 
+
+Para contrastar la hipótesis H7, se incluyó la interacción entre el nivel socioeconómico centrado en la comuna y la tasa comunal de empleo centrada a la gran media. Esta  presenta un coeficiente positivo (1.813), coherente con la hipótesis H7. Aunque no alcanza el umbral de significancia tradicional del 95% (p \< .05), su valor t (\~1.63) sugiere una significación marginal al 90%, lo que indica que en comunas con mayor dinamismo laboral, el efecto del NSE sobre la escolaridad tiende a amplificarse. En términos sustantivos, un aumento simultáneo de 1 en empleo (≈ 0,10 puntos) intensifica la pendiente del NSE en casi 0,18 años adicionales de escolaridad, tal como se aprecia en la Figura X.X. Este resultado entrega evidencia tentativa a favor de la hipótesis, aunque debe ser interpretado con cautela debido a su robustez estadística limitada. 
+
+El efecto principal del Nivel socioeconómico se incrementa levemente (β = 0,48) al controlar la interacción, lo que indica que el retorno promedio del capital económico del hogar sigue siendo robusto. Paralelamente, la tasa de empleo mantiene un impacto directo elevado (β = 17,51; EE = 3,82; p \< .001), mientras las estimaciones para género, participación social y oferta escolar permanecen estables.
+
+La varianza de la pendiente del NSE (0,08) se conserva, pero la varianza del intercepto comunal aumenta a 1,36, reflejando que la asociación NSE-empleo no es uniforme y agrega complejidad territorial al patrón educativo. En conjunto, el modelo respalda la idea de que los hogares con mayores recursos económicos obtienen beneficios escolares adicionales cuando se insertan en comunas con mayores oportunidades laborales, aunque esto no se manifiesta de forma idéntica en todo el Gran Santiago.
+
+#### **Modelo con Interacción entre niveles: NSE por IDH comunal**
+
+Respecto a la hipótesis 8, se introdujo la interacción entre el nivel socioeconómico centrado en la comuna y el Índice de Desarrollo Humano comunal centrado a la gran media. El coeficiente cruzado resulta positivo y estadísticamente significativo (β = 1,17; EE = 0,43; p \< .01), lo que confirma que el retorno educativo del capital económico familiar se amplifica en territorios con mayor desarrollo humano. Concretamente, elevar el IDH en 0,10 unidades intensifica la pendiente del NSE en unos 0,12 años adicionales de escolaridad, evidenciando una relación entre bienestar territorial y recursos del hogar.
+
+Los efectos de las otras variables se mantienen sólidos. Donde el NSE conserva un impacto positivo, la tasa de empleo y el propio IDH siguen asociados a mayores trayectorias educativas, y la brecha de género persiste inalterada. La varianza del intercepto comunal permanece baja (0,25), mientras que la variación de la pendiente del NSE desciende a 0,06, indicando que parte de la heterogeneidad captada en el modelo con pendiente aleatoria se explica ahora por el gradiente de desarrollo humano.
+
+En síntesis, los resultados respaldan la premisa de que los hogares con mayor nivel socioeconómico obtienen beneficios escolares adicionales cuando se ubican en comunas con altos niveles de bienestar multidimensional.
+
+### **Ajuste del modelo**
+
+Para estimar la potencia explicativa de cada modelo se aplicó el coeficiente de determinación multinivel de Bryk y Raudenbush (1992, como se citó en Castillo, 2025) que calcula para cada nuevo modelo la reducción proporcional de los componentes de la varianza respecto del modelo nulo. Esta estrategia resulta especialmente adecuada en contextos jerárquicos, ya que permite cuantificar cuánto mejora la explicación de la varianza dentro de los grupos (nivel 1) y entre los grupos (nivel 2), al incorporar predictores individuales y contextuales. Así, se logra evaluar no solo si un modelo se ajusta mejor, sino también dónde y cuánto reduce la incertidumbre respecto de los resultados educativos en función de los factores intro
+
+Respecto al reporte de R2, el modelo nulo presenta una varianza residual individual de 14,10 y una varianza del intercepto comunal de 2,80. Al incorporar únicamente predictores individuales, se explica un 3,8 % de la varianza intra-comunal y un 2,0 % de la varianza entre comunas, alcanzando un R2 Total de 0.035. En cambio, el modelo con solo predictores contextuales revierte esta proporción: las variables comunales tasa de empleo, IDH y oferta escolar explican el 91,6 % de la varianza entre comunas, mientras no modifican la varianza individual. El modelo combinado mantiene la explicación individual en 3,8 % y eleva levemente la explicación comunal a 91,9 %.
+
+Considerando lo anterior, los modelos con pendiente aleatoria del NSE y con interacciones entre niveles no aumentan la explicación contextual, pero sí logran mejoras modestas en la varianza individual: el modelo que corresponde a la interacción entre NSE y IDH alcanza un R²L1 de 4,4 %, el más alto del conjunto, con un R² Total de 0.185. En suma, la mayor parte de la desigualdad entre comunas se explica por las condiciones estructurales del territorio, mientras que los modelos más complejos aportan mejoras incrementales en la explicación de la varianza individual de la escolaridad.
+
+### **Gráficos de interacción**
+
+```{r modelo_tabla1, echo=FALSE, fig.cap="Figura 1.6: Interacción entre NSE individual y tasa de empleo comunal sobre los años esperados de escolaridad ", warning=FALSE, results='asis'}
+p_h6 <- plot_model(
+  m5_H6,
+  type  = "int",
+  terms = c("nse_cmc", "prop_empleo_gmc")
+) +
   labs(
-    title = "Variación comunal del efecto de la carencia de participación social",
-    x = "Carencia de participación social",
-    y = "Años esperados de escolaridad"
-  )
+    title  = "Interacción H6: NSE individual × Tasa de empleo comunal",
+    x      = "NSE centrado en la comuna (CMC)",
+    y      = "Años esperados de escolaridad",
+    colour = "Tasa de empleo comunal\n(GMC; −1 DE / Media / +1 DE)"
+  ) +
+  theme_minimal(base_size = 12)
+
+print(p_h6)
+
 ```
 
-El primer modelo incluye una pendiente aleatoria para la variable part_social_num (0 = carente, 1 = no carente). Los resultados muestran una varianza comunal de 0.10 para esta pendiente, además de una covarianza positiva con el intercepto (0.33). Esta covarianza positiva sugiere que en comunas con mayor nivel promedio de escolaridad, el efecto positivo de la participación social es aún más fuerte. Es decir, el capital social familiar potencia sus efectos cuando se inserta en contextos comunales más favorecidos.
+El Gráfico 1.6 ilustra la interacción entre el nivel socioeconómico individual (NSE) y la tasa de empleo comunal, mostrando cómo el efecto del NSE sobre los años esperados de escolaridad varía según el dinamismo del contexto laboral. Tal como se observa, en comunas con baja tasa de empleo (línea roja), el efecto positivo del NSE sobre la escolaridad es más tenue, mientras que en comunas con alta tasa de empleo (línea azul), esta relación se intensifica marcadamente. Esto sugiere que los recursos económicos del hogar generan mayores retornos educativos en contextos donde existen más oportunidades laborales, reforzando la idea de que un entorno estructuralmente favorable amplifica las ventajas asociadas al capital económico familiar.
 
-Esta heterogeneidad se representa visualmente (figura 1.2), donde se observa que en comunas como Providencia y La Reina, vivir en un hogar socialmente activo se traduce en un aumento sustancial en los años de escolaridad. Por el contrario, en comunas como Renca o La Granja, si bien el efecto sigue siendo positivo, es mucho más leve. Esto indica que el valor educativo de la participación social depende en parte del entorno territorial en que se desarrolla, posiblemente por la densidad de redes comunitarias, recursos disponibles o sinergias institucionales.
+```{r modelo_tabla2, echo=FALSE,  message=FALSE, fig.cap="Figura 1.7: Interacción entre NSE individual e Índice de Desarrollo Humano (IDH) comunal sobre los años esperados de escolaridad", warning=FALSE, results='asis'}
 
-### Género
+p_h8 <- plot_model(
+  m6_H7,
+  type  = "int",
+  terms = c("nse_cmc", "idh_gmc")   # usa el nombre real de tu var. IDH
+) +
+  labs(
+    title  = "Interacción H8: NSE individual × IDH comunal",
+    x      = "NSE centrado en la comuna (CMC)",
+    y      = "Años esperados de escolaridad",
+    colour = "IDH comunal\n(GMC; −1 DE / Media / +1 DE)"
+  ) +
+  theme_minimal(base_size = 12)
 
-```{r modelo_tabla2, echo=FALSE,  message=FALSE, fig.cap="Figura 1.3", warning=FALSE, results='asis'}
-
-# Modelo con intercepto y pendiente aleatoria para 'female'
-mod_female_aleat <- lmer(
-    esc ~ female + part_social_num + nse_numerico +           # efectos fijos
-      (1 + female | comuna),                                  # intercepto y pendiente aleatoria
-    data = casen_educ
-  )
-  
-  
-# Predicciones para 9 comunas al azar
-plt_female <- ggpredict(
-    mod_female_aleat,
-    terms = c("female", "comuna [sample=9]"),
-    type = "random"
-  )
-  
-# Gráfico del efecto del género según comuna
-plot(plt_female) +
-    labs(
-      title = "Variación comunal del efecto de ser mujer",
-      x = "Género (0 = hombre, 1 = mujer)",
-      y = "Años esperados de escolaridad"
-    )
+print(p_h8)
   
 ```
 
-El modelo incorpora una pendiente aleatoria para la variable female (0 = hombre, 1 = mujer), con el fin de evaluar si el efecto de ser mujer sobre los años de escolaridad varía entre comunas del Gran Santiago.
+El Gráfico 1.7 representa la interacción entre el nivel socioeconómico individual (NSE) y el Índice de Desarrollo Humano (IDH) comunal, revelando cómo el efecto del NSE sobre la escolaridad varía según las condiciones estructurales del territorio. En comunas con bajo IDH (línea roja), el incremento en escolaridad asociado al NSE es más modesto, mientras que en comunas con alto IDH (línea azul), dicho efecto se acentúa significativamente. Esto indica que el capital económico familiar tiene un mayor impacto educativo en contextos comunales más desarrollados, donde probablemente existen más recursos institucionales para transformar las ventajas familiares en logros escolares.
 
-Los resultados muestran que la varianza de esta pendiente es prácticamente nula (0.00), lo que indica que la penalización educativa asociada al género femenino es constante entre comunas. Esta conclusión es reforzada por la covarianza negativa con el intercepto (-0.08), aunque de muy baja magnitud, lo cual sugiere una relación muy débil e inversa entre el promedio comunal de escolaridad y el efecto de género.
+### Análisis de casos influyentes
 
-El gráfico confirma esta homogeneidad: en todas las comunas, las mujeres presentan sistemáticamente menor escolaridad esperada que los hombres, y las pendientes de las líneas son muy similares entre sí. Esto evidencia que la brecha de género es transversal, operando con intensidad relativamente uniforme a lo largo del territorio metropolitano.
+```{r Casos influyentes, include=FALSE}
+# ---------------------------------------------------------------
+# 0. Cargar paquetes y base de datos ----------------------------
+# ---------------------------------------------------------------
+library(lme4)          # modelos multinivel
+library(influence.ME)  # Cook's distance por grupo
+library(dplyr)         # manipulación de datos
+library(forcats)       # fct_drop
+library(sjPlot)        # tab_model
+library(broom.mixed)   # tidy() para lmer
 
-En resumen, el modelo sugiere que, a diferencia de otras variables como la participación social o la tasa de empleo, el efecto del género sobre la escolaridad no muestra variación contextual significativa, lo que refuerza la idea de que la desigualdad de género en la educación es una estructura persistente y generalizada.
+casen_educ_cen <- readRDS("output/casen_educ_cen.rds") %>%
+  filter(!is.na(comuna)) %>%                # asegura no haber NAs
+  mutate(comuna = as.factor(comuna))        # comuna como factor
 
-# Resumen y conclusiones
+stopifnot(nlevels(casen_educ_cen$comuna) == 32)  # debe haber 32 comunas
 
-Para concluir, este estudio abordó la desigualdad educativa en el Gran Santiago a partir de una perspectiva multinivel, analizando cómo las trayectorias escolares están influidas por factores individuales (nivel socioeconómico, género y participación social) y por condiciones territoriales (tasa de empleo y oferta escolar). El uso de modelos jerárquicos permitió estimar simultáneamente los efectos de ambos niveles y evaluar su interacción.
+# ────────────────────────────────────────────────────────────────────────
+# 1. Modelo original (m4) ‒ con nuevas variables contextuales
+# ────────────────────────────────────────────────────────────────────────
+m4 <- lmer(
+  esc ~ female + nse_cmc + part_social_num +
+    prop_empleo_gmc + prop_pob_esc_gmc + idh_gmc +
+    (1 + nse_cmc | comuna),
+  data = casen_educ_cen
+)
 
-Entre los principales hallazgos, se confirma que el nivel socioeconómico y la participación social son predictor relevante, que influyen en mayores años de escolaridad. También se observó una penalización persistente para las mujeres, quienes completan menos años de estudio en promedio que los hombres, de manera transversal entre comunas. La participación social del hogar, entendida como capital social comunitario, también mostró un efecto positivo significativo sobre la escolaridad. A nivel contextual, la tasa de empleo comunal resultó ser un factor determinante: en comunas con mayor dinamismo económico, los años de escolaridad promedio fueron más altos. En cambio, la cantidad de escuelas por comuna no mostró efectos significativos una vez controladas las demás variables.
+# ────────────────────────────────────────────────────────────────────────
+# 2. Cook’s Distance por comuna
+# ────────────────────────────────────────────────────────────────────────
+infl_m4   <- influence(m4, group = "comuna")
+cook_vals <- cooks.distance(infl_m4, sort = FALSE)
 
-La estructura del modelo reveló una correlación intra-clase del 16%, justificando el uso del enfoque multinivel y demostrando que parte importante de la desigualdad educativa se explica por el territorio. Además, el análisis de efectos aleatorios mostró que el impacto de la participación social varía entre comunas, sin embargo, el efecto del género se mantuvo constante en todas las comunas, lo que refuerza su carácter estructural.
+# añade nombres si faltan
+if (is.null(names(cook_vals)) || length(names(cook_vals)) == 0) {
+  names(cook_vals) <- levels(casen_educ_cen$comuna)
+}
 
-Estos resultados dialogan directamente con la pregunta de investigación, demostrando que los factores de socialización -familiares y territoriales- sí influyen en las trayectorias educativas, y que su interacción es clave para comprender la persistencia de la desigualdad. A nivel disciplinar, el estudio contribuye a una sociología de la educación más situada, que incorpora dimensiones económicas y comunitarias a la comprensión del capital escolar.
+k      <- nlevels(casen_educ_cen$comuna)   # 32
+cutoff <- 4 / k                            # ≈ 0.125
+influentes <- names(cook_vals)[!is.na(cook_vals) & cook_vals > cutoff]
 
-Entre las limitaciones del estudio se encuentran la falta de indicadores cualitativos sobre calidad escolar o capital cultural más específico, así como el uso de una medición dicotómica para la participación social, además de la inclusión de otras comunas y regiones del país para lograr dar cuenta de forma más completa del fenómeno. Para futuras investigaciones se recomienda explorar trayectorias escolares longitudinales, y considerar indicadores más precisos sobre redes comunitarias y recursos escolares.
+cat("Comunas influyentes (Cook >", round(cutoff, 3), "):\n")
+print(influentes)
 
-Finalmente, este estudio sugiere que las políticas públicas orientadas a reducir la desigualdad educativa deberían considerar no solo la mejora de recursos familiares, sino también la activación del empleo comunal y el fortalecimiento de las redes sociales locales como elementos clave para potenciar las oportunidades educativas.
+```
+
+```{r Grafico Cook, echo=FALSE, fig.cap="Figura 1.8: Distancia de Cook", results='asis'}
+# ────────────────────────────────────────────────────────────────────────
+# 3. Gráfico de Cook
+# ────────────────────────────────────────────────────────────────────────
+plot(
+  infl_m4, which = "cook",
+  cutoff  = cutoff, sort = TRUE,
+  xlab    = "Cook's distance", ylab = "Comuna",
+  main    = "Distancia de Cook – Influencia por comuna"
+)
+
+
+```
+
+Para evaluar la influencia de casos a nivel contextual en los resultados del modelo que incluye variables individuales y contextuales, se aplicó el diagnóstico de distancia de Cook (Figura 1.8), que permite identificar comunas potencialmente influyentes en la estimación de los efectos fijos. Se identificaron 2 comunas, Lo Barnechea y  Santiago que destacan con  valores altos de influencia, lo que sugiere que sus características podrían estar ejerciendo un peso en los resultados del modelo.
+
+A partir de esta alerta, se procedió a estimar nuevamente el modelo excluyendo dichas comunas  y se compararon los coeficientes originales con los nuevos. Los resultados muestran que, si bien la mayoría de los coeficientes se mantienen relativamente estables, algunos presentan variaciones. Por ejemplo, el coeficiente de la tasa de empleo comunal disminuye en un 11,4 %, lo que indica cierta sensibilidad del modelo a estos casos. En sentido contrario, el efecto del IDH comunal aumenta en un 9,4 % al excluir las comunas influyentes. Otros efectos, como el de género y la participación social, se mantienen estables con reducciones parciales de–7,0 % y –5,5 %, respectivamente. En contraste, el coeficiente del NSE individual permanece prácticamente inalterado, lo que refuerza su robustez.
+
+A pesar de la influencia de estas comunas, se decidió no excluirlas del análisis, dado su peso demográfico, económico y simbólico en la estructura territorial del Gran Santiago. No obstante, con el fin de transparencia analítica, se incorporan la comparaciones detalladas entre las estimaciones originales y aquellas obtenidas al excluir dichas comunas (anexo 1).
+
+En conjunto, este análisis sugiere que, si bien los resultados del modelo son globalmente consistentes, ciertos efectos contextuales pueden estar amplificados por comunas atípicas. Por tanto, su interpretación debe considerar esta posible sobrerrepresentación, especialmente en lo relativo a los factores estructurales del territorio. Considerando lo anterior, se opta por mantener estas observaciones en el modelo final, reconociendo su potencial influencia pero también su relevancia sustantiva en la comprensión de las desigualdades educativas en el Gran Santiago.
+
+# Discusión
+
+```{r r_fig_escolaridad, fig.cap="Figura 1.9: Modelo teórico con resultados de las hipótesis planteadas.", echo=FALSE}
+knitr::include_graphics(here::here("input", "img", "r_Años_de_escolaridad_final.png"))
+```
+
+Los resultados obtenidos son consistentes con la mayoría de las hipótesis planteadas. En primer lugar, respecto al nivel individual, se comprueba la H1, donde las mujeres presentan, en promedio, menos años de escolaridad que los hombres, lo que evidencia la persistencia de desigualdades de género en las trayectorias educativas. En relación con la H2, se confirma que un mayor nivel socioeconómico (NSE) del hogar se asocia con más años de escolaridad, subrayando el peso del capital económico familiar en la acumulación educativa. Asimismo, la hipótesis H3 también se sostiene, ya que los hogares con participación en redes sociales presentan mayores niveles de escolaridad, lo cual apunta a la relevancia del capital social en el acompañamiento escolar.
+
+En segundo lugar, los resultados permiten confirmar parcialmente las hipótesis a nivel contextual. Se comprueba la H4, dado que las comunas con mayores tasas de empleo presentan promedio de años educativos más altos, lo que sugiere que un mercado laboral más dinámico puede crear entornos que valoran y estimulan la continuidad educativa. También se confirma la H6, ya que el Índice de Desarrollo Humano (IDH) muestra una asociación positiva robusta con la escolaridad promedio. Sin embargo, la H5 no se ve respaldada, dado que la proporción de escuelas por habitante no tiene un efecto significativo, lo que indica que la disponibilidad de establecimientos educativos no garantiza por sí sola mejores trayectorias formativas, especialmente si no se considera su calidad o segmentación.
+
+En tercer lugar, los modelos multinivel permiten evaluar la interacción entre niveles. Respecto a la H7, los resultados entregan apoyo parcial, dado que el efecto del NSE sobre la escolaridad tiende a ser más intenso en comunas con alta tasa de empleo, aunque la significación estadística es marginal. En contraste, la H8 se ve respaldada, ya que el retorno educativo del NSE es significativamente mayor en comunas con alto IDH. Esto sugiere que el contexto comunal no solo influye directamente sobre la escolaridad, sino también esta se modula por los efectos de las condiciones familiares. En conjunto, los hallazgos refuerzan la importancia de adoptar un enfoque multinivel que considere simultáneamente factores individuales y estructurales para comprender las desigualdades educativas en contextos urbanos segmentados como el Gran Santiago.
+
+# Conclusiones
+
+El estudio muestra que tanto las condiciones familiares como las comunales inciden significativamente en los años de escolaridad de la población adulta del Gran Santiago. Entre los principales hallazgos destaca que las variables contextuales explican una proporción sustantiva de la desigualdad educativa entre comunas (91,9% de la varianza territorial), mientras que los factores individuales tienen un efecto más acotado pero persistente.
+
+En términos metodológicos, la adopción de modelos multinivel permitió separar y modelar con precisión las varianzas entre y dentro de comunas, evidenciando que las diferencias territoriales no pueden ser ignoradas. Esta aproximación fue especialmente relevante para identificar interacciones cruzadas entre niveles y estimar pendientes aleatorias, elementos imposibles de captar en modelos tradicionales.
+
+Entre las limitaciones, se reconoce la ausencia de variables de calidad escolar o experiencias educativas, así como la dificultad de establecer relaciones causales dado el carácter transversal de los datos. Además, ciertos resultados pueden estar influenciados por comunas atípicas, aunque se decidió mantenerlas por su relevancia sustantiva, presentando comparaciones alternativas en anexos.
+
+Como proyección, se sugiere extender este tipo de análisis a otras regiones del país, incorporar medidas de calidad educativa y explorar trayectorias longitudinales. Desde una perspectiva de política pública, los resultados refuerzan la necesidad de estrategias integrales que combinen desarrollo local con fortalecimiento del capital familiar, reconociendo que la desigualdad educativa es una expresión territorializada de las brechas sociales más amplias.
 
 # Referencias
 
@@ -352,31 +701,76 @@ Finalmente, este estudio sugiere que las políticas públicas orientadas a reduc
 
 -   Bellei Carvacho, C., Contreras, D., & Valenzuela Barros, J. P. (2008). La agenda pendiente en educación. Profesores, administradores y recursos: propuestas para la nueva arquitectura de la educación chilena. Universidad de Chile.
 
+-   Biblioteca Nacional del Congreso. (junio 2024). Estadísticas Territoriales. Biblioteca Nacional del Congreso. https://www.bcn.cl/siit/estadisticasterritoriales 
+
 -   Bourdieu, P., & Passeron, J. C. (2001). La reproducción. Elementos para una teoría del sistema de enseñanza. Editorial Laia.
 
 -   Bullones, E. (2022). Gestión educativa en valores para la paz comunitaria. Aula Virtual, 3(6), 150–160.
 
 -   Canales, A., & de Ibarrola, M. (2022). La segmentación del sistema escolar mexicano: un análisis territorial. Revista Mexicana de Investigación Educativa, 27(94), 1035–1060.
 
+-   Castillo, J. (2025). Modelos Multinivel. Sesión 6. Ajuste y Reporte. https://multinivel-facso.netlify.app/content/06-content
+
 -   Cimadamore, A. D., & Cattani, A. D. (Coords.). (2008). Producción de pobreza y desigualdad en América Latina. Siglo del Hombre Editores.
+
+-   Cortés, Y. (2021). Accesibilidad espacial a los servicios públicos locales en un lugar desigual: un análisis desde los patrones de segregación residencial en el área metropolitana de Santiago de Chile. Sustainability, 13(2), 442.
 
 -   Finch, W. H., Bolin, J. E., & Kelley, K. (2019). Multilevel modeling using R. Chapman and Hall/CRC.
 
--   Instituto Nacional de Evaluación Educativa. (2011). PIRLS–TIMSS 2011. Estudio Internacional de Progreso en Comprensión Lectora, Matemáticas y Ciencias. Volumen I: Informe español. IEA.[ ](https://www.mecd.gob.es/inee)
+-   Giménez, G. (30 de septiembre de 2004). Introducción al estudio de las identidades urbanas \[Sesión de conferencial\]. Seminario Permanente de Estudios sobre la Ciudad, Ciudad de México, México.
 
--   Ministerio de Educación de Chile. (2023). Informe de resultados SIMCE y brechas por grupo socioeconómico. Santiago: MINEDUC.
+-   Gobierno de Santiago (s.f.). Datos geográficos. Gobierno de Santiago. https://www.gobiernosantiago.cl/datos-geograficos/ 
+
+-   Gonzales y Espinoza  (1994). Estudio del logro educativo en el Índice de Desarrollo Humano en América Latina y el Caribe, 1994–05. Centro Interuniversitario de Desarrollo (CINDA). Recuperado de ResearchGate.
+
+-   Instituto Nacional de Evaluación Educativa \[INEE\]. (2011). PIRLS–TIMSS 2011. Estudio Internacional de Progreso en Comprensión Lectora, Matemáticas y Ciencias. Volumen I: Informe español. IEA. https://www.mecd.gob.es/inee
 
 -   Ministerio de Desarrollo Social y Familia. (2022). Encuesta de Caracterización Socioeconómica Nacional (Casen) 2022. Gobierno de Chile.
 
--   OECD. (2021). Education at a Glance: OECD Indicators. OECD Publishing.[ ](https://doi.org/10.1787/b35a14e5-en)
+-   Ministerio de Educación de Chile. (2023). Informe de resultados SIMCE y brechas por grupo socioeconómico. Santiago: MINEDUC.
+
+-   OECD. (2021). Education at a Glance: OECD Indicators. OECD Publishing. https://doi.org/10.1787/b35a14e5-en
 
 -   Peláez González, C., & Rodríguez, S. A. (2020). Género, trabajo y educación: Diferencias entre hombres y mujeres en la entrada al primer empleo. Revista Interdisciplinaria de Estudios de Género de El Colegio de México, 6, e494.
 
--   Rivas Espinosa, A., & Terra Polanco, V. (2024). Percepciones de niñas y niños sobre su hábitat en contextos urbanos informales. Sociológica (Madrid), 39(1).
-
--   Romero, E., Alcaraz, S., & Hernández, M. (2020). Desigualdades educativas y respuesta institucional: Una investigación desde la perspectiva territorial. Profesorado, Revista de Currículum y Formación del Profesorado, 24(1), 1–20.
-
--   Soler Mata, J., & Fernández León, R. (2021). La evaluación educativa en España: Tensiones entre la evaluación estandarizada y la evaluación formativa. Revista de Educación, 393, 245–271.
-
--   Villalobos, C., & Mardones, S. P. (2022). ¿Quién, cómo y de qué se investiga en un sistema educativo mercantilizado? Un meta-análisis de la investigación sobre política educativa en el Chile post-dictadura (1990–2019). Education Policy Analysis Archives, 30, 160.\
+-   Rivas Espinosa, A., & Terra Polanco, V. (2024). Percepciones de niñas y niños sobre su hábitat en contextos urbanos informales. Sociológica (Madrid), 39(1).\
     \
+
+# Anexos
+
+```{r}
+#| include: false
+
+# ────────────────────────────────────────────────────────────────────────
+# 4. Modelo recortado (m4_trim) sin comunas influyentes
+# ────────────────────────────────────────────────────────────────────────
+casen_trim <- casen_educ_cen %>%
+  filter(!comuna %in% influentes) %>% 
+  mutate(comuna = fct_drop(comuna))
+
+m4_trim <- lmer(
+  esc ~ female + nse_cmc + part_social_num +
+    prop_empleo_gmc + prop_pob_esc_gmc + idh_gmc +
+    (1 + nse_cmc | comuna),
+  data  = casen_trim,
+  REML  = FALSE
+)
+
+cat("\nNúmero de comunas en m4_trim:\n")
+print(summary(m4_trim)$ngrps)
+
+```
+
+```{r Anexo 1, echo=FALSE, fig.cap="Anexo 1: Tabla comparativa de estimación de modelos con y sin casos influyentes", results='asis'}
+
+# ────────────────────────────────────────────────────────────────────────
+# 5. Comparación de efectos fijos (tabla)
+# ────────────────────────────────────────────────────────────────────────
+tab_model(
+  m4, m4_trim,
+  dv.labels = c("Modelo original", "Sin comunas influyentes"),
+  show.ci   = FALSE, p.style = "stars", digits = 3
+)
+
+
+```

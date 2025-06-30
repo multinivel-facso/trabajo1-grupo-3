@@ -21,7 +21,8 @@ pacman::p_load(lme4,
                lattice,
                sjPlot,
                ggeffects, 
-               here
+               here, 
+               summarytools
 )
 
 
@@ -41,8 +42,29 @@ casen_educ <- readRDS("output/casen_educ.rds")
 
 ##Descriptivos------------------------------------------------------------------
 
-stargazer(as.data.frame(casen_educ), title="Estadísticos descriptivos", type = "text")
+#Tabla nivel 1-----
 
+# Variables de nivel 1 (individual)
+nivel1 <- casen_educ %>%
+  select(esc, female, nse_numerico,part_social_num)
+
+stargazer(as.data.frame(nivel1),
+          type = "text",
+          title = "Estadísticos descriptivos - Nivel 1 (individual)",
+          digits = 2, summary.stat = c("n","min", "p25", "median", "mean", "p75", "max", "sd"))
+
+
+#Tabla nivel 2-----
+
+# Variables de nivel 2 (contextual)
+nivel2 <- casen_educ %>%
+  select(comuna, prop_pob_esc, prop_empleo, idh_comuna) %>%
+  distinct()  # evitar duplicados por comuna
+
+stargazer(as.data.frame(nivel2),
+          type = "text",
+          title = "Estadísticos descriptivos - Nivel 2 (comunal)",
+          digits = 2, summary.stat = c("n", "min", "p25", "median", "mean", "p75", "max", "sd"))
 
 ##Modelo 0 ICC -----------------------------------------------------------------
 
@@ -145,3 +167,62 @@ plot(plt_female) +
   
 # Tabla resumida del modelo
   screenreg(mod_female_aleat)
+  
+  # ─────────────────────────────────────────────────────────────────────────────
+  # 1.  Lista de modelos y etiquetas
+  # ─────────────────────────────────────────────────────────────────────────────
+  model_list <- list(
+    results_1,            # Modelo 1: individuales
+    results_2,            # Modelo 2: contextuales
+    results_3,            # Modelo 3: completo (L1 + L2)
+    mod_aleat,            # + pendiente aleatoria part_social
+    mod_female_aleat      # + pendiente aleatoria female
+  )
+  
+  model_labels <- c(
+    "L1 (individuales)",
+    "L2 (contextuales)",
+    "L1 + L2",
+    "+ Pend. part_social",
+    "+ Pend. female"
+  )
+  
+  # ─────────────────────────────────────────────────────────────────────────────
+  # 2.  Función rb_r2  (si ya la tienes definida, omite este bloque)
+  # ─────────────────────────────────────────────────────────────────────────────
+  # R² de Raudenbush & Bryk con lme4
+  rb_r2 <- function(null_mod, mod, label = NA) {
+    # Varianzas
+    sig2_null  <- sigma(null_mod)^2
+    tau_null   <- as.numeric(VarCorr(null_mod)$comuna)  # intercepto
+    
+    sig2_mod   <- sigma(mod)^2
+    tau_mod    <- as.numeric(VarCorr(mod)$comuna)       # intercepto
+    
+    # Raudenbush & Bryk (1995) – proporción de reducción de varianza
+    r2_within  <- 1 - (sig2_mod / sig2_null)
+    r2_between <- 1 - (tau_mod  / tau_null)
+    
+    tibble::tibble(
+      Modelo      = label,
+      R2_within   = round(r2_within, 3),
+      R2_between  = round(r2_between, 3)
+    )
+  }
+  
+  # ─────────────────────────────────────────────────────────────────────────────
+  # 3.  Construir la tabla con purrr::map2_dfr
+  # ─────────────────────────────────────────────────────────────────────────────
+  library(purrr)
+  library(tibble)
+  
+  tabla_rb <- map2_dfr(
+    .x = model_list,
+    .y = model_labels,
+    ~ rb_r2(null_mod = modelo_icc, mod = .x, label = .y)
+  )
+  
+  tabla_rb
+  
+  
+  

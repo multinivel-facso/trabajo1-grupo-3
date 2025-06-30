@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Juan Padro, Katherine Aravena Herrera, Paula Cerda Torres &amp; Sebastián Monreal Villarroel">
+
+<title>Desigualdad educativa en el Gran Santiago</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-86023cba153004e3e72cede2c961b65e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Desigualdad educativa en el Gran Santiago</h1>
+            <p class="subtitle lead">Un análisis multinivel de factores individuales y territoriales</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Autor/a</div>
+      <div class="quarto-title-meta-contents">
+               <p>Juan Padro, Katherine Aravena Herrera, Paula Cerda Torres &amp; Sebastián Monreal Villarroel </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Fecha de publicación</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">6 de junio de 2027</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">Contenidos</h2>
+   
+  <ul class="collapse">
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract"><span class="header-section-number">1</span> Abstract</a></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">2</span> Introducción</a></li>
+  <li><a href="#objetivos-e-hipótesis" id="toc-objetivos-e-hipótesis" class="nav-link" data-scroll-target="#objetivos-e-hipótesis"><span class="header-section-number">3</span> Objetivos e hipótesis&nbsp;</a></li>
+  <li><a href="#datos-variables-y-métodos" id="toc-datos-variables-y-métodos" class="nav-link" data-scroll-target="#datos-variables-y-métodos"><span class="header-section-number">4</span> Datos, variables y métodos</a></li>
+  <li><a href="#resultados" id="toc-resultados" class="nav-link" data-scroll-target="#resultados"><span class="header-section-number">5</span> Resultados</a>
+  <ul class="collapse">
+  <li><a href="#descriptivos" id="toc-descriptivos" class="nav-link" data-scroll-target="#descriptivos"><span class="header-section-number">5.1</span> Descriptivos</a></li>
+  <li><a href="#estimación-multinivel" id="toc-estimación-multinivel" class="nav-link" data-scroll-target="#estimación-multinivel"><span class="header-section-number">5.2</span> Estimación multinivel</a></li>
+  </ul></li>
+  <li><a href="#discusión" id="toc-discusión" class="nav-link" data-scroll-target="#discusión"><span class="header-section-number">6</span> Discusión</a></li>
+  <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link" data-scroll-target="#conclusiones"><span class="header-section-number">7</span> Conclusiones</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias"><span class="header-section-number">8</span> Referencias</a></li>
+  <li><a href="#anexos" id="toc-anexos" class="nav-link" data-scroll-target="#anexos"><span class="header-section-number">9</span> Anexos</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="abstract" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Abstract</h1>
+<p>La persistencia de la desigualdad educativa en el Gran Santiago cuestiona la promesa meritocrática del sistema escolar chileno y evidencia la reproducción de las ventajas de origen social. Este estudio indaga en qué medida factores individuales (nivel socioeconómico, género y participación social del hogar) y contextuales (tasa de empleo, oferta escolar e índice de desarrollo humano comunal) inciden en los años de escolaridad de la población. A partir de datos de la Encuesta CASEN 2022 (N = 22.706), se estiman modelos multinivel que consideran la anidación de personas en 32 comunas del Gran Santiago. Los resultados muestran que tanto los recursos familiares como las condiciones comunales influyen significativamente en la escolaridad promedio, y que contextos más favorables amplifican los retornos educativos del nivel socioeconómico. En conclusión, el enfoque multinivel permite comprender la desigualdad educativa como un fenómeno estructural y territorialmente situado, lo que refuerza la necesidad de políticas públicas que articulen intervención social con desarrollo local.</p>
+</section>
+<section id="introducción" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Introducción</h1>
+<p>La desigualdad educativa persiste como una de las principales barreras para la movilidad social en Chile y, en particular, en la Región Metropolitana de Santiago. A pesar de los avances en acceso a la educación básica y media en el país, las diferencias en escolaridad continúan reproduciendo brechas de ingresos, oportunidades laborales y participación cívica entre los distintos grupos sociales (Ministerio de Educación, 2023; Agencia de Calidad de la Educación, 2015; OECD, 2021). Esta persistencia interroga la promesa meritocrática inscrita en el sistema educativo y revela su lógica de reproducción social. A raíz de esto, entendemos la desigualdad educativa como la distribución desigual de oportunidades de acceso y logro escolar, influida por factores sociales, económicos y territoriales (Bellei et al., 2008). Desde las investigación sociológica se ha explicado como un proceso de reproducción social donde la escuela refuerza las ventajas de origen, es decir impulsada sobre todo por el capital económico (Bourdieu &amp; Passeron, 2001).</p>
+<p>Hasta ahora, la desigualdad educativa ha sido investigada mediante análisis que privilegian los resultados de pruebas estandarizadas y descripciones administrativas del sistema escolar (Soler &amp; Fernández, 2021; Cimadamore &amp; Catanni, 2008). Desde este enfoque, se ha prestado menos atención a cómo se combinan factores individuales con condiciones del entorno inmediato, como la oferta educativa local o el dinamismo laboral de los territorios. Este artículo busca abordar esa brecha integrando una perspectiva multinivel que permita explicar las diferencias en años de escolaridad en el Gran Santiago a partir de la interacción entre recursos familiares y condiciones comunales. En base a lo anterior, nuestra pregunta de investigación es ¿En qué medida los distintos factores de socialización —tanto familiares como territoriales— influyen en los años de escolaridad de los habitantes del Gran Santiago?</p>
+<p>Para este estudio utilizaremos un enfoque multinivel que permite analizar cómo las trayectorias educativas se configuran por la interacción entre factores individuales (como el nivel socioeconómico, género o participación social) y contextuales (como la oferta escolar o la tasa de empleo comunal) (Finch et al., 2019). A diferencia de los modelos centrados únicamente en el individuo, esta perspectiva reconoce que el entorno territorial puede amplificar o moderar desigualdades. Así, permite capturar con mayor precisión cómo las condiciones estructurales inciden en los resultados educativos, reforzando la relevancia sociológica de abordar la desigualdad desde múltiples niveles de análisis&nbsp; (Romero et al, 2020).</p>
+<p>Es fundamental destacar la relevancia de incluir variables contextuales en el análisis de fenómenos sociales, especialmente cuando se investigan desigualdades estructurales como la educativa. Las condiciones individuales como el nivel socioeconómico o las redes familiares y sociales no operan en el vacío, sino que se despliegan dentro de contextos territoriales que pueden reforzar, neutralizar o modificar sus efectos (Canales &amp; Ibarrola, 2022). La interacción entre lo individual y lo contextual permite comprender con mayor profundidad cómo se configuran las trayectorias sociales, ya que factores como la oferta escolar o el dinamismo económico comunal no solo influyen directamente en los resultados educativos, sino que también potencian o mitigan las desigualdades preexistentes (Andréu, 2013).&nbsp;</p>
+<p>Considerando lo anterior, la relevancia sociológica del estudio radica en su capacidad para incluir el análisis de la desigualdad educativa la articulación de factores estructurales tradicionalmente subestimados. Por un lado, se incorpora la participación social, como un indicador que permite observar cómo la ausencia de redes comunitarias limita los recursos simbólicos y prácticos disponibles para acompañar los procesos escolares, conectando lo educativo con la integración social (Bullones, 2022).&nbsp;</p>
+<p>Por otro lado, se introduce la tasa comunal de empleo como una expresión concreta del dinamismo económico territorial, elemento clave para entender cómo los contextos locales amplifican o restringen las oportunidades educativas y los años de educación de sus habitantes (Villalobos &amp; Mardones, 2022). Este enfoque permite a la sociología desentrañar los mecanismos invisibles de reproducción de la desigualdad dentro de los contextos educativos, vinculando agencia y estructura en contextos concretos. Así, este estudio contribuye a una sociología de la educación que reconoce la interdependencia entre estructura social, recursos comunitarios y trayectorias formativas, proponiendo una mirada más integral y situada sobre la reproducción de la desigualdad.</p>
+<p>Diversas investigaciones han examinado cómo factores individuales y territoriales influyen en los niveles de escolaridad y, por extensión, en la reproducción de desigualdades sociales. Arita et al, (2015) analizaron la relación entre las condiciones objetivas de vida y el bienestar subjetivo en habitantes de dos colonias de estrato bajo en Culiacán, México. Mediante un estudio exploratorio transversal con una muestra de 108 personas adultas, identificaron que el nivel socioeconómico constituye una variable clave para el análisis de la calidad de vida, y que la educación opera como un indicador relevante de desigualdad social.</p>
+<p>Complementariamente, Peláez &amp; Rodríguez (2020) indagaron las desigualdades de género en la transición al primer empleo, utilizando datos de la Encuesta de Movilidad Social en México (2017), con una muestra representativa nacional de 17.665 casos. Su análisis destaca que el nivel educativo cumple una función mitigadora de las brechas de género en la inserción laboral temprana, y plantea la necesidad de incorporar analíticamente la transición escuela-trabajo como una dimensión clave en el estudio de la movilidad social.</p>
+<p>Continuando con factores contextuales, se han realizado bastantes estudios que relacionan la calidad de vida y el nivel socioeconómico con el nivel educacional (González y Espinoza, 1994; Aria et al, 2015; Bullones, 2022). A partir de esto, se puede justificar la relevancia que tiene analizar más allá de características individuales, sino también enfocarse en los factores sociales y su impacto en el nivel educacional.</p>
+<p>Por un lado, un análisis aplicado a los datos de TIMSS y PIRLS (Instituto nacional de evaluación educativa, 2011) en Italia utilizó un modelo multinivel multivariado para estudiar los logros académicos en lectura, matemáticas y ciencias en estudiantes de cuarto grado (N = 4.125, anidados en 239 cursos). El estudio incluyó variables individuales como género y nivel socioeconómico, y contextuales como recursos escolares y riqueza territorial. Los resultados revelaron una mayor influencia de los factores individuales sobre los contextuales, indicando que las condiciones estructurales del entorno, como la infraestructura escolar o el desarrollo económico provincial, no presentaron efectos significativos.</p>
+<p>Por otro lado, Rivas &amp; Terra (2024) realizaron un estudio cualitativo en barrios urbanos informales de Valparaíso, Chile, centrado en las percepciones de niñas y niños sobre su entorno habitacional. El estudio concluye proponer la inclusión de la oferta escolar por comuna como variable para evaluar las condiciones educativas locales. En este sentido, se incluyó la variable de oferta laboral operacionalizada por cantidad de escuelas por cada 10.000 habitantes dentro de la comuna.&nbsp;</p>
+<p>Asimismo, se incluye el Índice de Desarrollo Humano Comunal como indicador de condiciones infraestructurales y sociales de cada comuna. Se considera relevante poder diferenciar el valor de este indicador, pues el contexto social está estratificado también urbanamente (Giménez, 2004). De este modo, se podrá incluir en el análisis una posible relación entre la desigualdad socioeconómica, no solamente entre personas, sino también entre comunas y si serán relevantes para el nivel educacional. Como se mencionó anteriormente (Aria et al, 2015; Bullones, 2022), las características sociales contextuales son de gran importancia para entender.</p>
+<p>Finalmente es importante señalar que la selección la comuna de santiago no es azarosa, pues&nbsp; Cortés (2021) realizó un estudio sobre el Área Metropolitana de Santiago analizando la relación entre segregación residencial y acceso a servicios públicos locales, utilizando datos de precios de vivienda por bloque y medidas de accesibilidad a servicios como escuelas, hospitales y transporte. Los resultados subrayan que la segregación espacial impacta negativamente el acceso de los sectores más pobres a servicios públicos, limitando oportunidades laborales, educativas y sanitarias, y perpetuando la desigualdad urbana. Además, evidencia internacional como Shanghai respalda que la fragmentación municipal y la autonomía fiscal influyen significativamente en estos patrones y en la “doble desventaja” que enfrentan los residentes de bajos ingresos. Por último, es relevante la densidad poblacional de la Provincia de Santiago, pues acumula un 29.87% de la población total del país según el Censo del 2017 (Gobierno de Santiago, s.f.)</p>
+</section>
+<section id="objetivos-e-hipótesis" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Objetivos e hipótesis&nbsp;</h1>
+<section id="objetivo-general" class="level3">
+<h3 class="anchored" data-anchor-id="objetivo-general">Objetivo general:</h3>
+<p>Analizar el rol de la familia y el entorno comunal como espacios de socialización que inciden en las trayectorias educativas, a través de su influencia en los años de escolaridad de los habitantes del Gran Santiago el año 2022.</p>
+</section>
+<section id="objetivos-específicos" class="level3">
+<h3 class="anchored" data-anchor-id="objetivos-específicos">Objetivos específicos</h3>
+<ol type="1">
+<li>Determinar en qué medida factores individuales como el nivel socioeconómico, el género y la participación social del hogar se asocian con los años de escolaridad.</li>
+<li>Analizar la influencia de factores comunales como la tasa de empleo, la oferta escolar y el IDH inciden en los niveles promedio de escolaridad en el Gran Santiago.</li>
+<li>Explorar cómo interactúan los factores familiares y comunales, evaluando si el impacto de las condiciones individuales -nivel socioeconomico- varía según el contexto territorial.</li>
+</ol>
+</section>
+<section id="hipótesis-multinivel" class="level3">
+<h3 class="anchored" data-anchor-id="hipótesis-multinivel">Hipótesis multinivel</h3>
+<section id="nivel-1-individual" class="level4">
+<h4 class="anchored" data-anchor-id="nivel-1-individual"><strong>Nivel 1 – Individual</strong></h4>
+<ul>
+<li><p><strong>H1.</strong> Cuanto más alto es el nivel socioeconómico (NSE) del hogar, más años de escolaridad alcanza el estudiante.</p></li>
+<li><p><strong>H2.</strong> Las mujeres completan, en promedio, menos años de escolaridad que los hombres.</p></li>
+<li><p><strong>H3.</strong> Provenir de un hogar con participación social aumenta los años de escolaridad frente a hogares carentes en redes comunitarias.</p></li>
+</ul>
+</section>
+<section id="nivel-2-contexto-comunal" class="level4">
+<h4 class="anchored" data-anchor-id="nivel-2-contexto-comunal"><strong>Nivel 2 – Contexto comunal</strong></h4>
+<ul>
+<li><p><strong>H4.</strong> Las comunas con mayor tasa de empleo presentan una escolaridad promedio más alta.</p></li>
+<li><p><strong>H5.</strong> Las comunas con mayor proporción de escuelas por 10.000 habitantes ofrecen más oportunidades y muestran mayores años de escolaridad.</p></li>
+<li><p><strong>H6.</strong> Las comunas que presentan un mayor IDH presentan una escolaridad promedio más alta.</p></li>
+</ul>
+</section>
+<section id="interacciones-entre-niveles" class="level4">
+<h4 class="anchored" data-anchor-id="interacciones-entre-niveles"><strong>Interacciones entre niveles</strong></h4>
+<ul>
+<li><p><strong>H7.</strong> El efecto positivo del nivel socioeconómico (NSE) sobre la escolaridad es más intenso en comunas con alta tasa de empleo; un mercado laboral dinámico potencia los recursos familiares.</p></li>
+<li><p><strong>H8.</strong> El efecto positivo del nivel socioeconómico (NSE) sobre la escolaridad es más intenso en comunas con un alto IDH</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="input/img/Años_de_escolaridad_final.png" class="img-fluid figure-img"></p>
+<figcaption>Figura 1.0: Modelo teórico de las hipótesis planteadas</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="datos-variables-y-métodos" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Datos, variables y métodos</h1>
+<p>El presente estudio utiliza la Encuesta de Caracterización Socioeconómica Nacional (CASEN) del año 2022, elaborada por el Ministerio de Desarrollo Social y Familia.&nbsp; La CASEN utiliza un diseño muestral probabilístico, estratificado por región, comuna y área urbana/rural, lo que garantiza representatividad en el territorio y población chilena.</p>
+<p>Para la realización del modelo multinivel, se anilló en base a la selección de las 32 comunas perteneciente al Gran Santiago, de esta manera podemos controlar la influencia de comunas externas a nuestro análisis.&nbsp; Junto a esto, se trabajó con un total de 22.706 individuos&nbsp; (nivel 1) de 18 o más años, anidados dentro de las comunas (nivel 2). Además, en promedio hay 709 casos por cada una de ellas, de modo que es resulta óptima para la estimación de los efectos contextuales.</p>
+<section id="variable-dependiente" class="level4">
+<h4 class="anchored" data-anchor-id="variable-dependiente"><strong>Variable dependiente</strong></h4>
+<p>La variable dependiente años de escolaridad (esc) del presente modelo, se mide de manera continua, proviene del ítem de Educación y es usada de forma usual en la literatura (Bourdieu &amp; Passeron, 2001; Soler &amp; Fernández, 2021; Cimadamore &amp; Catanni, 2008). Esta presenta un promedio de 12,6 años, junto con una desviación estándar de 4,1. Lo cual indica una alta dispersión en los distintos niveles educativos de la muestra de las comunas del Gran Santiago. Además, los rangos de esta van de 0 a 29 años de escolaridad.&nbsp;</p>
+</section>
+<section id="variables-independientes-de-nivel-1-individual" class="level4">
+<h4 class="anchored" data-anchor-id="variables-independientes-de-nivel-1-individual"><strong>Variables independientes de nivel 1 (individual)</strong></h4>
+<p>La primera variable es sexo, recodificada en una variable dicotómica denominada female (1 = mujer; 0 = hombre). Su media es 0,539, lo que indica un leve predominio de mujeres en la muestra.</p>
+<p>El nivel socioeconómico en la Encuesta CASEN se construye combinando el ingreso autónomo total del hogar —remuneraciones, pensiones y rentas de capital— ajustado mediante una escala de equivalencia que corrige por número de adultos, niños, personas con discapacidad y dependientes. Además, se consideran bienes y medios indirectos que reflejan la capacidad económica, como propiedades y vehículos. El ingreso ajustado se transforma en ingreso per cápita equivalente y se ordena a toda la población, clasificándose en tramos o deciles socioeconómicos. Esta segunda variable fue trabajada por la CASEN de forma continua del 1 a 7, con un promedio de 4,56 y una mediana de 5, indicando que la mayoría de la muestra se ubica en tramos socioeconómicos medios o medio-bajos. La desviación estándar es de 2,01, lo que refleja una distribución relativamente dispersa dentro de los tramos definidos.</p>
+<p>La tercera variable es hogar carente&nbsp; participación social (hh_d_part), siendo&nbsp; recodificada como dicotómica, donde 1 indica ausencia de carencia&nbsp; y 0 presencia de carencia. Esta. se construyó considerando como participación social la pertenencia o involucramiento en diversas organizaciones, tales como juntas de vecinos, comunidades barriales, clubes de adulto mayor, centros de madres, comités de vivienda, redes de voluntariado, iglesias, comunidades de fe, centros culturales, talleres artísticos, clubes deportivos, sindicatos, asociaciones gremiales, partidos políticos, movimientos sociales y agrupaciones de defensa de derechos. También se incluyen otras formas de organización como grupos de apoyo mutuo o colectivos de interés específico, abarcando así ámbitos territoriales, comunitarios, religiosos, culturales, deportivos, gremiales y políticos, que reflejan la diversidad de la vida asociativa en la población. Presenta una media de 0,13 y su mediana es 0, lo que confirma la baja proporción de hogares con participación social activa dentro de la muestra.</p>
+<table style="text-align:center">
+<caption>
+<strong>Estadísticos descriptivos de Nivel 1 (individual)</strong>
+</caption>
+<tbody><tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Statistic
+</td>
+<td>
+N
+</td>
+<td>
+Min
+</td>
+<td>
+Pctl(25)
+</td>
+<td>
+Median
+</td>
+<td>
+Mean
+</td>
+<td>
+Pctl(75)
+</td>
+<td>
+Max
+</td>
+<td>
+St.&nbsp;Dev.
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+esc
+</td>
+<td>
+22,706
+</td>
+<td>
+0
+</td>
+<td>
+11
+</td>
+<td>
+12
+</td>
+<td>
+12.60
+</td>
+<td>
+16
+</td>
+<td>
+29
+</td>
+<td>
+4.11
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+female
+</td>
+<td>
+22,706
+</td>
+<td>
+0
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+0.54
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+0.50
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+nse_numerico
+</td>
+<td>
+22,706
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+5
+</td>
+<td>
+4.56
+</td>
+<td>
+6
+</td>
+<td>
+7
+</td>
+<td>
+2.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+part_social_num
+</td>
+<td>
+22,706
+</td>
+<td>
+0
+</td>
+<td>
+0
+</td>
+<td>
+0
+</td>
+<td>
+0.13
+</td>
+<td>
+0
+</td>
+<td>
+1
+</td>
+<td>
+0.33
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</tbody></table>
+</section>
+<section id="variable-independiente-de-nivel-2-contextual" class="level4">
+<h4 class="anchored" data-anchor-id="variable-independiente-de-nivel-2-contextual"><strong>Variable independiente de nivel 2 (contextual)</strong></h4>
+<p>La primera variable contextual es la tasa comunal de empleo efectivo (prop_empleo), que representa la proporción de personas que trabajaron al menos una hora durante la semana anterior por comuna. Su valor promedio es 0.554, con una desviación estándar de 0.063, y un rango 0.464 y 0.704. Esta oscilación refleja diferencias en el dinamismo económico de las comunas, lo cual puede incidir en las oportunidades educativas disponibles para sus habitantes.</p>
+<p>La segunda variable contextual corresponde a la oferta educativa comunal (prop_pob_esc), la cual se operacionaliza mediante el número de establecimientos escolares por cada 10.000 habitantes de cada comuna. Su valor promedio es de 3.87, con una desviación estándar de 1.06. El rango corresponde a 4.12, con un mínimo de 1.99 y un máximo de 6.11. Por último, cabe mencionar que esta variable se construyó en base a los datos proporcionados por la Biblioteca del Congreso Nacional de Chile (2024), específicamente del sistema SIIT Estadísticas Territoriales.</p>
+<p>La tercera variable contextual corresponde al índice de desarrollo humano comunal. Su valor promedio es 0.67, con una desviación estándar de 0.13. El rango corresponde a un 0.46, con un mínimo de de 0.5, y un máximo de 0.96. Esta variable se basa, al igual que su parte global, en 3 dimensiones: Vida larga y saludable, Educación y Nivel digno. No obstante, los indicadores se ajustaron para acoplarse mejor al nivel de medición. La dimensión de vida larga y saludable se mide con el indicador “Años de vida potencial perdidos”. La dimensión de “Educación”, se mide con los indicadores “Cobertura educacional” y “Años de escolaridad”. Por último, la dimensión de “Nivel de vida digna” se mide con el indicador “Ingreso per cápita”.</p>
+<table style="text-align:center">
+<caption>
+<strong>Estadísticos descriptivos - Nivel 2 (comunal)</strong>
+</caption>
+<tbody><tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Statistic
+</td>
+<td>
+N
+</td>
+<td>
+Min
+</td>
+<td>
+Pctl(25)
+</td>
+<td>
+Median
+</td>
+<td>
+Mean
+</td>
+<td>
+Pctl(75)
+</td>
+<td>
+Max
+</td>
+<td>
+St.&nbsp;Dev.
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+prop_pob_esc
+</td>
+<td>
+32
+</td>
+<td>
+1.99
+</td>
+<td>
+2.97
+</td>
+<td>
+3.90
+</td>
+<td>
+3.87
+</td>
+<td>
+4.77
+</td>
+<td>
+6.11
+</td>
+<td>
+1.06
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+prop_empleo
+</td>
+<td>
+32
+</td>
+<td>
+0.46
+</td>
+<td>
+0.51
+</td>
+<td>
+0.54
+</td>
+<td>
+0.55
+</td>
+<td>
+0.58
+</td>
+<td>
+0.70
+</td>
+<td>
+0.06
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+idh_comuna
+</td>
+<td>
+32
+</td>
+<td>
+0.50
+</td>
+<td>
+0.58
+</td>
+<td>
+0.64
+</td>
+<td>
+0.67
+</td>
+<td>
+0.73
+</td>
+<td>
+0.96
+</td>
+<td>
+0.13
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</tbody></table>
+<p><strong>3.3 Métodos</strong></p>
+<p>La estrategia metodológica consiste en el uso de modelos multinivel, configurando los datos entre individuos anidados en unidades de carácter territorial. De este modo, a través de esta metodología se puede obtener un análisis con mayor enfoque en los efectos que características contextuales pueden tener en características individuales.&nbsp;</p>
+<p>Para este análisis se realizaron 6 modelos:</p>
+<ul>
+<li><strong>Modelo nulo:</strong> no posee predictores, permite identificar la correlación intra-clase (ICC) y cuantifica la varianza entre las comunas del Gran Santiago.</li>
+</ul>
+<p><span class="math display">\[
+\text{esc}_{ij} \;=\; \gamma_{00}
++ u_{0\text{comuna}}
++ r_{ij}
+\]</span></p>
+<ul>
+<li><strong>Modelo 1: Predictores individuales:</strong> Este modelo evalúa únicamente variables individuales: sexo, nivel socioeconómico y participación social del hogar. Permite identificar cómo estas características personales inciden en los años de escolaridad, sin considerar diferencias territoriales. Sirve como línea base para observar efectos puramente individuales y comparar con modelos más complejos posteriormente.</li>
+</ul>
+<p><span class="math display">\[
+  \
+  \text{esc}_{ij} \;=\;
+  \gamma_{00}
+  + \gamma_{01}\,\text{female}
+  + \gamma_{02}\,\text{nse\_cmc}
+  + \gamma_{03}\,\text{part\_social\_num}
+  + u_{0j}
+  + r_{ij}
+  \
+\]</span></p>
+<ul>
+<li><strong>Modelo 2: Predictores contextuales:</strong> Este modelo incorpora exclusivamente variables contextuales de nivel comunal: proporción de empleo, la proporcion de escuelas por 10.000 habitantes y desarrollo humano comunal. Busca estimar cuánto influyen estas condiciones estructurales en la escolaridad promedio, sin considerar características individuales. Es útil para dimensionar la importancia del contexto territorial en los logros educativos de la población.</li>
+</ul>
+<p><span class="math display">\[
+  \
+  \begin{aligned}
+  \text{esc}_{ij} \;=\;
+  \gamma_{00}
+  + \gamma_{01}\,\text{prop\_empleo\_gmc}
+  + \gamma_{02}\,\text{prop\_pob\_escn\_gmc}
+  + \gamma_{03}\,\text{idh\_gmc}
+  + u_{0j}
+  + r_{ij}
+  \end{aligned}
+  \
+\]</span></p>
+<ul>
+<li><strong>Modelo 3: Predictores individuales y contextuales:</strong> Las variables anteriores fueron combinadas, incluyendo sexo, nivel socieconómico, participación social, proporción de empleo, oferta escolar y desarrollo humano comunal. Estima los efectos conjuntos, permitiendo conocer cómo se articulan factores personales y territoriales en los años de escolaridad. Asume que el impacto del NSE es constante en todas las comunas consideradas.</li>
+</ul>
+<p><span class="math display">\[
+  \
+  \begin{aligned}
+  \text{esc}_{ij} =\;&amp;
+      \gamma_{00}
+    + \gamma_{01}\,\text{female}
+    + \gamma_{02}\,\text{nse\_cmc}
+    + \gamma_{03}\,\text{part\_social\_num} \\[4pt]
+    &amp;+ \gamma_{04}\,\text{prop\_empleo\_gmc}
+    + \gamma_{05}\,\text{prop\_pob\_escn\_gmc}
+    + \gamma_{06}\,\text{idh\_gmc} \\[4pt]
+    &amp;+ u_{0j} + r_{ij}
+  \end{aligned}
+  \
+\]</span> - <strong>Modelo 4: intercepto y pendiente aleatoria de NSE:</strong> El presente modelo amplía el anterior al permitir que la relación entre nivel socioeconómico y escolaridad varíe entre comunas. Introduce una pendiente aleatoria para NSE, mostrando posibles desigualdades estructurales en el retorno educativo del estatus económico. Este diseño reconoce diferencias territoriales en cómo los recursos individuales se traducen en educación.</p>
+<p><span class="math display">\[
+  \
+  \begin{aligned}
+  \text{esc}_{ij} =\;&amp;
+      \gamma_{00}
+    + \gamma_{01}\,\text{female}
+    + \gamma_{02}\,\text{nse\_cmc}
+    + \gamma_{03}\,\text{part\_social\_num} \\[4pt]
+    &amp;+ \gamma_{04}\,\text{prop\_empleo\_gmc}
+    + \gamma_{05}\,\text{prop\_pob\_esc\_gmc}
+    + \gamma_{06}\,\text{idh\_gmc} \\[4pt]
+    &amp;+ u_{0j}
+    + u_{1j}\,\text{nse\_cmc}
+    + r_{ij}
+  \end{aligned}
+  \
+\]</span></p>
+<ul>
+<li><p><strong>Modelo 5 con interacción entre NSE y empleo:</strong> El Modelo 5 incorpora una interacción entre NSE y la tasa comunal de empleo. Permite analizar si el impacto del nivel socioeconómico sobre la escolaridad cambia según las oportunidades laborales de cada comuna. Mantiene la pendiente aleatoria para NSE, profundizando en la influencia combinada del capital individual y contexto económico.<br>
+<span class="math display">\[
+  \
+  \begin{aligned}
+  \text{esc}_{ij} =\;&amp;
+  \gamma_{00}
++ \gamma_{01}\,\text{female}
++ \gamma_{02}\,\text{nse\_cmc}
++ \gamma_{03}\,\text{part\_social\_num} \\[4pt]
+&amp;+ \gamma_{04}\,\text{prop\_empleo\_gmc}
++ \gamma_{05}\,\text{prop\_pob\_esc\_gmc}
++ \gamma_{06}\,\text{idh\_gmc} \\[4pt]
+&amp;+ \gamma_{07}\bigl(\text{nse\_cmc}\,\times\,\text{prop\_empleo\_gmc}\bigr) \\[4pt]
+&amp;+ u_{0j}
++ u_{1j}\,\text{nse\_cmc}
++ r_{ij}
+  \end{aligned}
+  \
+\]</span></p></li>
+<li><p><strong>Modelo 6 con interacción entre NSE y IDH:</strong> El Modelo 6 introduce la interacción entre NSE y el índice de desarrollo humano comunal. Examina si el retorno educativo del NSE se modifica dependiendo del desarrollo social y económico del territorio. Esta especificación complementa el análisis, evidenciando cómo condiciones estructurales pueden amplificar o moderar desigualdades educativas entre comunas. <span class="math display">\[
+\
+  \begin{aligned}
+  \text{esc}_{ij} =\;&amp;
+  \gamma_{00}
++ \gamma_{01}\,\text{female}
++ \gamma_{02}\,\text{nse\_cmc}
++ \gamma_{03}\,\text{part\_social\_num} \\[4pt]
+&amp;+ \gamma_{04}\,\text{prop\_empleo\_gmc}
++ \gamma_{05}\,\text{prop\_pob\_esc\_gmc}
++ \gamma_{06}\,\text{idh\_gmc} \\[4pt]
+&amp;+ \gamma_{07}\bigl(\text{nse\_cmc}\,\times\,\text{idh\_gmc}\bigr) \\[4pt]
+&amp;+ u_{0j}
++ u_{1j}\,\text{nse\_cmc}
++ r_{ij}
+  \end{aligned}
+  \
+\]</span></p></li>
+</ul>
+</section>
+</section>
+<section id="resultados" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Resultados</h1>
+<section id="descriptivos" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="descriptivos"><span class="header-section-number">5.1</span> Descriptivos</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="plantilla_informe_files/figure-html/Des1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Figura 1.3: Scatterplot relación entre promedio comunal de escolaridad y tasa de empleo</figcaption>
+</figure>
+</div>
+<p>El Gráfico 1.3 muestra una asociación positiva entre la tasa de empleo y los años promedios de escolaridad de sus habitantes. En términos generales, las comunas con una tasa de empleo inferior a 0,50, como La Pintana, Cerro Navia, Renca y Lo Espejo, presentan promedios educativos que no superan los 11 años, lo que evidencia la convergencia de vulnerabilidad laboral y rezago formativo. A medida que la proporción de personas ocupadas aumenta, la pendiente asciende con notable regularidad: por cada 0,10 puntos de empleo adicional, la escolaridad media se incrementa en torno a dos años, coherente con la estimación del modelo multinivel.</p>
+<p>En el extremo opuesto, comunas de altas tasas de empleo como Vitacura, Providencia y Ñuñoa, todas por sobre el 0,60 en empleo, superan los 16 años de estudio, situándose muy por encima de la media metropolitana. Las Condes y La Reina, con empleos en torno al 0,56, alcanzan también registros superiores a 14,5 años. Una excepción relativa es Santiago centro: aun con la mayor tasa de empleo (≈ 0,70), su promedio educativo (≈ 14 años) se sitúa algo por debajo de lo esperado según la tendencia, lo que sugiere la coexistencia de bolsas de población adulta con trayectorias educativas dispares.</p>
+<p>En síntesis, el gráfico confirma que la tasa comunal de empleo opera como un potente factor contextual que diferencia las trayectorias educativas entre territorios. Aquellas comunas con mercados laborales más inclusivos ofrecen entornos que potencian la continuidad escolar, mientras que las de menor dinamismo concentran rezagos educativos, reforzando la necesidad de políticas que articulen desarrollo económico local y oportunidades formativas.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="plantilla_informe_files/figure-html/Des2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Figura 1.4: Scatterplot: relación entre promedio comunal de escolaridad y IDH</figcaption>
+</figure>
+</div>
+<p>El Gráfico 1.4 confirma una asociación lineal ascendente entre el nivel de desarrollo humano del territorio y los años promedio de escolaridad de su población adulta. Las comunas con IDH ≤ 0,55 cómo Lo Espejo, Cerro Navia y La Pintana, registran menos de 11 años de estudio, ilustrando cómo la privación multidimensional se refleja en trayectorias educativas truncadas. A medida que el IDH se aproxima a 0,70, se concentran comunas intermedias como La Florida, Macul, San Miguel, cuyo promedio oscila entre 12,5 y 13,5 años, evidenciando progresos formativos pero aún por debajo de la línea metropolitana de referencia.</p>
+<p>En el extremo superior, podemos observar territorios con IDH ≥ 0,85 como Providencia, Vitacura y Las Condes que superan los 16 años de escolaridad, subrayando la sinergia entre bienestar socioeconómico, salud y educación. Una ligera desviación la ofrece La Barnechea, que pese a su alto IDH presenta un promedio educativo menor al previsto, lo que sugiere heterogeneidad interna.</p>
+</section>
+<section id="estimación-multinivel" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="estimación-multinivel"><span class="header-section-number">5.2</span> Estimación multinivel</h2>
+<p>Con el fin de orientar la lectura, la tabla está organizada de forma progresiva desde el modelo más simple al más complejo: comienza con el modelo nulo (ICC), que no incluye predictores, y avanza secuencialmente incorporando variables individuales (M1 centrado), variables contextuales (M2 centrado), ambos niveles simultáneamente (M1 + M2), pendiente aleatoria del NSE, y, finalmente, los modelos que incorporan interacciones entre niveles (H7 y H8). Esta secuencia permite observar de manera ordenada cómo cada conjunto de variables contribuye a explicar la variabilidad en los años de escolaridad, facilitando la comparación entre modelos en términos de ajuste y efectos sustantivos.</p>
+<p>Para que los coeficientes sean comparables y separemos con nitidez los componentes dentro y entre comunas, adoptamos un esquema mixto de centrado. El nivel socioeconómico (NSE) se centró en la media de cada comuna, de modo que su pendiente indica cuánto aumenta o disminuye la escolaridad respecto del promedio local. Por el contrario, las variables contextuales, tasa de empleo, IDH y proporción de escuelas por 10.000 habitantes, se centraron en la gran media del Gran Santiago, de manera que sus efectos expresan desviaciones respecto del contexto metropolitano típico. Las variables dicotómicas female y participación social se dejaron sin centrar, dado que su escala 0/1 ya ofrece una interpretación directa. Este enfoque reduce la colinealidad, aclara el significado del intercepto y facilita la interpretación de las interacciones entre niveles.</p>
+<style>.scroll-table{overflow-x:auto;width:100%;}</style><div class="scroll-table"><table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Nulo (ICC)</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">M1 (centrado)</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">M2 (centrado)</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">M1 + M2</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">+ Pend. NSE</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">+ Interacción H7</th>
+<th colspan="2" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">+ Interacción H8</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col8">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col9">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  0">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  1">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  2">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  3">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  4">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  5">std. Error</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">12.320 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.297</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">12.440 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.295</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">12.562 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.096</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">12.680 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.099</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">12.691 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">0.099</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">12.577 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">0.212</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  4">12.682 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  5">0.098</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">female</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.398 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.049</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">-0.397 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.049</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">-0.398 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">0.049</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">-0.398 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">0.049</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  4">-0.398 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  5">0.049</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">nse cmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.397 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.015</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.397 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.015</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">0.421 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">0.058</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">0.484 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">0.062</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  4">0.478 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  5">0.053</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">part social num</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.744 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.074</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.747 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.074</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">0.730 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">0.073</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">0.728 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">0.073</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  4">0.731 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  5">0.073</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">prop empleo gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">10.325 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">1.866</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">10.188 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">1.834</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">10.162 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">1.686</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">17.509 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">3.824</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  4">10.226 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  5">1.776</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">prop pob esc gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.124 <sup></sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.109</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.123 <sup></sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.107</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">0.151 <sup></sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">0.095</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">-0.294 <sup></sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">0.209</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  4">0.132 <sup></sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  5">0.102</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">idh gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">9.840 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.920</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">9.759 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.904</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">10.394 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">0.822</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  4">9.788 <sup>***</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  5">0.892</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">nse cmc × prop empleo gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2">1.813 <sup></sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3">1.116</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  4"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  5"></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">nse cmc × idh gmc</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  2"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  3"></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  4">1.169 <sup>**</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  5">0.433</td>
+</tr>
+<tr>
+<td colspan="15" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">14.10</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">13.56</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">14.10</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">13.56</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">13.37</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">13.37</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">13.38</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">2.80 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">2.74 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.26 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.25 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.26 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">1.36 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.25 <sub>comuna</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>11</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.08 <sub>comuna.nse_cmc</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.08 <sub>comuna.nse_cmc</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.06 <sub>comuna.nse_cmc</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ρ<sub>01</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">-0.52 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.32 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">-0.34 <sub>comuna</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.17</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.17</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.02</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.02</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.03</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.11</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.03</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">32 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">32 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">32 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">32 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">32 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">32 <sub>comuna</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">32 <sub>comuna</sub></td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">22706</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">22706</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">22706</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">22706</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">22706</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">22706</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="2">22706</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.000 / 0.166</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.032 / 0.195</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.144 / 0.159</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.176 / 0.191</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.187 / 0.215</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.133 / 0.224</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="2">0.182 / 0.206</td>
+</tr>
+<tr>
+<td colspan="15" style="font-style:italic; border-top:double black; text-align:right;">* p&lt;0.05&nbsp;&nbsp;&nbsp;** p&lt;0.01&nbsp;&nbsp;&nbsp;*** p&lt;0.001</td>
+</tr>
+
+</tbody></table>
+</div><p class="mt-2 mb-4 small text-muted">
+     <strong>Test de devianza</strong>
+     (m3&nbsp;vs&nbsp;m4, pendiente aleatoria NSE):<br>
+     Δ&nbsp;=&nbsp;256.10&nbsp;(df&nbsp;=&nbsp;2),&nbsp;p&nbsp;&lt; .001
+   </p>
+<section id="modelo-nulo-e-icc" class="level4">
+<h4 class="anchored" data-anchor-id="modelo-nulo-e-icc"><strong>Modelo nulo e ICC</strong></h4>
+<p>Antes de introducir los resultados, se estimó un modelo nulo con intercepto aleatorio por comuna, cuyo objetivo es evaluar la pertinencia del enfoque multinivel y estimar la varianza atribuible al contexto territorial. Este modelo permite calcular la correlación intra-clase (ICC), indicador que refleja qué proporción de la varianza total en los años de escolaridad puede atribuirse a diferencias entre comunas.</p>
+<p>El modelo nulo, estimado con intercepto aleatorio por comuna, revela que la escolaridad promedio en el Gran Santiago es de 12,31 años,&nbsp; (EE = 0,29; p &lt; .001). La varianza residual a nivel individual alcanza 14,15, mientras que la varianza entre comunas es 2,80, lo que se traduce en un coeficiente de correlación intraclase (ICC = 0,17). Esto implica que aproximadamente un 17% de la variabilidad en la escolaridad se debe a diferencias entre comunas, mientras que el 83% restante se explica por otros factores. Este valor es estadísticamente significativo.</p>
+<p>Estos resultados ofrecen evidencia empírica clara de que las comunas presentan diferencias sistemáticas en sus niveles promedio de escolaridad. Por tanto, el uso de un enfoque multinivel no solo es apropiado, sino necesario para capturar adecuadamente las influencias tanto individuales como contextuales sobre la trayectoria educativa.</p>
+</section>
+<section id="modelo-con-variables-individuales" class="level4">
+<h4 class="anchored" data-anchor-id="modelo-con-variables-individuales"><strong>Modelo con variables individuales</strong></h4>
+<p>Respecto al primer modelo, orientado a contrastar las hipótesis de nivel individual, los tres predictores incorporados resultaron estadísticamente significativos (p &lt; .001) y en la dirección esperada. En cuanto a la H1, el coeficiente para female (β = –0,40; EE = 0,05) indica que las mujeres completan, en promedio, casi medio año menos de escolaridad que los hombres, evidenciando una brecha de género persistente. De acuerdo con la segunda hipótesis, el nivel socioeconómico centrado en la comuna muestra un efecto positivo robusto (β = 0,40; EE = 0,02): cada unidad adicional en la escala de NSE se traduce en 0,4 años más de estudio. Finalmente, respecto a la tercera hipótesis de participación social del hogar: vivir en un hogar activo en redes comunitarias se asocia con un incremento de 0,74 años en la escolaridad (β = 0,74; EE = 0,07), subrayando la importancia del capital social familiar.</p>
+<p>El intercepto estimado (β₀ = 12,44; EE = 0,30) corresponde a un hombre con NSE promedio comunal y sin participación social. La varianza residual individual desciende a 13,56, mientras que la varianza del intercepto comunal se mantiene en 2,74, lo que sugiere que, aunque los factores familiares explican una parte relevante de las trayectorias educativas, persisten diferencias territoriales que requerirán incorporar predictores contextuales en modelos posteriores.</p>
+</section>
+<section id="modelo-con-variables-contextuales" class="level4">
+<h4 class="anchored" data-anchor-id="modelo-con-variables-contextuales"><strong>Modelo con variables contextuales</strong></h4>
+<p>En cuanto al modelo 2, centrado exclusivamente en predictores de nivel comunal se observa que los resultados confirman la H4, es decir que la tasa de empleo comunal muestra un efecto positivo y sustantivo sobre la escolaridad promedio (β = 10,33; EE = 1,87; p &lt; .001); un aumento de 0,10 puntos en la tasa de personas ocupadas se asocia con más de un año adicional de estudio. Asimismo, los hallazgos respaldan H6, donde el Índice de Desarrollo Humano presenta una influencia sólida (β = 9,84; EE = 0,92; p &lt; .001); cada incremento de 0,10 unidades en el IDH implica aproximadamente un año extra de escolaridad, subrayando la convergencia entre bienestar multidimensional y capital educativo.</p>
+<p>En contraste, H5 no recibe apoyo empírico: la proporción de escuelas por 10 000 habitantes exhibe un coeficiente pequeño y no significativo (β = 0,12; EE = 0,11). Esto sugiere que la mera disponibilidad cuantitativa de establecimientos, sin considerar su calidad o segmentación, no garantiza trayectorias formativas más largas.</p>
+<p>El intercepto estimado se eleva a 12,56 años (EE = 0,10), y la varianza entre comunas cae drásticamente a 0,26, revelando que los factores contextuales incluidos explican gran parte de las diferencias territoriales observadas en el modelo nulo. Sin embargo, la varianza residual individual se mantiene alta (14,10), indicando que persisten heterogeneidades a nivel de personas que serán examinadas al combinar predictores individuales y comunales en modelos posteriores.</p>
+</section>
+<section id="modelo-completo-efectos-individuales-y-contextuales" class="level4">
+<h4 class="anchored" data-anchor-id="modelo-completo-efectos-individuales-y-contextuales"><strong>Modelo completo: efectos individuales y contextuales</strong></h4>
+<p>Al estimar un 3 modelo que une las variables independientes y contextuales, se observa una convergencia de efectos con los hallazgos de los modelos parciales, pero ahora dentro de un marco explicativo más parsimonioso. Los coeficientes individuales, brecha de género, NSE y participación social familiar, conservan magnitud y significancia, lo que indica que su impacto no depende de la omisión de variables de nivel 2. Simultáneamente, la tasa de empleo y el IDH comunal continúan ejerciendo influencias positivas sustantivas, mientras que la densidad de escuelas sigue sin alcanzar significancia estadística, confirmando que la oferta educativa cuantitativa no opera como palanca autónoma.</p>
+<p>La varianza entre comunas cae a 0,26, señalando de que la combinación de recursos familiares y dinamismo territorial abarca prácticamente toda la heterogeneidad contextual detectada inicialmente. No obstante, la varianza residual individual permanece elevada, lo que sugiere la existencia de otros factores que escapan a la medición disponible.&nbsp;</p>
+</section>
+<section id="modelo-con-pendiente-aleatoria" class="level4">
+<h4 class="anchored" data-anchor-id="modelo-con-pendiente-aleatoria"><strong>Modelo con Pendiente aleatoria</strong></h4>
+<p>Para evaluar si el impacto del nivel socioeconómico centrado en la comuna varía entre territorios, se permitió su pendiente varie aleatoriamente por comuna. El test de devianza indica que el modelo con pendiente aleatoria presenta un ajuste significativamente mejor que el modelo con pendiente fija presentando un valor de chi-cuadrado de 256,1 (con 2 grados de libertad; p &lt; .001), lo que confirma que la heterogeneidad comunal en el retorno educativo del NSE es estadísticamente relevante.</p>
+<p>Considerando los resultados del modelo con pendiente aleatoria para el NSE, se observa que el efecto del nivel socioeconómico sobre los años de escolaridad no es uniforme entre comunas. La varianza de la pendiente del NSE alcanza 0,08, lo que indica que su impacto cambia significativamente según el territorio. Además, la covarianza negativa con el intercepto comunal (-0,52) sugiere que en comunas con menor escolaridad promedio, el efecto del NSE es más pronunciado.</p>
+<p>A pesar de este gradiente, las estimaciones fijas del modelo se mantienen estables respecto a las variables anteriores. En ese sentido, la inclusión de la pendiente aleatoria reduce la varianza residual a 13,37 y deja la varianza del intercepto comunal casi inalterada, mostrando que la principal ganancia del modelo radica en capturar la diversidad del efecto socioeconómico entre comunas.&nbsp;</p>
+</section>
+<section id="modelo-con-interacción-entre-niveles-nse-por-tasa-de-empleo-comunal" class="level4">
+<h4 class="anchored" data-anchor-id="modelo-con-interacción-entre-niveles-nse-por-tasa-de-empleo-comunal"><strong>Modelo con Interacción entre niveles: NSE por Tasa de empleo comunal</strong>&nbsp;</h4>
+<p>Para contrastar la hipótesis H7, se incluyó la interacción entre el nivel socioeconómico centrado en la comuna y la tasa comunal de empleo centrada a la gran media. Esta&nbsp; presenta un coeficiente positivo (1.813), coherente con la hipótesis H7. Aunque no alcanza el umbral de significancia tradicional del 95% (p &lt; .05), su valor t (~1.63) sugiere una significación marginal al 90%, lo que indica que en comunas con mayor dinamismo laboral, el efecto del NSE sobre la escolaridad tiende a amplificarse. En términos sustantivos, un aumento simultáneo de 1 en empleo (≈ 0,10 puntos) intensifica la pendiente del NSE en casi 0,18 años adicionales de escolaridad, tal como se aprecia en la Figura X.X. Este resultado entrega evidencia tentativa a favor de la hipótesis, aunque debe ser interpretado con cautela debido a su robustez estadística limitada.&nbsp;</p>
+<p>El efecto principal del Nivel socioeconómico se incrementa levemente (β = 0,48) al controlar la interacción, lo que indica que el retorno promedio del capital económico del hogar sigue siendo robusto. Paralelamente, la tasa de empleo mantiene un impacto directo elevado (β = 17,51; EE = 3,82; p &lt; .001), mientras las estimaciones para género, participación social y oferta escolar permanecen estables.</p>
+<p>La varianza de la pendiente del NSE (0,08) se conserva, pero la varianza del intercepto comunal aumenta a 1,36, reflejando que la asociación NSE-empleo no es uniforme y agrega complejidad territorial al patrón educativo. En conjunto, el modelo respalda la idea de que los hogares con mayores recursos económicos obtienen beneficios escolares adicionales cuando se insertan en comunas con mayores oportunidades laborales, aunque esto no se manifiesta de forma idéntica en todo el Gran Santiago.</p>
+</section>
+<section id="modelo-con-interacción-entre-niveles-nse-por-idh-comunal" class="level4">
+<h4 class="anchored" data-anchor-id="modelo-con-interacción-entre-niveles-nse-por-idh-comunal"><strong>Modelo con Interacción entre niveles: NSE por IDH comunal</strong></h4>
+<p>Respecto a la hipótesis 8, se introdujo la interacción entre el nivel socioeconómico centrado en la comuna y el Índice de Desarrollo Humano comunal centrado a la gran media. El coeficiente cruzado resulta positivo y estadísticamente significativo (β = 1,17; EE = 0,43; p &lt; .01), lo que confirma que el retorno educativo del capital económico familiar se amplifica en territorios con mayor desarrollo humano. Concretamente, elevar el IDH en 0,10 unidades intensifica la pendiente del NSE en unos 0,12 años adicionales de escolaridad, evidenciando una relación entre bienestar territorial y recursos del hogar.</p>
+<p>Los efectos de las otras variables se mantienen sólidos. Donde el NSE conserva un impacto positivo, la tasa de empleo y el propio IDH siguen asociados a mayores trayectorias educativas, y la brecha de género persiste inalterada. La varianza del intercepto comunal permanece baja (0,25), mientras que la variación de la pendiente del NSE desciende a 0,06, indicando que parte de la heterogeneidad captada en el modelo con pendiente aleatoria se explica ahora por el gradiente de desarrollo humano.</p>
+<p>En síntesis, los resultados respaldan la premisa de que los hogares con mayor nivel socioeconómico obtienen beneficios escolares adicionales cuando se ubican en comunas con altos niveles de bienestar multidimensional.</p>
+</section>
+<section id="ajuste-del-modelo" class="level3">
+<h3 class="anchored" data-anchor-id="ajuste-del-modelo"><strong>Ajuste del modelo</strong></h3>
+<p>Para estimar la potencia explicativa de cada modelo se aplicó el coeficiente de determinación multinivel de Bryk y Raudenbush (1992, como se citó en Castillo, 2025) que calcula para cada nuevo modelo la reducción proporcional de los componentes de la varianza respecto del modelo nulo. Esta estrategia resulta especialmente adecuada en contextos jerárquicos, ya que permite cuantificar cuánto mejora la explicación de la varianza dentro de los grupos (nivel 1) y entre los grupos (nivel 2), al incorporar predictores individuales y contextuales. Así, se logra evaluar no solo si un modelo se ajusta mejor, sino también dónde y cuánto reduce la incertidumbre respecto de los resultados educativos en función de los factores intro</p>
+<p>Respecto al reporte de R2, el modelo nulo presenta una varianza residual individual de 14,10 y una varianza del intercepto comunal de 2,80. Al incorporar únicamente predictores individuales, se explica un 3,8 % de la varianza intra-comunal y un 2,0 % de la varianza entre comunas, alcanzando un R2 Total de 0.035. En cambio, el modelo con solo predictores contextuales revierte esta proporción: las variables comunales tasa de empleo, IDH y oferta escolar explican el 91,6 % de la varianza entre comunas, mientras no modifican la varianza individual. El modelo combinado mantiene la explicación individual en 3,8 % y eleva levemente la explicación comunal a 91,9 %.</p>
+<p>Considerando lo anterior, los modelos con pendiente aleatoria del NSE y con interacciones entre niveles no aumentan la explicación contextual, pero sí logran mejoras modestas en la varianza individual: el modelo que corresponde a la interacción entre NSE y IDH alcanza un R²L1 de 4,4 %, el más alto del conjunto, con un R² Total de 0.185. En suma, la mayor parte de la desigualdad entre comunas se explica por las condiciones estructurales del territorio, mientras que los modelos más complejos aportan mejoras incrementales en la explicación de la varianza individual de la escolaridad.</p>
+</section>
+<section id="gráficos-de-interacción" class="level3">
+<h3 class="anchored" data-anchor-id="gráficos-de-interacción"><strong>Gráficos de interacción</strong></h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="plantilla_informe_files/figure-html/modelo_tabla1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Figura 1.6: Interacción entre NSE individual y tasa de empleo comunal sobre los años esperados de escolaridad</figcaption>
+</figure>
+</div>
+<p>El Gráfico 1.6 ilustra la interacción entre el nivel socioeconómico individual (NSE) y la tasa de empleo comunal, mostrando cómo el efecto del NSE sobre los años esperados de escolaridad varía según el dinamismo del contexto laboral. Tal como se observa, en comunas con baja tasa de empleo (línea roja), el efecto positivo del NSE sobre la escolaridad es más tenue, mientras que en comunas con alta tasa de empleo (línea azul), esta relación se intensifica marcadamente. Esto sugiere que los recursos económicos del hogar generan mayores retornos educativos en contextos donde existen más oportunidades laborales, reforzando la idea de que un entorno estructuralmente favorable amplifica las ventajas asociadas al capital económico familiar.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="plantilla_informe_files/figure-html/modelo_tabla2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Figura 1.7: Interacción entre NSE individual e Índice de Desarrollo Humano (IDH) comunal sobre los años esperados de escolaridad</figcaption>
+</figure>
+</div>
+<p>El Gráfico 1.7 representa la interacción entre el nivel socioeconómico individual (NSE) y el Índice de Desarrollo Humano (IDH) comunal, revelando cómo el efecto del NSE sobre la escolaridad varía según las condiciones estructurales del territorio. En comunas con bajo IDH (línea roja), el incremento en escolaridad asociado al NSE es más modesto, mientras que en comunas con alto IDH (línea azul), dicho efecto se acentúa significativamente. Esto indica que el capital económico familiar tiene un mayor impacto educativo en contextos comunales más desarrollados, donde probablemente existen más recursos institucionales para transformar las ventajas familiares en logros escolares.</p>
+</section>
+<section id="análisis-de-casos-influyentes" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-de-casos-influyentes">Análisis de casos influyentes</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="plantilla_informe_files/figure-html/Grafico Cook-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Figura 1.8: Distancia de Cook</figcaption>
+</figure>
+</div>
+<p>Para evaluar la influencia de casos a nivel contextual en los resultados del modelo que incluye variables individuales y contextuales, se aplicó el diagnóstico de distancia de Cook (Figura 1.8), que permite identificar comunas potencialmente influyentes en la estimación de los efectos fijos. Se identificaron 2 comunas, Lo Barnechea y&nbsp; Santiago que destacan con&nbsp; valores altos de influencia, lo que sugiere que sus características podrían estar ejerciendo un peso en los resultados del modelo.</p>
+<p>A partir de esta alerta, se procedió a estimar nuevamente el modelo excluyendo dichas comunas&nbsp; y se compararon los coeficientes originales con los nuevos. Los resultados muestran que, si bien la mayoría de los coeficientes se mantienen relativamente estables, algunos presentan variaciones. Por ejemplo, el coeficiente de la tasa de empleo comunal disminuye en un 11,4 %, lo que indica cierta sensibilidad del modelo a estos casos. En sentido contrario, el efecto del IDH comunal aumenta en un 9,4 % al excluir las comunas influyentes. Otros efectos, como el de género y la participación social, se mantienen estables con reducciones parciales de–7,0 % y –5,5 %, respectivamente. En contraste, el coeficiente del NSE individual permanece prácticamente inalterado, lo que refuerza su robustez.</p>
+<p>A pesar de la influencia de estas comunas, se decidió no excluirlas del análisis, dado su peso demográfico, económico y simbólico en la estructura territorial del Gran Santiago. No obstante, con el fin de transparencia analítica, se incorporan la comparaciones detalladas entre las estimaciones originales y aquellas obtenidas al excluir dichas comunas (anexo 1).</p>
+<p>En conjunto, este análisis sugiere que, si bien los resultados del modelo son globalmente consistentes, ciertos efectos contextuales pueden estar amplificados por comunas atípicas. Por tanto, su interpretación debe considerar esta posible sobrerrepresentación, especialmente en lo relativo a los factores estructurales del territorio. Considerando lo anterior, se opta por mantener estas observaciones en el modelo final, reconociendo su potencial influencia pero también su relevancia sustantiva en la comprensión de las desigualdades educativas en el Gran Santiago.</p>
+</section>
+</section>
+</section>
+<section id="discusión" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Discusión</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="input/img/r_Años_de_escolaridad_final.png" class="img-fluid figure-img"></p>
+<figcaption>Figura 1.9: Modelo teórico con resultados de las hipótesis planteadas.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Los resultados obtenidos son consistentes con la mayoría de las hipótesis planteadas. En primer lugar, respecto al nivel individual, se comprueba la H1, donde las mujeres presentan, en promedio, menos años de escolaridad que los hombres, lo que evidencia la persistencia de desigualdades de género en las trayectorias educativas. En relación con la H2, se confirma que un mayor nivel socioeconómico (NSE) del hogar se asocia con más años de escolaridad, subrayando el peso del capital económico familiar en la acumulación educativa. Asimismo, la hipótesis H3 también se sostiene, ya que los hogares con participación en redes sociales presentan mayores niveles de escolaridad, lo cual apunta a la relevancia del capital social en el acompañamiento escolar.</p>
+<p>En segundo lugar, los resultados permiten confirmar parcialmente las hipótesis a nivel contextual. Se comprueba la H4, dado que las comunas con mayores tasas de empleo presentan promedio de años educativos más altos, lo que sugiere que un mercado laboral más dinámico puede crear entornos que valoran y estimulan la continuidad educativa. También se confirma la H6, ya que el Índice de Desarrollo Humano (IDH) muestra una asociación positiva robusta con la escolaridad promedio. Sin embargo, la H5 no se ve respaldada, dado que la proporción de escuelas por habitante no tiene un efecto significativo, lo que indica que la disponibilidad de establecimientos educativos no garantiza por sí sola mejores trayectorias formativas, especialmente si no se considera su calidad o segmentación.</p>
+<p>En tercer lugar, los modelos multinivel permiten evaluar la interacción entre niveles. Respecto a la H7, los resultados entregan apoyo parcial, dado que el efecto del NSE sobre la escolaridad tiende a ser más intenso en comunas con alta tasa de empleo, aunque la significación estadística es marginal. En contraste, la H8 se ve respaldada, ya que el retorno educativo del NSE es significativamente mayor en comunas con alto IDH. Esto sugiere que el contexto comunal no solo influye directamente sobre la escolaridad, sino también esta se modula por los efectos de las condiciones familiares. En conjunto, los hallazgos refuerzan la importancia de adoptar un enfoque multinivel que considere simultáneamente factores individuales y estructurales para comprender las desigualdades educativas en contextos urbanos segmentados como el Gran Santiago.</p>
+</section>
+<section id="conclusiones" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Conclusiones</h1>
+<p>El estudio muestra que tanto las condiciones familiares como las comunales inciden significativamente en los años de escolaridad de la población adulta del Gran Santiago. Entre los principales hallazgos destaca que las variables contextuales explican una proporción sustantiva de la desigualdad educativa entre comunas (91,9% de la varianza territorial), mientras que los factores individuales tienen un efecto más acotado pero persistente.</p>
+<p>En términos metodológicos, la adopción de modelos multinivel permitió separar y modelar con precisión las varianzas entre y dentro de comunas, evidenciando que las diferencias territoriales no pueden ser ignoradas. Esta aproximación fue especialmente relevante para identificar interacciones cruzadas entre niveles y estimar pendientes aleatorias, elementos imposibles de captar en modelos tradicionales.</p>
+<p>Entre las limitaciones, se reconoce la ausencia de variables de calidad escolar o experiencias educativas, así como la dificultad de establecer relaciones causales dado el carácter transversal de los datos. Además, ciertos resultados pueden estar influenciados por comunas atípicas, aunque se decidió mantenerlas por su relevancia sustantiva, presentando comparaciones alternativas en anexos.</p>
+<p>Como proyección, se sugiere extender este tipo de análisis a otras regiones del país, incorporar medidas de calidad educativa y explorar trayectorias longitudinales. Desde una perspectiva de política pública, los resultados refuerzan la necesidad de estrategias integrales que combinen desarrollo local con fortalecimiento del capital familiar, reconociendo que la desigualdad educativa es una expresión territorializada de las brechas sociales más amplias.</p>
+</section>
+<section id="referencias" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Referencias</h1>
+<ul>
+<li><p>Agencia de Calidad de la Educación. (2015, agosto). Evolución de las brechas socioeconómicas de rendimiento en pruebas SIMCE. División de Estudios, Agencia de Calidad de la Educación.</p></li>
+<li><p>Andréu, J. (2011). El análisis multinivel: una revisión actualizada en el ámbito sociológico. Metodología de Encuestas, 13, 161–176.</p></li>
+<li><p>Arita, M., Romano, A., García, A., &amp; Félix, F. (2015). Condiciones de vida y bienestar subjetivo en Culiacán, México. Universidad Autónoma de Sinaloa.</p></li>
+<li><p>Bellei Carvacho, C., Contreras, D., &amp; Valenzuela Barros, J. P. (2008). La agenda pendiente en educación. Profesores, administradores y recursos: propuestas para la nueva arquitectura de la educación chilena. Universidad de Chile.</p></li>
+<li><p>Biblioteca Nacional del Congreso. (junio 2024). Estadísticas Territoriales. Biblioteca Nacional del Congreso. https://www.bcn.cl/siit/estadisticasterritoriales&nbsp;</p></li>
+<li><p>Bourdieu, P., &amp; Passeron, J. C. (2001). La reproducción. Elementos para una teoría del sistema de enseñanza. Editorial Laia.</p></li>
+<li><p>Bullones, E. (2022). Gestión educativa en valores para la paz comunitaria. Aula Virtual, 3(6), 150–160.</p></li>
+<li><p>Canales, A., &amp; de Ibarrola, M. (2022). La segmentación del sistema escolar mexicano: un análisis territorial. Revista Mexicana de Investigación Educativa, 27(94), 1035–1060.</p></li>
+<li><p>Castillo, J. (2025). Modelos Multinivel. Sesión 6. Ajuste y Reporte. https://multinivel-facso.netlify.app/content/06-content</p></li>
+<li><p>Cimadamore, A. D., &amp; Cattani, A. D. (Coords.). (2008). Producción de pobreza y desigualdad en América Latina. Siglo del Hombre Editores.</p></li>
+<li><p>Cortés, Y. (2021). Accesibilidad espacial a los servicios públicos locales en un lugar desigual: un análisis desde los patrones de segregación residencial en el área metropolitana de Santiago de Chile. Sustainability, 13(2), 442.</p></li>
+<li><p>Finch, W. H., Bolin, J. E., &amp; Kelley, K. (2019). Multilevel modeling using R. Chapman and Hall/CRC.</p></li>
+<li><p>Giménez, G. (30 de septiembre de 2004). Introducción al estudio de las identidades urbanas [Sesión de conferencial]. Seminario Permanente de Estudios sobre la Ciudad, Ciudad de México, México.</p></li>
+<li><p>Gobierno de Santiago (s.f.). Datos geográficos. Gobierno de Santiago. https://www.gobiernosantiago.cl/datos-geograficos/&nbsp;</p></li>
+<li><p>Gonzales y Espinoza&nbsp; (1994). Estudio del logro educativo en el Índice de Desarrollo Humano en América Latina y el Caribe, 1994–05. Centro Interuniversitario de Desarrollo (CINDA). Recuperado de ResearchGate.</p></li>
+<li><p>Instituto Nacional de Evaluación Educativa [INEE]. (2011). PIRLS–TIMSS 2011. Estudio Internacional de Progreso en Comprensión Lectora, Matemáticas y Ciencias. Volumen I: Informe español. IEA. https://www.mecd.gob.es/inee</p></li>
+<li><p>Ministerio de Desarrollo Social y Familia. (2022). Encuesta de Caracterización Socioeconómica Nacional (Casen) 2022. Gobierno de Chile.</p></li>
+<li><p>Ministerio de Educación de Chile. (2023). Informe de resultados SIMCE y brechas por grupo socioeconómico. Santiago: MINEDUC.</p></li>
+<li><p>OECD. (2021). Education at a Glance: OECD Indicators. OECD Publishing. https://doi.org/10.1787/b35a14e5-en</p></li>
+<li><p>Peláez González, C., &amp; Rodríguez, S. A. (2020). Género, trabajo y educación: Diferencias entre hombres y mujeres en la entrada al primer empleo. Revista Interdisciplinaria de Estudios de Género de El Colegio de México, 6, e494.</p></li>
+<li><p>Rivas Espinosa, A., &amp; Terra Polanco, V. (2024). Percepciones de niñas y niños sobre su hábitat en contextos urbanos informales. Sociológica (Madrid), 39(1).<br>
+<br>
+</p></li>
+</ul>
+</section>
+<section id="anexos" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Anexos</h1>
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
+&nbsp;
+</th>
+<th colspan="1" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Modelo original
+</th>
+<th colspan="1" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
+Sin comunas influyentes
+</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
+Predictors
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
+Estimates
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+(Intercept)
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+12.691 <sup>***</sup>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+12.769 <sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+female
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-0.398 <sup>***</sup>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+-0.426 <sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+nse cmc
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.421 <sup>***</sup>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.417 <sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+part social num
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.730 <sup>***</sup>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.690 <sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+prop empleo gmc
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+10.162 <sup>***</sup>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+9.000 <sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+prop pob esc gmc
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.151 <sup></sup>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+0.145 <sup>*</sup>
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
+idh gmc
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+10.394 <sup>***</sup>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
+11.375 <sup>***</sup>
+</td>
+</tr>
+<tr>
+<td colspan="3" style="font-weight:bold; text-align:left; padding-top:.8em;">
+Random Effects
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+σ<sup>2</sup>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+13.37
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+13.43
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+τ<sub>00</sub>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+0.26 <sub>comuna</sub>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+0.15 <sub>comuna</sub>
+</td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+τ<sub>11</sub>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+0.08 <sub>comuna.nse_cmc</sub>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+0.08 <sub>comuna.nse_cmc</sub>
+</td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+ρ<sub>01</sub>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+-0.52 <sub>comuna</sub>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+-0.66 <sub>comuna</sub>
+</td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+ICC
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+0.03
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+0.03
+</td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+N
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+32 <sub>comuna</sub>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+30 <sub>comuna</sub>
+</td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
+Observations
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="1">
+22706
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="1">
+20663
+</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
+Marginal R<sup>2</sup> / Conditional R<sup>2</sup>
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+0.187 / 0.215
+</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="1">
+0.201 / 0.222
+</td>
+</tr>
+<tr>
+<td colspan="3" style="font-style:italic; border-top:double black; text-align:right;">
+<ul>
+<li>p&lt;0.05&nbsp;&nbsp;&nbsp;** p&lt;0.01&nbsp;&nbsp;&nbsp;*** p&lt;0.001
+</li></ul></td>
+</tr>
+
+</tbody></table>
+<p>Anexo 1: Tabla comparativa de estimación de modelos con y sin casos influyentes</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

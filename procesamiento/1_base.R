@@ -31,8 +31,8 @@ getwd()
 #Carga datos ------------------------------------------------------------------
 
 #Leer las bases desde tus rutas
-casen2022 <- read_sav("D:/U pruebas/TDR_1/Prueba2/trabajo1-grupo-3/input/data/Base de datos Casen 2022 SPSS_18 marzo 2024.sav")
-comunas <- read_sav("D:/U pruebas/TDR_1/Prueba2/trabajo1-grupo-3/input/data/Base de datos provincia y comuna Casen 2022 SPSS.sav")
+casen2022 <- read_sav("D:/U/Multivariada/trabajo1-grupo-3/input/data/Base de datos Casen 2022 SPSS_18 marzo 2024.sav")
+comunas <- read_sav("D:/U/Multivariada//trabajo1-grupo-3/input/data/Base de datos provincia y comuna Casen 2022 SPSS.sav")
 
 
 #Unir bases por folio + id_persona  (añade código de comuna)------------------
@@ -176,6 +176,108 @@ escuelas_tbl <- tibble::tribble(
 casen_santiago <- casen_santiago %>%
   left_join(escuelas_tbl, by = "comuna")
 
+#
+#Crear tabla con número de personas por comuna
+# ------------------------------------------------------------------------------
+poblacion_tbl <- tibble::tribble(
+  ~comuna,                 ~n_poblacion,
+  "Lo Barnechea",            112.620,
+  "Quilicura",               205.624,
+  "Huechuraba",              101.808,
+  "Conchalí",                121.587,
+  "Vitacura",                86.420,
+  "Renca",                   143.622,
+  "Recoleta",                154.615,
+  "Independencia",           116.943,
+  "Las Condes",              296.134,
+  "Cerro Navia",             127.250,
+  "Quinta Normal",           129.351,
+  "Providencia",             143.974,
+  "Pudahuel",                227.820,
+  "La Reina",                89.870,
+  "Lo Prado",                91.290,
+  "Santiago",                438.856,
+  "Ñuñoa",                   241.467,
+  "Estación Central",        181.049,
+  "Peñalolén",               236.478,
+  "Macul",                   123.800,
+  "Pedro Aguirre Cerda",     96.062,
+  "San Joaquín",             95.602,
+  "San Miguel",              150.829,
+  "Cerrillos",               85.041,
+  "Maipú",                   503.635,
+  "Lo Espejo",               87.295,
+  "La Florida",              374.836,
+  "La Cisterna",             103.157,
+  "La Granja",               112.022,
+  "San Ramón",               76.002,
+  "El Bosque",               155.257,
+  "La Pintana",              175.421)
+
+# Unir a casen_santiago (la columna comuna ya es factor con nombres)
+casen_santiago <- casen_santiago %>%
+  left_join(poblacion_tbl, by = "comuna")
+
+# Crear tabla de indice de desarrollo  humano por comuna
+# ------------------------------------------------------------------------------
+idh_comuna_tbl <- tibble::tribble(
+  ~comuna,                 ~idh_comuna,
+  "Lo Barnechea",            0.909,
+  "Quilicura",               0.656,
+  "Huechuraba",              0.750,
+  "Conchalí",                0.587,
+  "Vitacura",                0.961,
+  "Renca",                   0.585,
+  "Recoleta",                0.590,
+  "Independencia",           0.576,
+  "Las Condes",              0.936,
+  "Cerro Navia",             0.521,
+  "Quinta Normal",           0.604,
+  "Providencia",             0.886,
+  "Pudahuel",                0.644,
+  "La Reina",                0.862,
+  "Lo Prado",                0.580,
+  "Santiago",                0.662,
+  "Ñuñoa",                   0.858,
+  "Estación Central",        0.594,
+  "Peñalolén",               0.702,
+  "Macul",                   0.732,
+  "Pedro Aguirre Cerda",     0.564,
+  "San Joaquín",             0.611,
+  "San Miguel",              0.727,
+  "Cerrillos",               0.633,
+  "Maipú",                   0.7,
+  "Lo Espejo",               0.5,
+  "La Florida",              0.701,
+  "La Cisterna",             0.660,
+  "La Granja",               0.568,
+  "San Ramón",               0.540,
+  "El Bosque",               0.572,
+  "La Pintana",              0.498)
+
+# Unir a casen_santiago (la columna comuna ya es factor con nombres)
+casen_santiago <- casen_santiago %>%
+  left_join(idh_comuna_tbl, by = "comuna")
+
+#-------------------------------------------------------------------------------
+
+#Ajuste de los decimales de la variable n de personas
+casen_santiago <- casen_santiago %>% 
+  mutate(
+    n_poblacion = if_else(
+      n_poblacion < 10000,      # usa 10000 o 1e4, sin guión bajo
+      n_poblacion * 1000,       # corrige escala
+      n_poblacion
+    )
+  )
+
+
+summary(casen_santiago$n_poblacion)
+
+#crear variable que establece la proporicion 
+casen_santiago <- casen_santiago %>% 
+  mutate(prop_pob_esc   = (n_escuelas / n_poblacion) * 10000)
+
 
 #base final (casen_educ) incluyendo n_escuelas
 # ------------------------------------------------------------------------------
@@ -185,14 +287,16 @@ casen_educ <- casen_santiago %>%
     esc, comuna,                       # dependiente + clúster
     female, nse_factor, nse_numerico,   # individuales ajustados
     part_social_num, part_social_fac,                         # indicador de hogar sin cotizar (si lo usas)
-    prop_empleo, n_escuelas            # contextuales ya unidos
+    prop_empleo, idh_comuna, prop_pob_esc, n_escuelas        # contextuales ya unidos
   ) %>% 
   filter(
     !is.na(esc),
     !is.na(nse_numerico),
-    !is.na(n_escuelas),
-    !is.na(prop_empleo)
-  )
+    !is.na(prop_empleo),
+    !is.na(prop_pob_esc),
+    !is.na(part_social_num))
+
+sum(is.na(casen_educ))
 
 # Guardar datos ----------------------------------------------------------------
 saveRDS(casen_educ, file = "output/casen_educ.rds")

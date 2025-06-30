@@ -239,7 +239,8 @@ $$
 $$
 \text{esc}_{ij} \;=\; \gamma_{00}
 + \gamma_{01}\,\text{prop_empleo_gmc}
-+ \gamma_{02}\,\text{n_escuelas_gmc}
++ \gamma_{02}\,\text{prop_pob_escn_gmc}
++ \gamma_{03}\,\text{idh_gmc}
 + u_{0\text{comuna}}
 + r_{ij}
 $$
@@ -249,14 +250,18 @@ $$
 :::: {style="font-size:85%"}
 ::: {style="overflow-x: auto; white-space: nowrap;"}
 $$
-\text{esc}_{ij}= \gamma_{00}
-+ \gamma_{01}\,\text{female}
-+ \gamma_{02}\,\text{nse_cmc}
-+ \gamma_{03}\,\text{part_social_num}
-+ \gamma_{04}\,\text{prop_empleo_gmc}
-+ \gamma_{05}\,\text{n_escuelas_gmc}
-+ u_{0\text{comuna}}
-+ r_{ij}
+  \
+  \text{esc}_{ij} \;=\;
+  \gamma_{00}
+  + \gamma_{01}\,\text{female}
+  + \gamma_{02}\,\text{nse\_cmc}
+  + \gamma_{03}\,\text{part\_social\_num}
+  + \gamma_{04}\,\text{prop\_empleo\_gmc}
+  + \gamma_{05}\,\text{prop\_pob\_escn\_gmc}
+  + \gamma_{06}\,\text{idh\_gmc}
+  + u_{0j}
+  + r_{ij}
+  \
 $$
 :::
 ::::
@@ -582,13 +587,13 @@ Cimadamore, A. D., & Cattani, A. D. (Coords.). (2008). Producción de pobreza y 
 
 Finch, W. H., Bolin, J. E., & Kelley, K. (2019). Multilevel modeling using R. Chapman and Hall/CRC.
 
-Instituto Nacional de Evaluación Educativa. (2011). PIRLS–TIMSS 2011. Estudio Internacional de Progreso en Comprensión Lectora, Matemáticas y Ciencias. Volumen I: Informe español. IEA.[ https://www.mecd.gob.es/inee](https://www.mecd.gob.es/inee)
+Instituto Nacional de Evaluación Educativa. (2011). PIRLS–TIMSS 2011. Estudio Internacional de Progreso en Comprensión Lectora, Matemáticas y Ciencias. Volumen I: Informe español. IEA.<https://www.mecd.gob.es/inee>
 
 Ministerio de Educación de Chile. (2023). Informe de resultados SIMCE y brechas por grupo socioeconómico. Santiago: MINEDUC.
 
 Ministerio de Desarrollo Social y Familia. (2022). Encuesta de Caracterización Socioeconómica Nacional (Casen) 2022. Gobierno de Chile.
 
-OECD. (2021). Education at a Glance: OECD Indicators. OECD Publishing.[ https://doi.org/10.1787/b35a14e5-en](https://doi.org/10.1787/b35a14e5-en)
+OECD. (2021). Education at a Glance: OECD Indicators. OECD Publishing.<https://doi.org/10.1787/b35a14e5-en>
 
 Peláez González, C., & Rodríguez, S. A. (2020). Género, trabajo y educación: Diferencias entre hombres y mujeres en la entrada al primer empleo. Revista Interdisciplinaria de Estudios de Género de El Colegio de México, 6, e494.
 

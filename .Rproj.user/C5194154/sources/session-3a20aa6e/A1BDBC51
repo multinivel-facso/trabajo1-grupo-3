@@ -1,0 +1,33 @@
+{
+    "id": "A1BDBC51",
+    "path": "D:/U/Multivariada/trabajo1-grupo-3/plantilla_informe.qmd",
+    "project_path": "plantilla_informe.qmd",
+    "type": "quarto_markdown",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1750176558872.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "rmdVisualMode": "true",
+        "rmdVisualWrapConfigured": "true",
+        "source_window_id": "",
+        "Source": "Source",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "618:61.599998474121094",
+        "docOutlineVisible": "1",
+        "cursorPosition": "0,0",
+        "scrollLine": "183",
+        "chunk_output_type": "console",
+        "docOutlineSize": "110"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1751265294,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1751265294302,
+    "read_only": false,
+    "read_only_alternatives": []
+}

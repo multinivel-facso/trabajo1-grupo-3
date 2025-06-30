@@ -1,0 +1,31 @@
+{
+    "id": "FA30C5C3",
+    "path": "D:/U/Multivariada/trabajo1-grupo-3/presentacion-template.qmd",
+    "project_path": "presentacion-template.qmd",
+    "type": "quarto_markdown",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1751214858781.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "rmdVisualMode": "false",
+        "source_window_id": "",
+        "Source": "Source",
+        "rmdVisualCollapsedChunks": "",
+        "rmdVisualModeLocation": "315:0",
+        "rmdVisualWrapConfigured": "true",
+        "docOutlineVisible": "0",
+        "cursorPosition": "110,0",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1751302804,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1751302804,
+    "read_only": false,
+    "read_only_alternatives": []
+}

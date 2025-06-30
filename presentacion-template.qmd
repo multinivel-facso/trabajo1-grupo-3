@@ -1,0 +1,606 @@
+---
+format:
+  revealjs:
+    title-slide: false
+    theme: multinivel.scss
+    incremental: true 
+    slideNumber: true
+    auto-stretch: false
+    transition: fade
+    transition-speed: slow
+    scrollable: true
+    scrollOverflow: true           
+    css: estilos.css 
+    self-contained: true
+editor: source
+---
+
+# 
+
+```{r paquetes y modelos}
+#| include: false
+#| message: false
+
+if (!require("pacman")) install.packages("pacman") # solo la primera vez
+pacman::p_load(lme4,
+               kableExtra,
+               haven,
+               car,
+               sjmisc,
+               sjPlot,
+               stargazer,
+               ggplot2, # gráficos
+               dplyr, # manipulacion de datos
+               equatiomatic, knitr, kableExtra, htmltools) # paquetes a cargar
+
+
+casen_educ <- readRDS("output/casen_educ.rds")
+
+# ---- centrados --------------------------------------------------------------
+casen_educ <- casen_educ %>%                 # CMC nivel-1
+  group_by(comuna) %>%
+  mutate(
+    mean_nse_comuna = mean(nse_numerico, na.rm = TRUE),
+    nse_cmc         = nse_numerico - mean_nse_comuna
+  ) %>% ungroup() %>%                        # GMC nivel-2
+  mutate(
+    prop_empleo_gmc = prop_empleo - mean(prop_empleo, na.rm = TRUE),
+    n_escuelas_gmc  = n_escuelas  - mean(n_escuelas,  na.rm = TRUE)
+  )
+
+# ---- modelos ----------------------------------------------------------------
+m0    <- lmer(esc ~ 1 + (1 | comuna), data = casen_educ)
+m1    <- lmer(esc ~ female + nse_cmc + part_social_num + (1|comuna), data = casen_educ)
+m2    <- lmer(esc ~ prop_empleo_gmc + n_escuelas_gmc + (1|comuna),    data = casen_educ)
+m3    <- lmer(esc ~ female + nse_cmc + part_social_num +
+                     prop_empleo_gmc + n_escuelas_gmc + (1|comuna),   data = casen_educ)
+m4    <- lmer(esc ~ female + nse_cmc + part_social_num +
+                     prop_empleo_gmc + n_escuelas_gmc +
+                     (1 + nse_cmc | comuna),                          data = casen_educ)
+m5_H6 <- lmer(esc ~ nse_cmc * prop_empleo_gmc +
+                     part_social_num + n_escuelas_gmc + female +
+                     (1 + nse_cmc | comuna),                          data = casen_educ)
+
+
+
+
+```
+
+:::::: columns
+::: {.column width="20%"}
+:::
+
+:::: {.column .column-right width="80%"}
+## **Desigualdad educativa en el Gran Santiago: un análisis multinivel de factores individuales y territoriales**
+
+------------------------------------------------------------------------
+
+**Juan Prado, Katherine Aravena Herrera, Paula Cerda Torres & Sebastián Monreal Villarroel**
+
+::: {.red2 .medium}
+**Análisis de datos multinivel - 2025**
+
+**Departamento de Sociología, Universidad de Chile**
+:::
+
+Santiago, 19 de Junio de 2025
+::::
+
+[Github repo](link%20al%20repo)
+::::::
+
+::: notes
+Aquí mis notas
+:::
+
+# Introducción
+
+-   **Problema/Objeto de estudio:**
+
+    | La desigualdad educativa persiste como una de las principales barreras para la movilidad social en Chile, especialmente en la Región Metropolitana de Santiago. A pesar de la expansión del acceso educativo, las diferencias en años de escolaridad continúan reproduciendo desigualdades estructurales entre grupos sociales. Este estudio busca comprender cómo estas diferencias se explican a partir de la interacción entre recursos familiares y condiciones territoriales en el Gran Santiago.
+
+------------------------------------------------------------------------
+
+-   **Factores asociados L1:** Nivel socioeconómico del hogar, Género y Participación social familiar
+
+    > Estos factores se entienden como recursos o desventajas que configuran las trayectorias escolares desde el origen social, afectando tanto el acceso como la permanencia y el logro educativo.
+
+-   **Factores asociados L2:** Tasa de empleo comunal y Oferta escolar comunal (densidad de establecimientos)
+
+    > Ambas variables expresan las condiciones estructurales del territorio, influyendo en las oportunidades educativas disponibles. Se incorporan para analizar cómo el entorno puede amplificar o mitigar las desigualdades preexistentes, más allá de las características individuales.
+
+##  {data-background-color="#FF0000"}
+
+::: {.center .middle}
+[¿En qué medida los distintos factores de socialización —tanto familiares como territoriales— influyen en los años de escolaridad de los habitantes del Gran Santiago?]{style="font-size: 230%;"}
+:::
+
+# Hipótesis:
+
+**Nivel 1:**
+
+$H_1$: Las mujeres completan, en promedio, menos años de escolaridad que los hombres.
+
+$H_2$: Cuanto más alto es el nivel socioeconómico (NSE) del hogar, más años de escolaridad alcanza el estudiante.
+
+$H_3$: Provenir de un hogar con baja participación social reduce los años de escolaridad frente a hogares activos en redes comunitarias.
+
+**Nivel 2:**
+
+$H_4$: Las comunas con mayor tasa de empleo presentan una escolaridad promedio más alta.
+
+$H_5$: Las comunas con mayor número de escuelas ofrecen más oportunidades y muestran mayores años de escolaridad.
+
+------------------------------------------------------------------------
+
+**Interacción entre niveles:**
+
+$H_6$: El efecto positivo del nivel socioeconómico (NSE) sobre la escolaridad es más intenso en comunas con alta tasa de empleo; un mercado laboral dinámico potencia los recursos familiares.
+
+![Modelo teórico (hipótesis)](input/img/Años_de_escolaridad.png){fig-align="center" width="638" height="364"}
+
+# Metodología {data-background-color="#FF0000"}
+
+## Datos
+
+\[Se utilizó la base de datos de la **CASEN 2022**, que tiene un diseño muestral probabilístico, estratificado por región, comuna y área urbana/rural.
+
+Para el análisis se trabajó con **22.706 individuos** (nivel 1) de 18 o más años, anidados dentro de las **32 comunas** del Gran Santiago (nivel 2), con un promedio de 702 casos por comuna.\]
+
+## Variables
+
+```{r tabla_nivel1, echo=FALSE, results='asis'}
+
+### --------- NIVEL 1: variables individuales -----------------------------
+nivel1 <- casen_educ %>%
+  mutate(
+    female          = as.numeric(female),          # 0 / 1
+    part_social_num = as.numeric(part_social_num)
+  ) %>%
+  select(esc, female, nse_numerico, part_social_num) %>%
+  as.data.frame()
+
+html_lvl1 <- paste(
+  capture.output(
+    stargazer(
+      nivel1,
+      type   = "html",
+      title  = "Estadísticos descriptivos – Nivel 1 (individual)",
+      digits = 2,
+      summary.stat = c("n","min","p25","median","mean","p75","max","sd")
+    )
+  ),
+  collapse = "\n"
+)
+
+### --------- NIVEL 2: variables comunales -------------------------------
+nivel2 <- casen_educ %>%
+  select(comuna, n_escuelas, prop_empleo) %>%
+  distinct() %>%                       # una fila por comuna
+  select(n_escuelas, prop_empleo) %>%  # solo numéricas
+  as.data.frame()
+
+html_lvl2 <- paste(
+  capture.output(
+    stargazer(
+      nivel2,
+      type   = "html",
+      title  = "Estadísticos descriptivos – Nivel 2 (comunal)",
+      digits = 2,
+      summary.stat = c("n","min","p25","median","mean","p75","max","sd")
+    )
+  ),
+  collapse = "\n"
+)
+
+### --------- COMBINA Y MUESTRA ------------------------------------------
+knitr::asis_output(
+  paste0(
+    '<div style="font-size:85%; width:95%; margin:0 auto;">',
+    html_lvl1,
+    '<br><br>',     # espacio entre tablas
+    html_lvl2,
+    '</div>'
+  )
+)
+invisible(NULL)
+
+```
+
+## Métodos
+
+Se utilizó una metodología de análisis estadístico multinivel. De este modo se puede observar de manera más precisa cómo \_\_las trayectorias educativas\_\_ se configuran por la interacción entre \_\_factores individuales\_\_ (nivel socioeconómico, género o participación social) y \_\_contextuales\_\_ (oferta escolar o tasa de empleo comunal).
+
+El análisis de datos se realizó en Rstudio, utilizando \_lmer\_ para la construcción de los modelos, \_sjPlot\_ para la visualización de los datos y \_summary tools\_ para generar descriptivos univariados
+
+Se estimaron un total de 6 modelos, siguientes modelos:
+
+## Modelo nulo
+
+$$
+\text{esc}_{ij} \;=\; \gamma_{00}
++ u_{0\text{comuna}}
++ r_{ij}
+$$
+
+## Modelo 1 con variables independientes individuales
+
+$$
+\text{esc}_{ij} \;=\; \gamma_{00}
++ \gamma_{01}\,\text{female}
++ \gamma_{02}\,\text{nse_cmc}
++ \gamma_{03}\,\text{part_social_num}
++ u_{0\text{comuna}}
++ r_{ij}
+$$
+
+## Modelo 2 con variables independientes contextuales
+
+$$
+\text{esc}_{ij} \;=\; \gamma_{00}
++ \gamma_{01}\,\text{prop_empleo_gmc}
++ \gamma_{02}\,\text{prop_pob_escn_gmc}
++ \gamma_{03}\,\text{idh_gmc}
++ u_{0\text{comuna}}
++ r_{ij}
+$$
+
+## Modelo 3 con variables independiente individual y grupal
+
+:::: {style="font-size:85%"}
+::: {style="overflow-x: auto; white-space: nowrap;"}
+$$
+  \
+  \text{esc}_{ij} \;=\;
+  \gamma_{00}
+  + \gamma_{01}\,\text{female}
+  + \gamma_{02}\,\text{nse\_cmc}
+  + \gamma_{03}\,\text{part\_social\_num}
+  + \gamma_{04}\,\text{prop\_empleo\_gmc}
+  + \gamma_{05}\,\text{prop\_pob\_escn\_gmc}
+  + \gamma_{06}\,\text{idh\_gmc}
+  + u_{0j}
+  + r_{ij}
+  \
+$$
+:::
+::::
+
+## Modelo 4 con intercepto y pendiente aleatoria de NSE
+
+:::: {style="font-size:85%"}
+::: {style="overflow-x: auto; white-space: nowrap;"}
+$$
+\text{esc}_{ij}= \gamma_{00}
++ \gamma_{01}\,\text{female}
++ \gamma_{02}\,\text{nse_cmc}
++ \gamma_{03}\,\text{part_social_num}
++ \gamma_{04}\,\text{prop_empleo_gmc}
++ \gamma_{05}\,\text{n_escuelas_gmc}
++ u_{0\text{comuna}}
++ u_{1\text{comuna}}\,\text{nse_cmc}
++ r_{ij}
+$$
+:::
+::::
+
+## Modelo 5 con interacción entre NSE y empleo
+
+:::: {style="font-size:85%"}
+::: {style="overflow-x: auto; white-space: nowrap;"}
+$$
+\text{esc}_{ij}= \gamma_{00}
++ \gamma_{01}\,\text{nse_cmc}
++ \gamma_{02}\,\text{prop_empleo_gmc}
++ \gamma_{03}\,\text{part_social_num}
++ \gamma_{04}\,\text{n_escuelas_gmc}
++ \gamma_{05}\,\text{female}
++ \gamma_{06}\bigl(\text{nse_cmc}\,\times\,\text{prop_empleo_gmc}\bigr)
++ u_{0\text{comuna}}
++ u_{1\text{comuna}}\,\text{nse_cmc}
++ r_{ij}
+$$
+:::
+::::
+
+# Resultados {data-background-color="#FF0000"}
+
+## Descriptivos
+
+Scatterplot: relación entre promedio comunal de escolaridad y tasa de empleo
+
+```{r Scatterplot}
+casen_educ %>%
+  group_by(comuna) %>%
+  summarise(
+    esc_prom = mean(esc, na.rm = TRUE),
+    prop_empleo = first(prop_empleo)
+  ) %>%
+  ggplot(aes(x = prop_empleo, y = esc_prom)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "steelblue") +
+  labs(
+    title = "Relación entre tasa de empleo comunal y escolaridad promedio",
+    x = "Tasa de empleo (proporción)",
+    y = "Años promedio de escolaridad"
+  ) +
+  theme_minimal()
+```
+
+------------------------------------------------------------------------
+
+## Boxplot
+
+escolaridad individual según cuartiles de escuelas comunales
+
+```{r Boxplot}
+casen_educ %>%
+  mutate(
+    cuartil_escuelas = ntile(n_escuelas, 4)  # divide en 4 cuartiles
+  ) %>%
+  ggplot(aes(x = factor(cuartil_escuelas), y = esc)) +
+  geom_boxplot(fill = "lightgray", color = "black") +
+  labs(
+    title = "Distribución de escolaridad según cantidad de escuelas en la comuna",
+    x = "Cuartil de cantidad de escuelas",
+    y = "Años de escolaridad"
+  ) +
+  theme_minimal()
+```
+
+\`
+
+## Modelos
+
+```{r tabla_modelos, echo=FALSE, results='asis'}
+library(sjPlot)
+
+# 1. Genera la tabla SIN imprimirla
+html_tab <- tab_model(
+  m0, m1, m2, m3, m4, m5_H6,
+  show.ci  = FALSE,
+  show.se  = TRUE,
+  p.style  = "stars",
+  digits   = 3,
+  dv.labels = c(
+    "Nulo (ICC)", "L1 (centrado)", "L2 (centrado)",
+    "L1 + L2", "+ Pend. NSE", "+ Interacción H6"
+  ),
+  file = NA          # ← devuelve la lista, no la imprime
+)
+
+# 2. Compone la salida (solo UNA vez)
+salida <- paste0(
+  "<style>", html_tab$page.style, "</style>",
+  '<div class="hscroll small-table">', html_tab$page.content, "</div>"
+)
+
+knitr::asis_output(salida)
+invisible(NULL)      # evita ecos adicionales
+```
+
+------------------------------------------------------------------------
+
+## Test de devianza
+
+```{r test de devianza}
+#| label: lrt-table
+#| echo: false
+#| results: asis
+#| warning: false
+#| message: false
+
+
+## 1 ─ LRT ----------------------------------------------------------------------
+lrt_raw <- anova(m3, m4) |>
+  as.data.frame() |>
+  tibble::rownames_to_column("modelo") |>
+  mutate(modelo = recode(modelo,
+                         m3 = "sin&nbsp;pendiente",
+                         m4 = "con&nbsp;pendiente"))
+
+row_lrt <- tibble(
+  modelo = "LRT", npar = NA, AIC = NA, BIC = NA, logLik = NA,
+  LRT = lrt_raw$Chisq[2], gl = lrt_raw$Df[2],
+  p = lrt_raw$`Pr(>Chisq)`[2]
+)
+
+tabla_lrt <- bind_rows(
+  select(lrt_raw, modelo, npar, AIC, BIC, logLik),
+  row_lrt
+)
+
+## 2 ─ kable en HTML ------------------------------------------------------------
+tbl_html <- kable(tabla_lrt, "html", digits = 3, escape = FALSE,
+                  caption = "¿La pendiente aleatoria de NSE mejora el ajuste?") |>
+  kable_styling(full_width = FALSE,
+                bootstrap_options = c("striped", "hover", "condensed"),
+                font_size = 15) |>          # ← TAMAÑO FUENTE (sube o baja)
+  add_header_above(c(" " = 5, "Likelihood-ratio test" = 3)) |>
+  add_footnote(
+    "χ² significativo (p < 0.001) ⇒ conviene dejar la pendiente de NSE como aleatoria",
+    notation = "none"
+  )
+
+## 3 ─ contenedor centrado con scroll si hace falta ----------------------------
+scroll_box <- div(
+  style = "
+    max-width: 1000px;      /* cambia este ancho si lo necesitas */
+    margin: 0 auto;         /* centra la tabla */
+    overflow-x: auto;       /* barra horizontal si se pasa de 1000 px */
+  ",
+  HTML(tbl_html)
+)
+
+knitr::asis_output(as.character(scroll_box))
+```
+
+------------------------------------------------------------------------
+
+## Interacción
+
+::::: columns
+::: {.column width="60%"}
+```{r }
+library(sjPlot)
+library(ggplot2)
+
+p_h6 <- plot_model(
+  m5_H6,
+  type  = "int",
+  terms = c("nse_cmc", "prop_empleo_gmc")
+) +
+  labs(
+    title  = "Interacción H6: NSE individual × Tasa de empleo comunal",
+    x      = "NSE centrado en la comuna (CMC)",
+    y      = "Años esperados de escolaridad",
+    colour = "Tasa de empleo comunal\n(−1 DE / Media / +1 DE)"
+  ) +
+  theme_minimal(base_size = 12)
+
+print(p_h6)      # <- aseguras la impresión  
+```
+:::
+
+::: {.column width="40%"}
+[La interacción muestra que el efecto del nivel socioeconómico sobre la escolaridad varía según la tasa de empleo comunal. En comunas con más empleo (azul), el NSE tiene un impacto mayor sobre los años de escolaridad, mientras que en comunas con menos empleo (roja), su efecto es más débil. Esto confirma que los recursos familiares rinden más en contextos laborales favorables, ampliando así las desigualdades educativas.]{style="font-size: 80%;"}
+:::
+:::::
+
+# **Observaciones influyentes**
+
+```{r Observaciones influyentes}
+#| include: false
+library(influence.ME)  # Cook's distance por grupo
+library(dplyr)         # manipulación de datos
+library(forcats)       # fct_drop
+library(sjPlot)        # tab_model
+library(broom.mixed)   # tidy() para lmer
+
+casen_educ_cen <- readRDS("output/casen_educ_cen.rds") %>%
+  filter(!is.na(comuna)) %>%                # asegura no haber NAs
+  mutate(comuna = as.factor(comuna))        # comuna como factor
+
+stopifnot(nlevels(casen_educ_cen$comuna) == 32)  # debe haber 32 comunas
+
+# ---------------------------------------------------------------
+# 1. Modelo original (m4) ---------------------------------------
+# ---------------------------------------------------------------
+m4 <- lmer(
+  esc ~ female + nse_cmc + part_social_num +
+    prop_empleo_gmc + n_escuelas_gmc +
+    (1 + nse_cmc | comuna),
+  data = casen_educ_cen
+)
+
+# ---------------------------------------------------------------
+# 2. Cook’s Distance por comuna ---------------------------------
+# ---------------------------------------------------------------
+infl_m4   <- influence(m4, group = "comuna")
+cook_vals <- cooks.distance(infl_m4, sort = FALSE)
+
+# Añadir nombres de comunas si faltan
+if (is.null(names(cook_vals)) || length(names(cook_vals)) == 0) {
+  names(cook_vals) <- levels(casen_educ_cen$comuna)
+}
+
+# Punto de corte 4/k
+k      <- nlevels(casen_educ_cen$comuna)    # 32
+cutoff <- 4 / k                             # ≈ 0.125
+
+# Comunas influyentes (Cook > cutoff, ignorando NA)
+influentes <- names(cook_vals)[!is.na(cook_vals) & cook_vals > cutoff]
+
+cat("Comunas influyentes (Cook >", round(cutoff, 3), "):\n")
+                           # ej. "Vitacura" "Santiago"
+
+
+```
+
+```{r Gráfico de Cook}
+# ---------------------------------------------------------------
+# 3. Gráfico de Cook --------------------------------------------
+# ---------------------------------------------------------------
+plot(
+  infl_m4, which = "cook",
+  cutoff  = cutoff, sort = TRUE,
+  xlab    = "Cook's distance", ylab = "Comuna",
+  main    = "Distancia de Cook – Influencia por comuna (modelo m4)"
+)
+
+```
+
+------------------------------------------------------------------------
+
+```{r}
+#| include: false
+# ---------------------------------------------------------------
+# 4. Modelo recortado (m4_trim) ---------------------------------
+# ---------------------------------------------------------------
+casen_trim <- casen_educ_cen %>%
+  filter(!comuna %in% influentes) %>%        # excluir influyentes
+  mutate(comuna = fct_drop(comuna))          # quitar niveles vacíos
+
+m4_trim <- lmer(
+  esc ~ female + nse_cmc + part_social_num +
+    prop_empleo_gmc + n_escuelas_gmc +
+    (1 + nse_cmc | comuna),
+  data  = casen_trim,
+  REML  = FALSE
+)
+
+cat("\nNúmero de comunas en m4_trim:\n")
+print(summary(m4_trim)$ngrps)                # debería ser 30
+
+
+```
+
+```{r}
+tab_model(
+  m4, m4_trim,
+  dv.labels = c("Modelo original", "Sin comunas influyentes"),
+  show.ci   = FALSE, p.style = "stars", digits = 3
+)
+```
+
+# Conclusiones {data-background-color="#FF0000"}
+
+![Modelo teórico con resultados](input/img/r_Años_de_escolaridad.png){fig-align="center" width="830"}
+
+## Referencias
+
+Agencia de Calidad de la Educación. (2015, agosto). Evolución de las brechas socioeconómicas de rendimiento en pruebas SIMCE. División de Estudios, Agencia de Calidad de la Educación.
+
+Andréu, J. (2011). El análisis multinivel: una revisión actualizada en el ámbito sociológico. Metodología de Encuestas, 13, 161–176.
+
+Arita, M., Romano, A., García, A., & Félix, F. (2015). Condiciones de vida y bienestar subjetivo en Culiacán, México. Universidad Autónoma de Sinaloa.
+
+Bellei Carvacho, C., Contreras, D., & Valenzuela Barros, J. P. (2008). La agenda pendiente en educación. Profesores, administradores y recursos: propuestas para la nueva arquitectura de la educación chilena. Universidad de Chile.
+
+Bourdieu, P., & Passeron, J. C. (2001). La reproducción. Elementos para una teoría del sistema de enseñanza. Editorial Laia.
+
+Bullones, E. (2022). Gestión educativa en valores para la paz comunitaria. Aula Virtual, 3(6), 150–160.
+
+Canales, A., & de Ibarrola, M. (2022). La segmentación del sistema escolar mexicano: un análisis territorial. Revista Mexicana de Investigación Educativa, 27(94), 1035–1060.
+
+Cimadamore, A. D., & Cattani, A. D. (Coords.). (2008). Producción de pobreza y desigualdad en América Latina. Siglo del Hombre Editores.
+
+Finch, W. H., Bolin, J. E., & Kelley, K. (2019). Multilevel modeling using R. Chapman and Hall/CRC.
+
+Instituto Nacional de Evaluación Educativa. (2011). PIRLS–TIMSS 2011. Estudio Internacional de Progreso en Comprensión Lectora, Matemáticas y Ciencias. Volumen I: Informe español. IEA.<https://www.mecd.gob.es/inee>
+
+Ministerio de Educación de Chile. (2023). Informe de resultados SIMCE y brechas por grupo socioeconómico. Santiago: MINEDUC.
+
+Ministerio de Desarrollo Social y Familia. (2022). Encuesta de Caracterización Socioeconómica Nacional (Casen) 2022. Gobierno de Chile.
+
+OECD. (2021). Education at a Glance: OECD Indicators. OECD Publishing.<https://doi.org/10.1787/b35a14e5-en>
+
+Peláez González, C., & Rodríguez, S. A. (2020). Género, trabajo y educación: Diferencias entre hombres y mujeres en la entrada al primer empleo. Revista Interdisciplinaria de Estudios de Género de El Colegio de México, 6, e494.
+
+Rivas Espinosa, A., & Terra Polanco, V. (2024). Percepciones de niñas y niños sobre su hábitat en contextos urbanos informales. Sociológica (Madrid), 39(1).
+
+Romero, E., Alcaraz, S., & Hernández, M. (2020). Desigualdades educativas y respuesta institucional: Una investigación desde la perspectiva territorial. Profesorado, Revista de Currículum y Formación del Profesorado, 24(1), 1–20.
+
+Soler Mata, J., & Fernández León, R. (2021). La evaluación educativa en España: Tensiones entre la evaluación estandarizada y la evaluación formativa. Revista de Educación, 393, 245–271.
+
+Villalobos, C., & Mardones, S. P. (2022). ¿Quién, cómo y de qué se investiga en un sistema educativo mercantilizado? Un meta-análisis de la investigación sobre política educativa en el Chile post-dictadura (1990–2019). Education Policy Analysis Archives, 30, 160.

@@ -1,9 +1,0 @@
-project:
-  type: website
-  output-dir: docs          # la carpeta que servirá GitHub Pages
-  render:
-    - plantilla_informe.qmd # ← compilará solo este QMD
-
-website:
-  title: "Desigualdad educativa en el Gran Santiago"
-  site-url: https://multinivel-facso.github.io/trabajo1-grupo-3/

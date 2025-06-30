@@ -33,7 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="plantilla_informe_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="plantilla_informe_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="plantilla_informe_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="plantilla_informe_files/libs/bootstrap/bootstrap-3968185da41a4741d77265aeb0b01c07.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="plantilla_informe_files/libs/bootstrap/bootstrap-3945562aa5a0126d52e3c8f8dee497d6.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -515,15 +515,13 @@ idh_comuna
 <p>La estrategia metodológica consiste en el uso de modelos multinivel, configurando los datos entre individuos anidados en unidades de carácter territorial. De este modo, a través de esta metodología se puede obtener un análisis con mayor enfoque en los efectos que características contextuales pueden tener en características individuales.&nbsp;</p>
 <p>Para este análisis se realizaron 6 modelos:</p>
 <ul>
-<li><strong>Modelo nulo:</strong> no posee predictores, permite identificar la correlación intra-clase (ICC) y cuantifica la varianza entre las comunas del Gran Santiago.</li>
-</ul>
+<li><p><strong>Modelo nulo:</strong> no posee predictores, permite identificar la correlación intra-clase (ICC) y cuantifica la varianza entre las comunas del Gran Santiago.</p>
 <p><span class="math display">\[
 \text{esc}_{ij} \;=\; \gamma_{00}
-+ u_{0\text{comuna}}
-+ r_{ij}
-\]</span></p>
-<ul>
-<li><strong>Modelo 1: Predictores individuales:</strong> Este modelo evalúa únicamente variables individuales: sexo, nivel socioeconómico y participación social del hogar. Permite identificar cómo estas características personales inciden en los años de escolaridad, sin considerar diferencias territoriales. Sirve como línea base para observar efectos puramente individuales y comparar con modelos más complejos posteriormente.</li>
+      + u_{0j}
+      + r_{ij}
+\]</span></p></li>
+<li><p><strong>Modelo 1: Predictores individuales:</strong> Este modelo evalúa únicamente variables individuales: sexo, nivel socioeconómico y participación social del hogar. Permite identificar cómo estas características personales inciden en los años de escolaridad, sin considerar diferencias territoriales. Sirve como línea base para observar efectos puramente individuales y comparar con modelos más complejos posteriormente.</p></li>
 </ul>
 <p><span class="math display">\[
   \
@@ -1257,6 +1255,7 @@ Marginal R<sup>2</sup> / Conditional R<sup>2</sup>
 
 </tbody></table>
 <p>Anexo 1: Tabla comparativa de estimación de modelos con y sin casos influyentes</p>
+
 </section>
 
 </main>

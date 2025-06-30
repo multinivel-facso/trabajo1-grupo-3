@@ -11,6 +11,7 @@ lang: es
 fontsize: 14pt
 format:
   html:
+    math: mathjax 
     code-fold: true
     toc: true
     toc-location: right
@@ -186,11 +187,11 @@ Para este análisis se realizaron 6 modelos:
 
 -   **Modelo nulo:** no posee predictores, permite identificar la correlación intra-clase (ICC) y cuantifica la varianza entre las comunas del Gran Santiago.
 
-$$
-\text{esc}_{ij} \;=\; \gamma_{00}
-+ u_{0\text{comuna}}
-+ r_{ij}
-$$
+    $$
+    \text{esc}_{ij} \;=\; \gamma_{00}
+          + u_{0j}
+          + r_{ij}
+    $$
 
 -   **Modelo 1: Predictores individuales:** Este modelo evalúa únicamente variables individuales: sexo, nivel socioeconómico y participación social del hogar. Permite identificar cómo estas características personales inciden en los años de escolaridad, sin considerar diferencias territoriales. Sirve como línea base para observar efectos puramente individuales y comparar con modelos más complejos posteriormente.
 

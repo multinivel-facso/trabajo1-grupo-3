@@ -1,7 +1,7 @@
 ---
-title: "Desigualdad educativa en el Gran Santiago"
+title: "Entre el mérito y la estructura social: Desigualdad educativa en el Gran Santiago"
 subtitle: "Un análisis multinivel de factores individuales y territoriales"
-author: "Juan Padro,  
+author: "
   Katherine Aravena Herrera,  
   Paula Cerda Torres &  
   Sebastián Monreal Villarroel"
@@ -414,7 +414,7 @@ m5_H6 <- lmer(
   esc ~ 1 +
     nse_cmc         * prop_empleo_gmc +    # H6 (se mantiene)
     part_social_num +                     # efecto principal (sin interacción)
-    prop_pob_esc_gmc +                      # efecto principal contextual
+    prop_pob_esc_gmc +  idh_gmc +                    # efecto principal contextual
     female +
     (1 + nse_cmc | comuna),
   data = casen_educ

@@ -1,0 +1,43 @@
+/* --- contenedor con scroll horizontal (sin cambios) --- */
+.hscroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+/* --- tabla ligeramente más grande y ancha --- */
+.small-table table {
+  font-size: 1rem;   /* ≈ 16 px en la mayoría de temas Reveal   */
+  width: 98%;        /* casi todo el ancho del slide            */
+  margin: 0 auto;    /* centrada                                */
+}
+
+/* aire extra en las celdas */
+.small-table th,
+.small-table td  {
+  padding: 8px 12px; /* un poco más que antes                  */
+}
+
+/* Justificar todos los párrafos */
+p {
+  text-align: justify;
+}
+
+/* Estilo para reducir el tamaño de letra en descripciones o notas */
+.small-text {
+  font-size: 0.75em;  /* Puedes ajustar a 0.75em o 80% si deseas aún más pequeño */
+  line-height: 1.4;
+  color: #444;       /* Opcional: tono más suave que el texto principal */
+  margin-top: 0.3em;
+}
+
+/* Reduce fuente de toda la slide */
+.smaller {
+  font-size: 0.8em;   /* Ajusta a 0.75 o 0.7 si aún no cabe */
+  line-height: 1.3;
+}
+
+.math-tiny mjx-container {
+  font-size: 0.85em !important;   /* ajusta 0.8–0.9 si lo necesitas */
+}
+

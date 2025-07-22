@@ -1,0 +1,29 @@
+/* ─── Estilo compacto para tablas sjPlot ────────────────────────── */
+.tab_model              {               /* contenedor de la tabla     */
+  font-family: "Source Sans 3", sans-serif;
+  font-size : 0.70rem;   /* ↓ más pequeño que el 0.9 rem original      */
+  width      : 100%;
+}
+
+/* encabezados */
+.tab_model th {
+  background : #003366;
+  color      : #ffffff;
+  padding    : 4px 6px;  /* ↓ menos alto y ancho que 6×10 px           */
+}
+
+/* celdas de datos */
+.tab_model td {
+  padding : 3px 5px;     /* ↓ aún más compacto                         */
+}
+
+/* filas zebra */
+.tab_model tr:nth-child(even) {
+  background: #f5f5f5;
+}
+
+/* filas de sección “Random Effects” */
+.randomparts            { background:#e0e0e0; }
+
+/* superíndices de p-value */
+.tab_model sup          { font-size: 55%; }  /* ↓ más discreto         */
